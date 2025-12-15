@@ -1,0 +1,7 @@
+- name: Remove files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  become: "{{ item.become }}"
+  loop: "{{ remove_files_items }}"
+  when: remove_files is defined

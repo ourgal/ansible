@@ -1,0 +1,35 @@
+- name: Configure chromebit postmarketOS
+  hosts: chromebit
+  roles:
+    - debug
+    - role: apk
+      vars:
+        apk_install_packages:
+          - chromium
+          - firefox
+          - fish
+          - zsh
+          - bash
+          - htop
+          - btop
+          - font-fira-code-nerd
+          - font-noto-cjk
+          - mpv
+          - git
+          - curl
+          - chezmoi
+    - role: remove_files
+      vars:
+        remove_files_items:
+          path: /etc/sway/config.d/00-logo-key.conf
+          become: true
+    - role: rc_update_add
+      vars:
+        rc_update_add_services:
+          - name: sshd
+            runlevel: default
+          - name: ntpd
+            runlevel: default
+    - role: user_pw
+      vars:
+        user_pw_user: user

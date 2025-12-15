@@ -1,0 +1,26 @@
+---
+- name: Add mirror
+  ansible.builtin.replace:
+    path: /etc/apk/repositories
+    regexp: dl-cdn.alpinelinux.org
+    replace: mirrors.aliyun.com
+  become: true
+- name: Apk upgrade system
+  community.general.apk:
+    upgrade: true
+  become: true
+- name: Apk install packages
+  community.general.apk:
+    name: "{{ item }}"
+  loop: "{{ apk_install_packages }}"
+  when:
+    - apk_install_packages is defined
+  become: true
+- name: Apk uninstall packages
+  community.general.apk:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ apk_uninstall_packages }}"
+  when:
+    - apk_uninstall_packages is defined
+  become: true

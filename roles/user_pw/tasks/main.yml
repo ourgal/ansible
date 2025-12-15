@@ -1,0 +1,5 @@
+- name: Update user password
+  ansible.builtin.user:
+    name: "{{ user_pw_user }}"
+    password: "{{ user_pw_password }}"
+  become: true

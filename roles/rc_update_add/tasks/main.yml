@@ -1,0 +1,7 @@
+- name: Enable services
+  ansible.builtin.command:
+    cmd: "rc-update add {{ item.name }} {{ item.runlevel }}"
+  loop: "{{ rc_update_add_services }}"
+  register: rc_update_add_result
+  changed_when: "'added' not in rc_update_add_result.stdout"
+  become: true

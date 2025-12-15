@@ -1,0 +1,3 @@
+- name: Debug variables
+  ansible.builtin.debug:
+    var: "{{ debug_var }}"
