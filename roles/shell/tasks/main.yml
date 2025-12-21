@@ -1,0 +1,12 @@
+- name: Shell
+  ansible.builtin.shell:
+    free_form: "{{ item.free_form if item.free_form is defined else omit }}"
+    cmd: "{{ item.cmd if item.cmd is defined else omit }}"
+    creates: "{{ item.creates if item.creates is defined else omit }}"
+    removes: "{{ item.removes if item.removes is defined else omit }}"
+    chdir: "{{ item.chdir if item.chdir is defined else omit }}"
+    executable: "{{ item.executable if item.executable is defined else omit }}"
+    stdin: "{{ item.stdin if item.stdin is defined else omit }}"
+    stdin_add_newline: "{{ item.stdin_add_newline | default(true) }}"
+  loop: "{{ shell_items }}"
+  when: shell_items is defined

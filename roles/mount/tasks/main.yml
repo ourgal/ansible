@@ -1,0 +1,10 @@
+- name: Mount
+  ansible.posix.mount:
+    path: "{{ item.path }}"
+    state: "{{ item.state | default('ephemeral') }}"
+    src: "{{ item.src if item.src is defined else omit }}"
+    fstype: "{{ item.fstype if item.fstype is defined else omit }}"
+    opts: "{{ item.opts if item.opts is defined else omit }}"
+  loop: "{{ mount_devices }}"
+  when: mount_devices is defined
+  become: true

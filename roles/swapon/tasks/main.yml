@@ -1,0 +1,9 @@
+- name: Enable swap
+  ansible.builtin.command:
+    cmd: "swapon {{ item }}"
+  changed_when: true
+  loop: "{{ swapon_device }}"
+  when:
+    - swapon_device is defined
+    - ansible_facts.swaptotal_mb < 1
+  become: true

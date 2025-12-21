@@ -1,0 +1,9 @@
+- name: File system
+  community.general.filesystem:
+    dev: "{{ item.dev }}"
+    force: "{{ item.force | default(false) }}"
+    fstype: "{{ item.fstype }}"
+    state: "{{ item.state | default('present') }}"
+  loop: "{{ filesystem_devices }}"
+  when: filesystem_devices is defined
+  become: true

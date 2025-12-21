@@ -1,0 +1,16 @@
+- name: Line in file
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp if item.regexp is defined else omit }}"
+    state: "{{ item.state if item.state is defined else omit }}"
+    line: "{{ item.line if item.line is defined else omit }}"
+    create: "{{ item.create | default(false) }}"
+    backup: "{{ item.backup | default(false) }}"
+    firstmatch: "{{ item.firstmatch | default(false) }}"
+    others: "{{ item.others if item.others is defined else omit }}"
+    mode: "{{ item.mode if item.mode is defined else omit }}"
+    owner: "{{ item.owner if item.owner is defined else omit }}"
+    group: "{{ item.group if item.group is defined else omit }}"
+  loop: "{{ lineinfile_items }}"
+  when: lineinfile_items is defined
+  become: "{{ item.become | default(false) }}"

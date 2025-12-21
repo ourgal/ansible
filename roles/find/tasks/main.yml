@@ -1,0 +1,6 @@
+- name: Find
+  ansible.builtin.find:
+    path: "{{ item.path }}"
+    pattern: "{{ item.pattern }}"
+  loop: "{{ find_items }}"
+  when: find_items is defined

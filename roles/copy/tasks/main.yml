@@ -1,0 +1,8 @@
+- name: Copy
+  ansible.builtin.copy:
+    dest: "{{ item.dest }}"
+    content: "{{ item.content }}"
+    mode: "{{ item.mode | default('644') }}"
+  loop: "{{ copy_files }}"
+  when: copy_files is defined
+  become: "{{ item.become }}"

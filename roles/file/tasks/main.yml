@@ -1,0 +1,12 @@
+- name: File
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: "{{ item.state | default('present') }}"
+    src: "{{ item.src if item.src is defined else omit }}"
+    force: "{{ item.force | default('false') }}"
+    mode: "{{ item.mode if item.mode is defined else omit }}"
+    owner: "{{ item.owner if item.owner is defined else omit }}"
+    group: "{{ item.group if item.group is defined else omit }}"
+  loop: "{{ file_files }}"
+  when: file_files is defined
+  become: "{{ item.become | default('false') }}"

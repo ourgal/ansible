@@ -1,0 +1,13 @@
+- name: Parted
+  community.general.parted:
+    device: "{{ item.device }}"
+    part_start: "{{ item.start }}"
+    part_end: "{{ item.end }}"
+    state: "{{ item.state | default('present') }}"
+    number: "{{ item.number }}"
+    fs_type: "{{ item.fs_type }}"
+    part_type: "{{ item.part_type | default('primary') }}"
+    label: "{{ item.label | default('gpt') }}"
+  loop: "{{ parted_partitions }}"
+  when: parted_partitions is defined
+  become: true

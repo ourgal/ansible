@@ -1,0 +1,9 @@
+- name: Install void linux via xbps
+  ansible.builtin.shell: |
+    REPO=https://mirror.nju.edu.cn/voidlinux/current
+    ARCH={{ ansible_facts.machine }}
+    mkdir -p /mnt/var/db/xbps/keys
+    cp /var/db/xbps/keys/* /mnt/var/db/xbps/keys/
+    XBPS_ARCH=$ARCH xbps-install -y -S -r /mnt -R "$REPO" base-system
+  changed_when: true
+  become: true
