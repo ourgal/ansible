@@ -5,10 +5,11 @@
       ansible.builtin.debug:
         var: ansible_facts
     - name: Install parted
-      become: true
-      community.general.xbps:
-        name: parted
-        repositories: https://mirror.nju.edu.cn/voidlinux/current
+      vars:
+        xbps_packages:
+          - name: parted
+      ansible.builtin.include_role:
+        name: xbps
     - name: Add partitions
       become: true
       vars:
@@ -42,20 +43,19 @@
     - name: Format file systems
       become: true
       vars:
-        filesystem_number: 0
-        filesystem_device: /dev/nvme0n1
+        device: /dev/nvme0n1
       block:
         - name: Format boot
           community.general.filesystem:
-            dev: "{{ filesystem_device }}p1"
+            dev: "{{ device }}p1"
             fstype: vfat
         - name: Format swap
           community.general.filesystem:
-            dev: "{{ filesystem_device }}p2"
+            dev: "{{ device }}p2"
             fstype: swap
         - name: Format root
           community.general.filesystem:
-            dev: "{{ filesystem_device }}p3"
+            dev: "{{ device }}p3"
             fstype: btrfs
             force: true
     - name: Mount all partitions
@@ -101,19 +101,20 @@
           when: xbps_keys.matched > 0
           loop: "{{ xbps_keys.files | map(attribute='path') }}"
     - name: Install packages in mnt
-      become: true
-      community.general.xbps:
-        name: "{{ item }}"
-        root: /mnt
-        repositories: https://mirror.nju.edu.cn/voidlinux/current
-      loop:
-        - base-system
-        - grub-x86_64-efi
-        - avahi
-        - nss-mdns
-        - python3
-      environment:
-        XBPS_ARCH: "{{ ansible_facts.machine }}"
+      vars:
+        xbps_packages:
+          - name:
+              - base-system
+              - grub-x86_64-efi
+              - avahi
+              - nss-mdns
+              - python3
+              - NetworkManager
+            root: /mnt
+            env:
+              XBPS_ARCH: "{{ ansible_facts.machine }}"
+      ansible.builtin.include_role:
+        name: xbps
     - name: Enable swap
       become: true
       ansible.builtin.command:
@@ -135,8 +136,9 @@
         state: link
         force: true
       loop:
-        - dhcpcd
+        - NetworkManager
         - sshd
+        - dbus
         - avahi-daemon
     - name: Create files
       become: true

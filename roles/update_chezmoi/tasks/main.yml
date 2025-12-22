@@ -1,0 +1,20 @@
+- name: Chezmoi
+  block:
+    - name: Check chezomi folder
+      ansible.builtin.stat:
+        path: /home/zxc/.local/share/chezmoi
+      register: update_chezmoi_stat
+    - name: Chezmoi init
+      ansible.builtin.command:
+        cmd: chezmoi init ourgal
+      changed_when: true
+      when: not update_chezmoi_stat.stat.exists
+    - name: Chezmoi apply
+      ansible.builtin.command:
+        cmd: chezmoi apply --force
+      changed_when: true
+      when: not update_chezmoi_stat.stat.exists
+    - name: Chezmoi update
+      ansible.builtin.command:
+        cmd: chezmoi update --force
+      changed_when: true

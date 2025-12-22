@@ -1,0 +1,19 @@
+- name: Create chroot script
+  become: true
+  ansible.builtin.copy:
+    dest: /mnt/script
+    content: |
+      {{ xchroot_script_content }}
+    mode: "0644"
+- name: Run chroot script
+  become: true
+  environment:
+    LANG: C.UTF-8
+  ansible.builtin.command:
+    cmd: xchroot /mnt /bin/bash /script
+  changed_when: true
+- name: Remove script
+  become: true
+  ansible.builtin.file:
+    path: /mnt/script
+    state: absent

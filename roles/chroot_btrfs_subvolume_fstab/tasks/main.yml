@@ -1,0 +1,26 @@
+- name: Mount btrfs subvolumes
+  become: true
+  block:
+    - name: Create btrfs sobvolumes
+      community.general.btrfs_subvolume:
+        name: "{{ item.src }}"
+        filesystem_device: "{{ chroot_btrfs_subvolume_fstab_device }}"
+        automount: true
+      loop: "{{ chroot_btrfs_subvolume_fstab_map }}"
+    - name: Mount subvolumes
+      ansible.posix.mount:
+        src: "{{ chroot_btrfs_subvolume_fstab_device }}"
+        path: "/mnt{{ item.dest }}"
+        fstype: btrfs
+        opts: "rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,subvol={{ item.src }}"
+        state: ephemeral
+      loop: "{{ chroot_btrfs_subvolume_fstab_map }}"
+    - name: Save to fstab
+      ansible.posix.mount:
+        src: "{{ chroot_btrfs_subvolume_fstab_device }}"
+        path: "{{ item.dest }}"
+        fstype: btrfs
+        opts: "rw,noatime,compress=zstd:3,ssd,discard=async,space_cache=v2,subvol={{ item.src }}"
+        state: present
+        fstab: /mnt/etc/fstab
+      loop: "{{ chroot_btrfs_subvolume_fstab_map }}"

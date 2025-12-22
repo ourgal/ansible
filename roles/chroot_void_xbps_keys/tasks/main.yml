@@ -1,0 +1,26 @@
+- name: Find repository keys to install into a new void system on a mounted partition
+  block:
+    - name: Search key files
+      ansible.builtin.find:
+        path: /var/db/xbps/keys
+        pattern: "*.plist"
+      register: chroot_void_xbps_keys_files
+    - name: Create folder
+      become: true
+      ansible.builtin.file:
+        path: /mnt/var/db/xbps/keys
+        state: directory
+        mode: "0755"
+        owner: root
+        group: root
+    - name: Copy repository keys to into a new void system on a mounted partition
+      become: true
+      ansible.builtin.copy:
+        remote_src: true
+        src: "{{ item }}"
+        dest: "/mnt{{ item }}"
+        owner: root
+        group: root
+        mode: "0644"
+      when: chroot_void_xbps_keys_files.matched > 0
+      loop: "{{ chroot_void_xbps_keys_files.files | map(attribute='path') }}"

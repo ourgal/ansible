@@ -1,0 +1,33 @@
+- name: Create files
+  become: true
+  block:
+    - name: Set system ssh rsa private key
+      ansible.builtin.copy:
+        dest: /mnt/etc/ssh/ssh_host_rsa_key
+        content: "{{ lookup('gopass', 'ssh/' + chroot_ssh_keys_host + '/system/rsa_key') }}"
+        mode: "600"
+    - name: Set system ssh rsa public key
+      ansible.builtin.copy:
+        dest: /mnt/etc/ssh/ssh_host_rsa_key.pub
+        content: "{{ lookup('gopass', 'ssh/' + chroot_ssh_keys_host + '/system/rsa_key.pub') }}"
+        mode: "644"
+    - name: Set system ssh ed25519 private key
+      ansible.builtin.copy:
+        dest: /mnt/etc/ssh/ssh_host_ed25519_key
+        content: "{{ lookup('gopass', 'ssh/' + chroot_ssh_keys_host + '/system/ed25519_key') }}"
+        mode: "600"
+    - name: Set system ssh ed25519 public key
+      ansible.builtin.copy:
+        dest: /mnt/etc/ssh/ssh_host_ed25519_key.pub
+        content: "{{ lookup('gopass', 'ssh/' + chroot_ssh_keys_host + '/system/ed25519_key.pub') }}"
+        mode: "644"
+    - name: Set system ssh ecdsa private key
+      ansible.builtin.copy:
+        dest: /mnt/etc/ssh/ssh_host_ecdsa_key
+        content: "{{ lookup('gopass', 'ssh/' + chroot_ssh_keys_host + '/system/ecdsa_key') }}"
+        mode: "600"
+    - name: Set system ssh ecdsa public key
+      ansible.builtin.copy:
+        dest: /mnt/etc/ssh/ssh_host_ecdsa_key.pub
+        content: "{{ lookup('gopass', 'ssh/' + chroot_ssh_keys_host + '/system/ecdsa_key.pub') }}"
+        mode: "644"

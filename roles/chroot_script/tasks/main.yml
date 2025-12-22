@@ -1,0 +1,46 @@
+- name: Run chroot script
+  when: chroot_script_content is defined
+  block:
+    - name: Create chroot script
+      become: true
+      ansible.builtin.copy:
+        dest: /mnt/script
+        content: |
+          {{ chroot_script_content }}
+        mode: "0644"
+    - name: Run chroot script
+      become: true
+      environment:
+        LANG: C.UTF-8
+      ansible.builtin.shell:
+        cmd: |
+          fail() {
+                  printf '%s\n' "$1" >&2
+                  exit 1
+          }
+
+          CHROOT=/mnt
+
+          [ -d "$CHROOT" ] || fail 'not a directory'
+          [ -d "$CHROOT/dev" ] || fail 'no /dev in chroot'
+          [ -d "$CHROOT/proc" ] || fail 'no /proc in chroot'
+          [ -d "$CHROOT/sys" ] || fail 'no /sys in chroot'
+
+          for _fs in dev proc sys; do
+                  mount --rbind "/$_fs" "$CHROOT/$_fs"
+                  mount --make-rslave "$CHROOT/$_fs"
+          done
+
+          cleanup() {
+                  umount -R "$CHROOT/dev" "$CHROOT/proc" "$CHROOT/sys"
+          }
+
+          trap cleanup EXIT INT
+
+          chroot "$CHROOT" /bin/bash /script
+      changed_when: true
+    - name: Remove script
+      become: true
+      ansible.builtin.file:
+        path: /mnt/script
+        state: absent

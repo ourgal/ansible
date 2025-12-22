@@ -1,0 +1,124 @@
+- name: Install void linux
+  hosts: surface-void
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Install parted and debootstrap
+      become: true
+      community.general.xbps:
+        name:
+          - parted
+          - debootstrap
+          - xtools
+        repositories:
+          - https://mirror.nju.edu.cn/voidlinux/current
+          - https://mirror.nju.edu.cn/voidlinux/current/nonfree
+    - name: Add partitions
+      become: true
+      vars:
+        device: /dev/nvme0n1
+        start: "{{ 2 + 512 + 1024 * 24 }}"
+        root_size: "{{ 1024 * 20 }}"
+      block:
+        - name: Root partition
+          community.general.parted:
+            device: "{{ device }}"
+            number: 4
+            fs_type: swap
+            part_start: "{{ start }}MiB"
+            part_end: "{{ [root_size, start] | sum }}MiB"
+    - name: Format file systems
+      become: true
+      vars:
+        device: /dev/nvme0n1
+      block:
+        - name: Format roo
+          community.general.filesystem:
+            dev: "{{ device }}p4"
+            fstype: btrfs
+            force: true
+    - name: Mount all partitions
+      become: true
+      block:
+        - name: Mount root
+          ansible.posix.mount:
+            src: /dev/nvme0n1p5
+            path: /mnt
+            fstype: btrfs
+            opts: compress=zstd,noatime
+            state: ephemeral
+        - name: Mount boot
+          ansible.posix.mount:
+            src: /dev/nvme0n1p1
+            path: /mnt/boot/efi
+            fstype: vfat
+            state: ephemeral
+        - name: Mount sys dev proc run
+          ansible.posix.mount:
+            src: "/{{ item }}"
+            path: /mnt/"{{ item }}"
+            fstype: auto
+            state: ephemeral
+            opts: rbind,slave
+          loop:
+            - sys
+            - dev
+            - proc
+            - run
+    - name: Run debootstrap
+      become: true
+      ansible.builtin.command:
+        cmd: debootstrap --arch amd64 trixie /mnt https://mirrors.aliyun.com/debian/
+      changed_when: true
+    - name: Set timezone
+      become: true
+      ansible.builtin.file:
+        src: /usr/share/zoneinfo/Asia/Hong_kong
+        dest: /mnt/etc/localtime
+        state: link
+        force: true
+    - name: Set hostname
+      ansible.builtin.copy:
+        dest: /mnt/etc/hostname
+        content: |
+          surface-debian
+        mode: "0644"
+    - name: Set apt sources
+      ansible.builtin.copy:
+        dest: /mnt/etc/apt/sources.list
+        content: |
+          deb https://mirrors.aliyun.com/debian/ trixie main
+          deb-src https://mirrors.aliyun.com/debian/ trixie main
+
+          deb https://mirrors.aliyun.com/debian-security/ trixie-security main
+          deb-src https://mirrors.aliyun.com/debian-security/ trixie-security main
+        mode: "0644"
+    - name: Set locale
+      ansible.builtin.copy:
+        dest: /mnt/etc/locale.gen
+        content: |
+          en_US.UTF-8
+        mode: "0644"
+    - name: Generate fstab
+      become: true
+      ansible.builtin.shell:
+        cmd: set -o pipefail && xgenfstab -U /mnt | sudo tee /mnt/etc/fstab
+        executable: /bin/bash
+      changed_when: true
+    - name: Create chroot script
+      ansible.builtin.copy:
+        dest: /mnt/config
+        content: |
+          for _fs in dev proc sys; do
+            mount --rbind "/$_fs" "/$_fs"
+            mount --make-slave "/$_fs"
+          done
+          apt install util-linux-extra
+          locale-gen
+          hwclock --systohc
+          yes {{ lookup('gopass', 'password/linux/root') | trim }} | passwd root
+          useradd -m zxc
+          yes {{ lookup('gopass', 'password/linux/user') | trim }} | passwd zxc
+          usermod -aG sudo zxc
+        mode: "0644"

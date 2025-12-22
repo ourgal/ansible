@@ -4,7 +4,7 @@
     upgrade: "{{ item.upgrade | default(false) }}"
     root: "{{ item.root if item.root is defined else omit }}"
     state: "{{ item.state | default('present') }}"
-    repositories: "{{ item.repositories | default('https://mirror.nju.edu.cn/voidlinux/current') }}"
+    repositories: "{{ item.repositories | default(['https://mirror.nju.edu.cn/voidlinux/current', 'https://mirror.nju.edu.cn/voidlinux/current/nonfree']) }}"
   loop: "{{ xbps_packages }}"
   when: xbps_packages is defined
   environment: "{{ item.env if item.env is defined else omit }}"
