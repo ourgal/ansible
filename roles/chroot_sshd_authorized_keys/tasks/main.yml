@@ -3,7 +3,7 @@
   block:
     - name: Create ssh authorized keys folder
       ansible.builtin.file:
-        path: /mnt/etc/ssh/authorized_keys.d
+        path: "{{ chroot_sshd_authorized_keys_root | default('/mnt') }}/etc/ssh/authorized_keys.d"
         state: directory
         mode: "0755"
         owner: root
@@ -11,13 +11,13 @@
     - name: Copy ssh root authorized keys
       ansible.builtin.copy:
         src: "/etc/ssh/authorized_keys.d/{{ item }}"
-        dest: "/mnt/etc/ssh/authorized_keys.d/{{ item }}"
+        dest: "{{ chroot_sshd_authorized_keys_root | default('/mnt') }}/etc/ssh/authorized_keys.d/{{ item }}"
         mode: "0644"
       loop:
         - root
         - zxc
     - name: Set sshd config
       ansible.builtin.lineinfile:
-        path: /mnt/etc/ssh/sshd_config
+        path: "{{ chroot_sshd_authorized_keys_root | default('/mnt') }}/etc/ssh/sshd_config"
         regex: "^[#]?AuthorizedKeysFile"
         line: "AuthorizedKeysFile %h/.ssh/authorized_keys /etc/ssh/authorized_keys.d/%u"

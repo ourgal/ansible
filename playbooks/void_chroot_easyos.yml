@@ -1,0 +1,125 @@
+- name: Install easyos
+  hosts: surface-void
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Install parted
+      become: true
+      community.general.xbps:
+        name: "{{ item }}"
+        repositories:
+          - https://mirror.nju.edu.cn/voidlinux/current
+          - https://mirror.nju.edu.cn/voidlinux/current/nonfree
+      loop:
+        - parted
+    - name: Add partitions
+      become: true
+      vars:
+        device: /dev/nvme0n1
+      block:
+        - name: Delete old root partition
+          community.general.parted:
+            device: "{{ device }}"
+            number: 5
+            state: absent
+        - name: Root partition
+          community.general.parted:
+            device: "{{ device }}"
+            number: 5
+            fs_type: ext4
+            label: gpt
+            name: easy_root
+            part_start: "{{ 2 + 512 + 1024 * 64 }}MiB"
+            part_end: "{{ 2 + 512 + 1024 * 94 }}MiB"
+            state: present
+        - name: Format root
+          community.general.filesystem:
+            dev: "{{ device }}p5"
+            fstype: ext4
+            force: true
+    - name: Download img
+      become: true
+      ansible.builtin.get_url:
+        url: https://distro.ibiblio.org/easyos/amd64/releases/excalibur/2026/7.1.1/easy-7.1.1-amd64.img
+        dest: /root/easy-7.1.1-amd64.img
+        checksum: md5:33366a4d8e9f2a7b7aacf493498710fc
+        mode: "644"
+    - name: Inspect img file
+      become: true
+      community.general.parted:
+        device: /root/easy-7.1.1-amd64.img
+        unit: B
+      register: img_info
+    - name: Mount files
+      become: true
+      block:
+        - name: Create mount point
+          become: true
+          ansible.builtin.file:
+            path: "/mnt/{{ item }}"
+            state: directory
+            mode: "0755"
+          loop:
+            - boot
+            - root
+            - easy_root
+        - name: Mount img boot
+          become: true
+          ansible.posix.mount:
+            src: /root/easy-7.1.1-amd64.img
+            path: /mnt/boot
+            opts: "ro,loop,offset={{ img_info.partitions[0].begin | int }},sizelimit={{ img_info.partitions[0].size | int }}"
+            fstype: vfat
+            state: ephemeral
+        - name: Mount img root
+          become: true
+          ansible.posix.mount:
+            src: /root/easy-7.1.1-amd64.img
+            path: /mnt/root
+            opts: "ro,loop,offset={{ img_info.partitions[1].begin | int }},sizelimit={{ img_info.partitions[1].size | int }}"
+            fstype: ext4
+            state: ephemeral
+        - name: Mount easy root
+          become: true
+          ansible.posix.mount:
+            src: /dev/nvme0n1p5
+            path: /mnt/easy_root
+            fstype: ext4
+            state: ephemeral
+    - name: Copy files to easy root
+      become: true
+      ansible.builtin.copy:
+        remote_src: true
+        src: /mnt/root/easyos
+        dest: /mnt/easy_root/
+        owner: root
+        group: root
+        mode: "0644"
+    - name: Get root partition uuid
+      ansible.builtin.setup:
+        gather_subset:
+          - devices
+    - name: Update grub config
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/grub.d/40_custom
+        content: |
+          #!/bin/sh
+          exec tail -n +3 $0
+          # This file provides an easy way to add custom menu entries.  Simply type the
+          # menu entries you want to add after this comment.  Be careful not to change
+          # the 'exec tail' line above.
+          menuentry "EasyOS (partition nvme0n1p5, folder easyos)" {
+          insmod ext2
+          insmod search_fs_uuid
+          search --no-floppy --fs-uuid --set=root {{ ansible_facts.device_links.uuids.nvme0n1p5[0] }}
+          linux /easyos/vmlinuz rw wkg_uuid={{ ansible_facts.device_links.uuids.nvme0n1p5[0] }} wkg_dir=easyos
+          initrd /easyos/initrd
+          }
+        mode: "0755"
+    - name: Update grub
+      become: true
+      ansible.builtin.command:
+        cmd: update-grub
+      changed_when: true

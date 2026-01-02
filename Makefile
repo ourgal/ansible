@@ -4,7 +4,7 @@ TARGETS := $(FILES:playbooks/%=%)
 .PHONY: all ${TARGETS}
 all: ${TARGETS}
 
-build: void_chroot_debian
+build: void_chroot_kali
 
 ${TARGETS}:
 	ansible-playbook playbooks/$@.yml

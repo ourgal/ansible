@@ -4,7 +4,7 @@
     - name: Create chroot script
       become: true
       ansible.builtin.copy:
-        dest: /mnt/script
+        dest: "{{ chroot_script_root | default('/mnt') }}/script"
         content: |
           {{ chroot_script_content }}
         mode: "0644"
@@ -19,7 +19,7 @@
                   exit 1
           }
 
-          CHROOT=/mnt
+          CHROOT={{ chroot_script_root | default('/mnt') }}
 
           [ -d "$CHROOT" ] || fail 'not a directory'
           [ -d "$CHROOT/dev" ] || fail 'no /dev in chroot'
@@ -42,5 +42,5 @@
     - name: Remove script
       become: true
       ansible.builtin.file:
-        path: /mnt/script
+        path: "{{ chroot_script_root | default('/mnt') }}/script"
         state: absent
