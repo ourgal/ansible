@@ -1,0 +1,124 @@
+- name: Install puppy linux
+  hosts: surface-void
+  vars:
+    root: /mnt/root
+    iso: /mnt/iso
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Install parted
+      become: true
+      community.general.xbps:
+        name: "{{ item }}"
+        repositories:
+          - https://mirror.nju.edu.cn/voidlinux/current
+          - https://mirror.nju.edu.cn/voidlinux/current/nonfree
+      loop:
+        - parted
+    - name: Add partitions
+      become: true
+      vars:
+        device: /dev/nvme0n1
+      block:
+        - name: Delete old root partition
+          community.general.parted:
+            device: "{{ device }}"
+            number: 6
+            state: absent
+        - name: Root partition
+          community.general.parted:
+            device: "{{ device }}"
+            number: 6
+            fs_type: ext4
+            label: gpt
+            name: puppy_root
+            part_start: "{{ 2 + 512 + 1024 * 94 }}MiB"
+            part_end: "{{ 2 + 512 + 1024 * 124 }}MiB"
+            state: present
+        - name: Format root
+          community.general.filesystem:
+            dev: "{{ device }}p6"
+            fstype: ext4
+            force: true
+    - name: Copy iso
+      become: true
+      ansible.builtin.copy:
+        src: /home/zxc/Downloads/TrixiePup64-Wayland-2510-251201.iso
+        dest: /root/TrixiePup64-Wayland-2510-251201.iso
+        checksum: a63763ce2853bd98130569f5b4df2dfccb38ce74
+        mode: "644"
+    - name: Mount files
+      become: true
+      block:
+        - name: Create mount point
+          become: true
+          ansible.builtin.file:
+            path: "/mnt/{{ item }}"
+            state: directory
+            mode: "0755"
+          loop:
+            - iso
+            - root
+        - name: Mount iso boot
+          become: true
+          ansible.posix.mount:
+            src: /root/TrixiePup64-Wayland-2510-251201.iso
+            path: "{{ iso }}"
+            opts: ro,loop
+            fstype: iso9660
+            state: ephemeral
+        - name: Mount easy root
+          become: true
+          ansible.posix.mount:
+            src: /dev/nvme0n1p6
+            path: "{{ root }}"
+            fstype: ext4
+            state: ephemeral
+    - name: Search key files
+      ansible.builtin.find:
+        path: "{{ iso }}"
+        pattern:
+          - vmlinuz
+          - initrd.gz
+          - puppy*sfs
+          - zdrv*sfs
+          - fdrv*sfs
+          - ddrv*sfs
+          - ydrv*sfs
+          - adrv*sfs
+      register: puppy_files
+    - name: Copy files to easy root
+      become: true
+      ansible.builtin.copy:
+        remote_src: true
+        src: "{{ item }}"
+        dest: "{{ root }}/puppy"
+        owner: root
+        group: root
+        mode: "0644"
+      when: puppy_files.matched > 0
+      loop: "{{ puppy_files.files | map(attribute='path') }}"
+    - name: Get root partition uuid
+      ansible.builtin.setup:
+        gather_subset:
+          - devices
+    - name: Update grub config
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/grub.d/40_custom
+        line: |
+          menuentry "PuppyOS (partition nvme0n1p6 folder puppy)" {
+          insmod ext2
+          insmod search_fs_uuid
+          search --no-floppy --fs-uuid --set=root {{ ansible_facts.device_links.uuids.nvme0n1p6[0] }}
+          linux /puppy/vmlinuz rw wkg_uuid={{ ansible_facts.device_links.uuids.nvme0n1p6[0] }} wkg_dir=easyos
+          initrd /puppy/initrd.gz
+          }
+        mode: "0755"
+    - name: Update grub
+      become: true
+      ansible.builtin.command:
+        cmd: update-grub
+      changed_when: true
+

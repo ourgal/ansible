@@ -102,14 +102,9 @@
           - devices
     - name: Update grub config
       become: true
-      ansible.builtin.copy:
-        dest: /etc/grub.d/40_custom
-        content: |
-          #!/bin/sh
-          exec tail -n +3 $0
-          # This file provides an easy way to add custom menu entries.  Simply type the
-          # menu entries you want to add after this comment.  Be careful not to change
-          # the 'exec tail' line above.
+      ansible.builtin.lineinfile:
+        path: /etc/grub.d/40_custom
+        line: |
           menuentry "EasyOS (partition nvme0n1p5, folder easyos)" {
           insmod ext2
           insmod search_fs_uuid
