@@ -1,0 +1,72 @@
+---
+- name: Configure q4os
+  hosts: q4os
+  vars:
+    homebrew_mirror:
+      HOMEBREW_BREW_GIT_REMOTE: https://mirrors.aliyun.com/homebrew/brew.git
+      HOMEBREW_CORE_GIT_REMOTE: https://mirrors.aliyun.com/homebrew/homebrew-core.git
+      HOMEBREW_INSTALL_FROM_API: 1
+  tasks:
+    - name: Set mirror
+      block:
+        - name: First mirror url
+          ansible.builtin.replace:
+            path: /etc/apt/sources.list.d/20_debian.list
+            regexp: http://deb.debian.org/debian/
+            replace: https://mirrors.aliyun.com/debian/
+        - name: Second mirror url
+          ansible.builtin.replace:
+            path: /etc/apt/sources.list.d/20_debian.list
+            regexp: http://security.debian.org/
+            replace: https://mirrors.aliyun.com/debian-security/
+      become: true
+    - name: Install packages
+      ansible.builtin.apt:
+        name:
+          - curl
+          - firefox-esr
+          - git
+          - vim
+          - zeal
+          - flatpak
+        update_cache: true
+      become: true
+      tags: apt
+    - name: Install homebrew
+      block:
+        - name: check homebrew is installed
+          ansible.builtin.stat:
+            path: /home/linuxbrew/.linuxbrew/bin/brew
+          register: brew_path
+        - name: run offical script
+          ansible.builtin.shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          when: not brew_path.stat.exists
+          environment: "{{ homebrew_mirror }}"
+    - name: deskflow tap
+      community.general.homebrew_tap:
+        name: deskflow/tap
+        state: absent
+      environment: "{{ homebrew_mirror }}"
+    - name: Install chezmoi
+      community.general.homebrew:
+        name:
+          - chezmoi
+        update_homebrew: true
+      environment: "{{ homebrew_mirror }}"
+    - name: Flatpak remote
+      block:
+        - name: User remote
+          community.general.flatpak_remote:
+            name: flathub
+            method: user
+            flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+        - name: Modify url
+          ansible.builtin.command: flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
+      tags: flatpak
+    - name: Flatpak packages
+      community.general.flatpak:
+        name: org.deskflow.deskflow
+        method: user
+        remote: flathub
+      tags: flatpak
+
