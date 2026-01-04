@@ -24,6 +24,7 @@
           - Clipboard
           - 7zip
           - aria2
+          - dua-cli
           - atool
           - atuin
           - bat
@@ -57,9 +58,11 @@
           - tree
           - xclip
           - xsel
+          - gitui
           - yt-dlp
           - zellij
           - zoxide
+          - psmisc
         dev:
           - shellcheck
           - uv
@@ -91,3 +94,7 @@
     - name: Chezmoi
       ansible.builtin.include_role:
         name: update_chezmoi
+    - name: Download xlocate data
+      changed_when: true
+      ansible.builtin.command:
+        cmd: xlocate -S
