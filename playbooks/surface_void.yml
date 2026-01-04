@@ -19,6 +19,7 @@
           - noto-fonts-emoji
         gui:
           - firefox
+          - kitty
         cli:
           - Clipboard
           - 7zip
@@ -62,6 +63,7 @@
         dev:
           - shellcheck
           - uv
+          - ansible
         ani_cli:
           - git
           - curl
