@@ -20,20 +20,56 @@
         gui:
           - firefox
         cli:
+          - Clipboard
+          - 7zip
+          - aria2
+          - atool
+          - atuin
+          - bat
+          - btop
+          - buku
           - chezmoi
+          - duf
+          - eza
+          - fd
           - fzf
           - git
-          - starship
-          - vim
-          - zoxide
-          - eza
-          - duf
-          - lf
-          - ranger
+          - git-annex
+          - git-crypt
+          - git-extras
+          - gvim-huge
           - helix
           - htop
-          - btop
+          - lazygit
+          - lf
+          - mmv
           - mpv
+          - nnn
+          - nodejs
+          - python3-pipx
+          - ranger
+          - ripgrep
+          - rsync
+          - starship
+          - tmux
+          - transmission
+          - tree
+          - xclip
+          - xsel
+          - yt-dlp
+          - zellij
+          - zoxide
+        dev:
+          - shellcheck
+          - uv
+        ani_cli:
+          - git
+          - curl
+          - aria2
+          - grep
+          - fzf
+          - yt-dlp
+          - ffmpeg
       block:
         - name: Upgrade all packages
           community.general.xbps:
@@ -44,7 +80,7 @@
             repositories:
               - https://mirror.nju.edu.cn/voidlinux/current
               - https://mirror.nju.edu.cn/voidlinux/current/nonfree
-          loop: "{{ system + gui + cli }}"
+          loop: "{{ system + gui + cli + dev + ani_cli | unique }}"
         - name: Regenerate initramfs
           become: true
           ansible.builtin.command:

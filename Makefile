@@ -4,7 +4,7 @@ TARGETS := $(FILES:playbooks/%=%)
 .PHONY: all ${TARGETS}
 all: ${TARGETS}
 
-build: void_puppy
+build: surface_void
 
 ${TARGETS}:
 	ansible-playbook playbooks/$@.yml
