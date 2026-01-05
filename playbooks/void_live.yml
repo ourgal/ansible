@@ -171,6 +171,7 @@
         - NetworkManager
         - sshd
         - dbus
+        - alsa
         - avahi-daemon
     - name: Create files
       become: true
@@ -233,6 +234,7 @@
           xbps-reconfigure -fa
           useradd -m zxc
           usermod -aG wheel zxc
+          usermod -aG audio zxc
       ansible.builtin.include_role:
         name: xchroot_script
     - name: Update passwords
