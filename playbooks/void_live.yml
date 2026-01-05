@@ -194,6 +194,12 @@
             content: |
               repository=https://mirror.nju.edu.cn/voidlinux/current
             mode: "0644"
+        - name: Set xbps nonfree mirror
+          ansible.builtin.copy:
+            dest: /mnt/etc/xbps.d/01-repository-nonfree.conf
+            content: |
+              repository=https://mirror.nju.edu.cn/voidlinux/current/nonfree
+            mode: "0644"
     - name: Copy ssh keys
       vars:
         chroot_ssh_keys_host: surface-void
