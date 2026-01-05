@@ -85,7 +85,7 @@
             repositories:
               - https://mirror.nju.edu.cn/voidlinux/current
               - https://mirror.nju.edu.cn/voidlinux/current/nonfree
-          loop: "{{ system + gui + cli + dev + ani_cli | unique }}"
+          loop: "{{ system + gui + cli + dev + ani_cli | unique(case_sensitive='true') }}"
         - name: Regenerate initramfs
           become: true
           ansible.builtin.command:
