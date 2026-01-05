@@ -91,11 +91,13 @@
           ansible.builtin.command:
             cmd: "xbps-reconfigure --force linux{{ ansible_facts.kernel | regex_search('\\d+\\.\\d+') }}"
           changed_when: true
-        - name: Install pipx packages
-          community.general.pipx:
-            name: "{{ item }}"
-          loop:
-            - jellyfin-mpv-shim
+    - name: Install pipx packages
+      tags: pipx
+      community.general.pipx:
+        name: "{{ item }}"
+        # executable: /usr/bin/pipx
+      loop:
+        - jellyfin-mpv-shim
     - name: Chezmoi
       ansible.builtin.include_role:
         name: update_chezmoi
