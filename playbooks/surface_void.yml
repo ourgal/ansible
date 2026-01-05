@@ -18,7 +18,6 @@
           - nerd-fonts
           - noto-fonts-emoji
           - libva-utils
-          - alsa-utils
         gui:
           - firefox
           - kitty

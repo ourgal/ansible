@@ -153,6 +153,8 @@
         - python3
         - NetworkManager
         - os-prober
+        - chrony
+        - alsa-utils
     - name: Set timezone
       become: true
       ansible.builtin.file:
@@ -173,6 +175,7 @@
         - dbus
         - alsa
         - avahi-daemon
+        - chronyd
     - name: Create files
       become: true
       block:
