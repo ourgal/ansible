@@ -37,7 +37,85 @@
             },
             {
               "gnx": "zxc.20260121230040.1",
-              "vh": "scoop packages"
+              "vh": "scoop packages",
+              "children": [
+                {
+                  "gnx": "zxc.20260121233046.1",
+                  "vh": "cli",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260121233453.1",
+                      "vh": "Ai"
+                    },
+                    {
+                      "gnx": "zxc.20260121233359.1",
+                      "vh": "viewer"
+                    },
+                    {
+                      "gnx": "zxc.20260121233751.1",
+                      "vh": "file tree"
+                    },
+                    {
+                      "gnx": "zxc.20260121233346.1",
+                      "vh": "android"
+                    },
+                    {
+                      "gnx": "zxc.20260121233331.1",
+                      "vh": "scoop helper"
+                    },
+                    {
+                      "gnx": "zxc.20260121233238.1",
+                      "vh": "editor"
+                    },
+                    {
+                      "gnx": "zxc.20260121233923.1",
+                      "vh": "system"
+                    },
+                    {
+                      "gnx": "zxc.20260121234124.1",
+                      "vh": "clipboard"
+                    },
+                    {
+                      "gnx": "zxc.20260121234048.1",
+                      "vh": "shell"
+                    },
+                    {
+                      "gnx": "zxc.20260121233309.1",
+                      "vh": "dot file manager"
+                    },
+                    {
+                      "gnx": "zxc.20260121234148.1",
+                      "vh": "share"
+                    },
+                    {
+                      "gnx": "zxc.20260121233854.1",
+                      "vh": "system statics"
+                    },
+                    {
+                      "gnx": "zxc.20260121234012.1",
+                      "vh": "CA"
+                    },
+                    {
+                      "gnx": "zxc.20260121233511.1",
+                      "vh": "dev",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260121233656.1",
+                          "vh": "binary"
+                        },
+                        {
+                          "gnx": "zxc.20260121233522.1",
+                          "vh": "markdown"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260121233143.1",
+                  "vh": "gui"
+                }
+              ]
             }
           ]
         }
@@ -52,11 +130,29 @@
     "zxc.20260121213948.1": "- name: Create scoop folder\n  ansible.windows.win_shell: |\n    $TargetPath = \"D:\\scoop\"\n    $LinkPath = Join-Path $env:ProgramData \"scoop\"\n    New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null\n    if (Test-Path -Path $LinkPath) {\n        Write-Host \"Symbolic link already exists at $LinkPath. Skipping creation.\"\n        exit\n    }\n    & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"",
     "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    - aria2\n    - git",
     "zxc.20260121220419.1": "- name: Add extra bucket\n  community.windows.win_scoop_bucket:\n    name: extras",
-    "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    - chezmoi\n    - firefox\n    - sfsu\n    - windows-terminal"
+    "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    @others",
+    "zxc.20260121233046.1": "@others",
+    "zxc.20260121233453.1": "- aichat",
+    "zxc.20260121233359.1": "- bat",
+    "zxc.20260121233751.1": "- broot",
+    "zxc.20260121233346.1": "- adb",
+    "zxc.20260121233331.1": "- sfsu",
+    "zxc.20260121233238.1": "- vim",
+    "zxc.20260121233923.1": "- coreutils",
+    "zxc.20260121234124.1": "- clipboard",
+    "zxc.20260121234048.1": "- clink\n- clink-completions\n- cmder-full",
+    "zxc.20260121233309.1": "- chezmoi",
+    "zxc.20260121234148.1": "- croc",
+    "zxc.20260121233854.1": "- btop",
+    "zxc.20260121234012.1": "- cacert",
+    "zxc.20260121233511.1": "@others",
+    "zxc.20260121233656.1": "- binutils",
+    "zxc.20260121233522.1": "- autocorrect",
+    "zxc.20260121233143.1": "- firefox\n- windows-terminal\n- brave"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769009082.211
+      "_mod_time": 1769010121.745
     }
   }
 }
