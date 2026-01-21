@@ -2,3 +2,4 @@ tags
 .ansible
 .vscode
 lookup_plugins/__pycache__
+playbooks/nuc-windows.yml

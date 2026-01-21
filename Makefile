@@ -4,7 +4,7 @@ TARGETS := $(FILES:playbooks/%=%)
 .PHONY: all ${TARGETS}
 all: ${TARGETS}
 
-build: surface_void
+build: nuc-windows
 
 ${TARGETS}:
 	ansible-playbook playbooks/$@.yml
