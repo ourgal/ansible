@@ -1,0 +1,62 @@
+- name: Configure windows user
+  hosts: nuc-windows-user
+  tasks:
+    - name: Install scoop to user
+      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    - name: Add scoop bucket
+      community.windows.win_scoop_bucket:
+        name: extras
+- name: Configure windows admin
+  hosts: nuc-windows-admin
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Create scoop folder
+      ansible.windows.win_shell: |
+        $TargetPath = "D:\scoop"
+        $LinkPath = Join-Path $env:ProgramData "scoop"
+        New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null
+        if (Test-Path -Path $LinkPath) {
+            Write-Host "Symbolic link already exists at $LinkPath. Skipping creation."
+            exit
+        }
+        & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
+    - name: Install init packages via scoop
+      community.windows.win_scoop:
+        name: "{{ item }}"
+        global: true
+        no_cache: true
+      loop:
+        - aria2
+        - git
+    - name: Add extra bucket
+      community.windows.win_scoop_bucket:
+        name: extras
+    - name: Install base packages via scoop
+      tags: pkg
+      community.windows.win_scoop:
+        name: "{{ item }}"
+        global: true
+        no_cache: true
+      loop:
+        - aichat
+        - bat
+        - broot
+        - adb
+        - sfsu
+        - vim
+        - coreutils
+        - clipboard
+        - clink
+        - clink-completions
+        - cmder-full
+        - chezmoi
+        - croc
+        - btop
+        - cacert
+        - binutils
+        - autocorrect
+        - firefox
+        - windows-terminal
+        - brave
