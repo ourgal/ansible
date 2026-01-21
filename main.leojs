@@ -47,7 +47,7 @@
   "tnodes": {
     "zxc.20260121215923.1": "    - name: Update powershell help\n      ansible.windows.win_shell: Update-help\n",
     "zxc.20260121210616.1": "    - name: Install scoop-cn\n      ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex\n",
-    "zxc.20260121205603.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tasks:\n    @others",
+    "zxc.20260121205603.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tasks:\n    - name: Install scoop to user\n      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n    - name: Add scoop bucket\n      community.windows.win_scoop_bucket:\n        name: extras\n- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tasks:\n    @others",
     "zxc.20260121210025.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260121213948.1": "- name: Create scoop folder\n  ansible.windows.win_shell: |\n    $TargetPath = \"D:\\scoop\"\n    $LinkPath = Join-Path $env:ProgramData \"scoop\"\n    New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null\n    if (Test-Path -Path $LinkPath) {\n        Write-Host \"Symbolic link already exists at $LinkPath. Skipping creation.\"\n        exit\n    }\n    & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"",
     "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    - aria2\n    - git",
@@ -56,7 +56,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769007965.924
+      "_mod_time": 1769009082.211
     }
   }
 }
