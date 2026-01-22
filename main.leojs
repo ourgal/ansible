@@ -82,8 +82,42 @@
                       "vh": "editor"
                     },
                     {
+                      "gnx": "zxc.20260122225219.1",
+                      "vh": "CMS"
+                    },
+                    {
+                      "gnx": "zxc.20260122224722.1",
+                      "vh": "video"
+                    },
+                    {
+                      "gnx": "zxc.20260122225232.1",
+                      "vh": "image"
+                    },
+                    {
                       "gnx": "zxc.20260121233923.1",
-                      "vh": "system"
+                      "vh": "system",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260122224346.1",
+                          "vh": "file size"
+                        },
+                        {
+                          "gnx": "zxc.20260122224631.1",
+                          "vh": "ls"
+                        },
+                        {
+                          "gnx": "zxc.20260122224711.1",
+                          "vh": "find"
+                        },
+                        {
+                          "gnx": "zxc.20260122225030.1",
+                          "vh": "grep"
+                        },
+                        {
+                          "gnx": "zxc.20260122224604.1",
+                          "vh": "file info"
+                        }
+                      ]
                     },
                     {
                       "gnx": "zxc.20260121234124.1",
@@ -102,6 +136,52 @@
                       "vh": "share"
                     },
                     {
+                      "gnx": "zxc.20260122224814.1",
+                      "vh": "downloader"
+                    },
+                    {
+                      "gnx": "zxc.20260122224753.1",
+                      "vh": "fuzzy finder"
+                    },
+                    {
+                      "gnx": "zxc.20260122224542.1",
+                      "vh": "file search"
+                    },
+                    {
+                      "gnx": "zxc.20260122224234.1",
+                      "vh": "network"
+                    },
+                    {
+                      "gnx": "zxc.20260122225013.1",
+                      "vh": "encrypt"
+                    },
+                    {
+                      "gnx": "zxc.20260122224958.1",
+                      "vh": "password manager"
+                    },
+                    {
+                      "gnx": "zxc.20260122224144.1",
+                      "vh": "git",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260122225339.1",
+                          "vh": "jj"
+                        },
+                        {
+                          "gnx": "zxc.20260122224200.1",
+                          "vh": "diff"
+                        },
+                        {
+                          "gnx": "zxc.20260122224900.1",
+                          "vh": "search"
+                        },
+                        {
+                          "gnx": "zxc.20260122224925.1",
+                          "vh": "tui"
+                        }
+                      ]
+                    },
+                    {
                       "gnx": "zxc.20260121233854.1",
                       "vh": "system statics"
                     },
@@ -113,6 +193,10 @@
                       "gnx": "zxc.20260121233511.1",
                       "vh": "dev",
                       "children": [
+                        {
+                          "gnx": "zxc.20260122225059.1",
+                          "vh": "haskell"
+                        },
                         {
                           "gnx": "zxc.20260121233656.1",
                           "vh": "binary"
@@ -127,7 +211,21 @@
                 },
                 {
                   "gnx": "zxc.20260121233143.1",
-                  "vh": "gui"
+                  "vh": "gui",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260122223535.1",
+                      "vh": "browser"
+                    },
+                    {
+                      "gnx": "zxc.20260122224420.1",
+                      "vh": "text expander"
+                    },
+                    {
+                      "gnx": "zxc.20260122223606.1",
+                      "vh": "terminal"
+                    }
+                  ]
                 }
               ]
             }
@@ -149,25 +247,47 @@
     "zxc.20260121220419.1": "- name: Add extra bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
     "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    @others\n",
     "zxc.20260121233453.1": "- aichat\n",
-    "zxc.20260121233359.1": "- bat\n",
+    "zxc.20260121233359.1": "- bat\n- less\n",
     "zxc.20260121233751.1": "- broot\n",
     "zxc.20260121233346.1": "- adb\n",
     "zxc.20260121233331.1": "- sfsu\n",
-    "zxc.20260121233238.1": "- vim",
-    "zxc.20260121233923.1": "- coreutils\n",
+    "zxc.20260121233238.1": "- vim\n- helix",
+    "zxc.20260122225219.1": "- hugo",
+    "zxc.20260122224722.1": "- ffmpeg",
+    "zxc.20260122225232.1": "- imagemagick",
+    "zxc.20260121233923.1": "- coreutils\n- gsudo\n- innounp",
+    "zxc.20260122224346.1": "- dua\n- duf\n- dust",
+    "zxc.20260122224631.1": "- eza",
+    "zxc.20260122224711.1": "- fd",
+    "zxc.20260122225030.1": "- grep",
+    "zxc.20260122224604.1": "- exiftool",
     "zxc.20260121234124.1": "- clipboard\n",
     "zxc.20260121234048.1": "- clink\n- clink-completions\n- cmder-full\n",
     "zxc.20260121233309.1": "- chezmoi\n",
-    "zxc.20260121234148.1": "- croc\n",
+    "zxc.20260121234148.1": "- croc\n- cwrsync\n- dufs\n- ffsend",
+    "zxc.20260122224814.1": "- gallery-dl",
+    "zxc.20260122224753.1": "- fzf",
+    "zxc.20260122224542.1": "- everything-cli",
+    "zxc.20260122224234.1": "- dog\n- goodbyedpi",
+    "zxc.20260122225013.1": "- gpg",
+    "zxc.20260122224958.1": "- gopass",
+    "zxc.20260122224144.1": "- git-lfs",
+    "zxc.20260122225339.1": "- jj",
+    "zxc.20260122224200.1": "- diff-so-fancy\n- delta",
+    "zxc.20260122224900.1": "- gitql",
+    "zxc.20260122224925.1": "- gitui",
     "zxc.20260121233854.1": "- btop\n",
     "zxc.20260121234012.1": "- cacert\n",
+    "zxc.20260122225059.1": "- haskell\n- haskell-cabal\n- haskell-language-server",
     "zxc.20260121233656.1": "- binutils\n",
     "zxc.20260121233522.1": "- autocorrect\n",
-    "zxc.20260121233143.1": "- firefox\n- windows-terminal\n- brave\n"
+    "zxc.20260122223535.1": "- firefox\n- brave",
+    "zxc.20260122224420.1": "- espanso",
+    "zxc.20260122223606.1": "- windows-terminal"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769015206.957
+      "_mod_time": 1769093663.036
     }
   }
 }
