@@ -25,6 +25,8 @@
             exit
         }
         & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
+    - name: Install scoop-cn
+      ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: "{{ item }}"
