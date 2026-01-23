@@ -12,6 +12,9 @@
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
+    - name: Update powershell help
+      tags: powershell-help
+      ansible.windows.win_shell: Update-help
     - name: Create scoop folder
       ansible.windows.win_shell: |
         $TargetPath = "D:\scoop"
