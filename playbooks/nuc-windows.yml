@@ -2,10 +2,14 @@
   hosts: nuc-windows-user
   tasks:
     - name: Install scoop to user
-      ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex
+      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
     - name: Add scoop bucket
       community.windows.win_scoop_bucket:
         name: extras
+    - name: Add scoop-cn bucket
+      community.windows.win_scoop_bucket:
+        name: scoop-cn
+        repo: https://github.com/duzyn/scoop-cn
 - name: Configure windows admin
   hosts: nuc-windows-admin
   tasks:
@@ -22,11 +26,6 @@
             exit
         }
         & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
-    - name: Install scoop-cn
-      ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex
-    - name: Add extra bucket
-      community.windows.win_scoop_bucket:
-        name: extras
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: "{{ item }}"
@@ -35,6 +34,13 @@
       loop:
         - scoop-cn/aria2
         - scoop-cn/git
+    - name: Add extra bucket
+      community.windows.win_scoop_bucket:
+        name: extras
+    - name: Add scoop-cn bucket
+      community.windows.win_scoop_bucket:
+        name: scoop-cn
+        repo: https://github.com/duzyn/scoop-cn
     - name: Install base packages via scoop
       tags: pkg
       community.windows.win_scoop:
