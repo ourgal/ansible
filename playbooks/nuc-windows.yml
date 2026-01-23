@@ -24,6 +24,13 @@
         & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
     - name: Install scoop-cn
       ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex
+    - name: Add extra bucket
+      community.windows.win_scoop_bucket:
+        name: extras
+    - name: Add scoop-cn bucket
+      community.windows.win_scoop_bucket:
+        name: scoop-cn
+        repo: https://gh-proxy.com/https://github.com/duzyn/scoop-cn.git
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: "{{ item }}"
@@ -32,13 +39,6 @@
       loop:
         - scoop-cn/aria2
         - scoop-cn/git
-    - name: Add extra bucket
-      community.windows.win_scoop_bucket:
-        name: extras
-    - name: Add scoop-cn bucket
-      community.windows.win_scoop_bucket:
-        name: scoop-cn
-        repo: https://gh-proxy.com/https://github.com/duzyn/scoop-cn.git
     - name: Install base packages via scoop
       tags: pkg
       community.windows.win_scoop:
