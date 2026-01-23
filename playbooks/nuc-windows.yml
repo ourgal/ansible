@@ -33,11 +33,15 @@
         global: true
         no_cache: true
       loop:
-        - aria2
-        - git
+        - scoop-cn/aria2
+        - scoop-cn/git
     - name: Add extra bucket
       community.windows.win_scoop_bucket:
         name: extras
+    - name: Add scoop-cn bucket
+      community.windows.win_scoop_bucket:
+        name: scoop-cn
+        repo: https://gh-proxy.com/https://github.com/duzyn/scoop-cn.git
     - name: Install base packages via scoop
       tags: pkg
       community.windows.win_scoop:
@@ -45,57 +49,57 @@
         global: true
         no_cache: true
       loop:
-        - aichat
-        - bat
-        - less
-        - broot
-        - adb
-        - sfsu
-        - vim
-        - helix
-        - hugo
-        - ffmpeg
-        - imagemagick
-        - coreutils
-        - gsudo
-        - innounp
-        - dua
-        - duf
-        - dust
-        - eza
-        - fd
-        - grep
-        - exiftool
-        - clipboard
-        - clink
-        - clink-completions
-        - cmder-full
-        - chezmoi
-        - croc
-        - cwrsync
-        - dufs
-        - ffsend
-        - gallery-dl
-        - fzf
-        - everything-cli
-        - dog
-        - goodbyedpi
-        - gpg
-        - gopass
-        - git-lfs
-        - jj
-        - diff-so-fancy
-        - delta
-        - gitql
-        - gitui
-        - btop
-        - cacert
-        - haskell
-        - haskell-cabal
-        - haskell-language-server
-        - binutils
-        - autocorrect
-        - firefox
-        - brave
-        - espanso
-        - windows-terminal
+        - scoop-cn/aichat
+        - scoop-cn/bat
+        - scoop-cn/less
+        - scoop-cn/broot
+        - scoop-cn/adb
+        - scoop-cn/sfsu
+        - scoop-cn/vim
+        - scoop-cn/helix
+        - scoop-cn/hugo
+        - scoop-cn/ffmpeg
+        - scoop-cn/imagemagick
+        - scoop-cn/coreutils
+        - scoop-cn/gsudo
+        - scoop-cn/innounp
+        - scoop-cn/dua
+        - scoop-cn/duf
+        - scoop-cn/dust
+        - scoop-cn/eza
+        - scoop-cn/fd
+        - scoop-cn/grep
+        - scoop-cn/exiftool
+        - scoop-cn/clipboard
+        - scoop-cn/clink
+        - scoop-cn/clink-completions
+        - scoop-cn/cmder-full
+        - scoop-cn/chezmoi
+        - scoop-cn/croc
+        - scoop-cn/cwrsync
+        - scoop-cn/dufs
+        - scoop-cn/ffsend
+        - scoop-cn/gallery-dl
+        - scoop-cn/fzf
+        - scoop-cn/everything-cli
+        - scoop-cn/dog
+        - scoop-cn/goodbyedpi
+        - scoop-cn/gpg
+        - scoop-cn/gopass
+        - scoop-cn/git-lfs
+        - scoop-cn/jj
+        - scoop-cn/diff-so-fancy
+        - scoop-cn/delta
+        - scoop-cn/gitql
+        - scoop-cn/gitui
+        - scoop-cn/btop
+        - scoop-cn/cacert
+        - scoop-cn/haskell
+        - scoop-cn/haskell-cabal
+        - scoop-cn/haskell-language-server
+        - scoop-cn/binutils
+        - scoop-cn/autocorrect
+        - scoop-cn/firefox
+        - scoop-cn/brave
+        - scoop-cn/espanso
+        - scoop-cn/windows-terminal
