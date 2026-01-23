@@ -2,7 +2,7 @@
   hosts: nuc-windows-user
   tasks:
     - name: Install scoop to user
-      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+      ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex
     - name: Add scoop bucket
       community.windows.win_scoop_bucket:
         name: extras

@@ -21,7 +21,7 @@
               "children": [
                 {
                   "gnx": "zxc.20260122004546.1",
-                  "vh": "install scoop"
+                  "vh": "install scoop-cn"
                 },
                 {
                   "gnx": "zxc.20260122004623.1",
@@ -242,7 +242,7 @@
     "zxc.20260121215923.1": "- name: Update powershell help\n  tags: powershell-help\n  ansible.windows.win_shell: Update-help\n",
     "zxc.20260121205603.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tasks:\n    << user >>\n- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tasks:\n    @others\n",
     "zxc.20260122004348.1": "@others\n",
-    "zxc.20260122004546.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
+    "zxc.20260122004546.1": "- name: Install scoop to user\n  ansible.windows.win_shell: irm https://cdn.jsdelivr.net/gh/duzyn/scoop-cn/install.ps1 | iex\n",
     "zxc.20260122004623.1": "- name: Add scoop bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
     "zxc.20260121210025.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260121213948.1": "- name: Create scoop folder\n  ansible.windows.win_shell: |\n    $TargetPath = \"D:\\scoop\"\n    $LinkPath = Join-Path $env:ProgramData \"scoop\"\n    New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null\n    if (Test-Path -Path $LinkPath) {\n        Write-Host \"Symbolic link already exists at $LinkPath. Skipping creation.\"\n        exit\n    }\n    & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n",
@@ -292,7 +292,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769156956.694
+      "_mod_time": 1769157263.815
     }
   }
 }
