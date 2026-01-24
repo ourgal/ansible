@@ -12,16 +12,24 @@
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
-    - name: Create scoop folder
-      ansible.windows.win_shell: |
-        $TargetPath = "D:\scoop"
-        $LinkPath = Join-Path $env:ProgramData "scoop"
-        New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null
-        if (Test-Path -Path $LinkPath) {
-            Write-Host "Symbolic link already exists at $LinkPath. Skipping creation."
-            exit
-        }
-        & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
+    - name: Link scoop folder
+      tags: scoop_folder
+      block:
+        - name: Create folder
+          ansible.windows.win_file:
+            path: D:\scoop
+            state: directory
+        - name: Global scoop folder stat
+          ansible.windows.win_stat:
+            path: C:\ProgramData\scoop
+          register: scoop_stat
+        - name: Check stat
+          ansible.builtin.debug:
+            var: scoop_stat
+        - name: Create scoop folder
+          ansible.windows.win_shell: |
+            & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
+          when: scoop_stat.stat.isjunction is false
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: "{{ item }}"

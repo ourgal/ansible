@@ -248,8 +248,8 @@
     "zxc.20260122004546.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
     "zxc.20260122004623.1": "- name: Add scoop bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
     "zxc.20260121210025.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
-    "zxc.20260121213948.1": "- name: Create scoop folder\n  ansible.windows.win_shell: |\n    $TargetPath = \"D:\\scoop\"\n    $LinkPath = Join-Path $env:ProgramData \"scoop\"\n    New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null\n    if (Test-Path -Path $LinkPath) {\n        Write-Host \"Symbolic link already exists at $LinkPath. Skipping creation.\"\n        exit\n    }\n    & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n",
-    "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - git",
+    "zxc.20260121213948.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Check stat\n      ansible.builtin.debug:\n        var: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.isjunction is false\n",
+    "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - git\n",
     "zxc.20260121220419.1": "- name: Add extra bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
     "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260121233453.1": "- aichat\n",
@@ -270,8 +270,8 @@
     "zxc.20260121234124.1": "- clipboard\n",
     "zxc.20260121234048.1": "- clink\n- clink-completions\n- cmder-full\n",
     "zxc.20260121233309.1": "- chezmoi\n",
-    "zxc.20260121234148.1": "- croc\n- cwrsync\n- dufs",
-    "zxc.20260124115459.1": "@\nhash check filed\n- ffsend\n@c",
+    "zxc.20260121234148.1": "- croc\n- cwrsync\n- dufs\n",
+    "zxc.20260124115459.1": "@\nhash check filed\n- ffsend\n@c\n",
     "zxc.20260122224814.1": "- gallery-dl\n",
     "zxc.20260122224753.1": "- fzf\n",
     "zxc.20260122224542.1": "- everything-cli\n",
@@ -294,7 +294,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769227903.573
+      "_mod_time": 1769242244.442
     }
   }
 }
