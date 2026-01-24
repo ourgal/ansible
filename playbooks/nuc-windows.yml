@@ -1,17 +1,15 @@
-- name: Configure windows user
-  hosts: nuc-windows-user
-  tasks:
-    - name: Install scoop to user
-      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-    - name: Add scoop bucket
-      community.windows.win_scoop_bucket:
-        name: extras
+---
 - name: Configure windows admin
   hosts: nuc-windows-admin
+  tags: admin
   tasks:
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
+    - name: Remove user documents folder
+      ansible.windows.win_file:
+        path: C:/Users/User/Documents
+        state: absent
     - name: Link scoop folder
       tags: scoop_folder
       block:
@@ -23,32 +21,32 @@
           ansible.windows.win_stat:
             path: C:\ProgramData\scoop
           register: scoop_stat
-        - name: Check stat
-          ansible.builtin.debug:
-            var: scoop_stat
         - name: Create scoop folder
           ansible.windows.win_shell: |
             & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
           when: scoop_stat.stat.isjunction is false
     - name: Install init packages via scoop
       community.windows.win_scoop:
-        name: "{{ item }}"
+        name: '{{ item }}'
         global: true
         no_cache: true
       register: result
       retries: 3
       delay: 5
       until: result is not failed
-      loop:
-        - aria2
-        - git
-    - name: Add extra bucket
+      loop: [aria2, git]
+    - name: Add bucket
       community.windows.win_scoop_bucket:
-        name: extras
-    - name: Install base packages via scoop
-      tags: pkg
+        name: "{{ item }}"
+        state: present
+      loop:
+        - extras
+        - nerd-fonts
+    - name: Install amin packages via scoop
+      tags: scoop-main
       community.windows.win_scoop:
         name: "{{ item }}"
+        state: present
         global: true
         no_cache: true
       register: result
@@ -57,57 +55,290 @@
       until: result is not failed
       loop:
         - aichat
-        - bat
-        - less
-        - broot
         - adb
-        - sfsu
+        - scrcpy
+        - cacert
+        - clipboard
+        - hugo
+        - chsrc
+        - dos2unix
+        - shellcheck
+        - binutils
+        - make
+        - task
+        - msys2
+        - haskell
+        - haskell-cabal
+        - haskell-language-server
+        - stack
+        - tectonic
+        - autocorrect
+        - nodejs-lts
+        - perl
+        - pandoc
+        - chezmoi
+        - gallery-dl
+        - yt-dlp
         - vim
         - helix
-        - hugo
-        - ffmpeg
-        - imagemagick
-        - coreutils
-        - gsudo
-        - innounp
-        - dua
-        - duf
-        - dust
-        - eza
-        - fd
-        - grep
-        - exiftool
-        - clipboard
-        - clink
-        - clink-completions
-        - cmder-full
-        - chezmoi
-        - croc
-        - cwrsync
-        - dufs
-        # hash check filed
-        # - ffsend
-        - gallery-dl
-        - fzf
-        - everything-cli
-        - dog
-        - goodbyedpi
+        - neovim
         - gpg
-        - gopass
+        - openssl
+        - lf
+        - yazi
+        - everything-cli
+        - broot
+        - fzf
         - git-lfs
         - jj
         - diff-so-fancy
         - delta
         - gitql
         - gitui
+        - imagemagick
+        - dog
+        - goodbyedpi
+        - nali
+        - nmap
+        - q-dns
+        - tcping
+        - gopass
+        - scoop-search
+        - croc
+        - cwrsync
+        - dufs
+        - miniserve
+        - portal
+        - rclone
+        - syncthing
+        # hash check filed
+        # - ffsend
+        - clink
+        - clink-completions
+        - cmder-full
+        - pwsh
+        - nu
+        - navi
+        - starship
+        - mcfly
+        - coreutils
+        - nircmd
+        - pipx
+        - winget
+        - gsudo
+        - nssm
+        - innounp
+        - lessmsi
+        - dua
+        - duf
+        - dust
+        - eza
+        - unrar
+        - unzip
+        - sd
+        - tealdeer
+        - fd
+        - grep
+        - ripgrep
+        - fastfetch
+        - rnr
+        - ntop
+        - zoxide
+        - exiftool
+        - shasum
+        - which
         - btop
-        - cacert
-        - haskell
-        - haskell-cabal
-        - haskell-language-server
-        - binutils
-        - autocorrect
-        - firefox
+        - ttyper
+        - ffmpeg
+        - bat
+        - less
+    - name: Install extras packages via scoop
+      tags: scoop-extras
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: true
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - kdeconnect
+        - autohotkey
+        - autoclicker
+        # install failed
+        # - calibre
+        # windows can't set default browser to this
+        # - firefox
         - brave
-        - espanso
+        - qutebrowser
+        - ungoogled-chromium
+        - telegram
+        - cfssl
+        - windowsdesktop-runtime-lts
+        - fiddler
+        - sioyek
+        - sumatrapdf
+        - zeal
+        - libreoffice
+        - wpsoffice
+        - aria-ng-gui
+        - eget
+        - transmission
+        - notepadplusplus
+        - anki
+        - mc
+        - vifm
+        - locale-emulator
+        - ludusavi
+        - playnite
+        - sunshine
+        - lazygit
+        - gitu
+        - gimp
+        - nomacs
+        # installed via choco
+        # - qview
+        - qmk-toolbox
+        - vial
+        - kanata
+        - komokana
+        - qalculate
+        - siyuan-note
+        - qrscan
+        - rustdesk
+        - tightvnc
+        - flameshot
+        - carapace-bin
+        - psfzf
+        - psreadline
+        - television
+        - sfsu
+        - bulk-crap-uninstaller
+        - coretemp
+        - winspy
+        - windhawk
+        - deskflow
+        - dhcp-server
+        - copyq
+        - flclash
+        - hourglass
+        - glazewm
+        - zebar
+        - komorebi
+        - yasb
+        - whkd
+        - flow-launcher
+        - everything
+        - diskgenius
+        - doublecmd
         - windows-terminal
+        - alacritty
+        - wezterm
+        - espanso
+        - ttdl
+        - copytranslator
+        - rufus
+        - ventoy
+        - handbrake
+        - jellyfin-mpv-shim
+        # install failed
+        # - miru
+        # installed via choco
+        # - mpv
+        - openboard
+    - name: Install nerd-fonts packages via scoop
+      tags: scoop-fonts
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: true
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - Maple-Mono-NF-CN
+    - name: Uninstall packages
+      tags: scoop-uninstall
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        state: absent
+        global: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - firefox
+        - qview
+        - mpv
+    - name: Install pacakges via choco
+      tags: choco
+      chocolatey.chocolatey.win_chocolatey:
+        name: '{{ item }}'
+        state: present
+      loop:
+        - calibre
+        - firefox
+        - qview
+        - mpv
+    - name: Uninstall pacakges via choco
+      tags: choco
+      chocolatey.chocolatey.win_chocolatey:
+        name: '{{ item }}'
+        state: absent
+      loop:
+        # user can't access
+        - brave
+- name: Configure windows user
+  hosts: nuc-windows-user
+  tags: user
+  tasks:
+    - name: Install scoop to user
+      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+    - name: Add bucket
+      community.windows.win_scoop_bucket:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - extras
+        - nerd-fonts
+    - name: Remove origin folder
+      ansible.windows.win_file:
+        path: '{{ ansible_facts.user_dir }}/{{ item }}'
+        state: absent
+      loop:
+        - Downloads
+        - Music
+        - Pictures
+        - Video
+        - Documents
+        - Favorites
+        - Saved Games
+        - Contacts
+    - name: Create folder
+      ansible.windows.win_file:
+        path: D:/{{ item }}
+        state: directory
+      loop:
+        - Downloads
+        - Music
+        - Pictures
+        - Video
+        - Documents
+        - Favorites
+        - Saved Games
+        - Contacts
+    - name: Link to new folder
+      ansible.windows.win_shell: |
+        & cmd /c "mklink /j ""{{ ansible_facts.user_dir }}\{{ item }}"" ""D:\{{ item }}"""
+      loop:
+        - Downloads
+        - Music
+        - Pictures
+        - Video
+        - Documents
+        - Favorites
+        - Saved Games
+        - Contacts
