@@ -8,6 +8,10 @@
       "vh": "powershell help"
     },
     {
+      "gnx": "zxc.20260123161541.1",
+      "vh": "scoop cn bucket"
+    },
+    {
       "gnx": "zxc.20260121205511.1",
       "vh": "nuc-windows",
       "children": [
@@ -26,10 +30,6 @@
                 {
                   "gnx": "zxc.20260122004623.1",
                   "vh": "add scoop extras bucket"
-                },
-                {
-                  "gnx": "zxc.20260123165127.1",
-                  "vh": "scoop cn bucket"
                 }
               ]
             },
@@ -48,10 +48,6 @@
             {
               "gnx": "zxc.20260121220419.1",
               "vh": "extras bucket"
-            },
-            {
-              "gnx": "zxc.20260123161541.1",
-              "vh": "scoop cn bucket"
             },
             {
               "gnx": "zxc.20260121230040.1",
@@ -137,7 +133,13 @@
                     },
                     {
                       "gnx": "zxc.20260121234148.1",
-                      "vh": "share"
+                      "vh": "share",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260124115459.1",
+                          "vh": "disabled"
+                        }
+                      ]
                     },
                     {
                       "gnx": "zxc.20260122224814.1",
@@ -240,60 +242,59 @@
   ],
   "tnodes": {
     "zxc.20260121215923.1": "- name: Update powershell help\n  tags: powershell-help\n  ansible.windows.win_shell: Update-help\n",
+    "zxc.20260123161541.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
     "zxc.20260121205603.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tasks:\n    << user >>\n- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tasks:\n    @others\n",
     "zxc.20260122004348.1": "@others\n",
     "zxc.20260122004546.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
     "zxc.20260122004623.1": "- name: Add scoop bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
-    "zxc.20260123165127.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
     "zxc.20260121210025.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260121213948.1": "- name: Create scoop folder\n  ansible.windows.win_shell: |\n    $TargetPath = \"D:\\scoop\"\n    $LinkPath = Join-Path $env:ProgramData \"scoop\"\n    New-Item -Path $TargetPath -ItemType Directory -Force | Out-Null\n    if (Test-Path -Path $LinkPath) {\n        Write-Host \"Symbolic link already exists at $LinkPath. Skipping creation.\"\n        exit\n    }\n    & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n",
-    "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    - git\n",
+    "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - git",
     "zxc.20260121220419.1": "- name: Add extra bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
-    "zxc.20260123161541.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
-    "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  loop:\n    @others\n",
-    "zxc.20260121233046.1": "- scoop-cn/aria2",
-    "zxc.20260121233453.1": "- scoop-cn/aichat\n",
-    "zxc.20260121233359.1": "- scoop-cn/bat\n- scoop-cn/less\n",
-    "zxc.20260121233751.1": "- scoop-cn/broot\n",
-    "zxc.20260121233346.1": "- scoop-cn/adb\n",
-    "zxc.20260121233331.1": "- scoop-cn/sfsu\n",
-    "zxc.20260121233238.1": "- scoop-cn/vim\n- scoop-cn/helix\n",
-    "zxc.20260122225219.1": "- scoop-cn/hugo\n",
-    "zxc.20260122224722.1": "- scoop-cn/ffmpeg\n",
-    "zxc.20260122225232.1": "- scoop-cn/imagemagick\n",
-    "zxc.20260121233923.1": "- scoop-cn/coreutils\n- scoop-cn/gsudo\n- scoop-cn/innounp\n",
-    "zxc.20260122224346.1": "- scoop-cn/dua\n- scoop-cn/duf\n- scoop-cn/dust\n",
-    "zxc.20260122224631.1": "- scoop-cn/eza\n",
-    "zxc.20260122224711.1": "- scoop-cn/fd\n",
-    "zxc.20260122225030.1": "- scoop-cn/grep\n",
-    "zxc.20260122224604.1": "- scoop-cn/exiftool\n",
-    "zxc.20260121234124.1": "- scoop-cn/clipboard\n",
-    "zxc.20260121234048.1": "- scoop-cn/clink\n- scoop-cn/clink-completions\n- scoop-cn/cmder-full\n",
-    "zxc.20260121233309.1": "- scoop-cn/chezmoi\n",
-    "zxc.20260121234148.1": "- scoop-cn/croc\n- scoop-cn/cwrsync\n- scoop-cn/dufs\n- scoop-cn/ffsend\n",
-    "zxc.20260122224814.1": "- scoop-cn/gallery-dl\n",
-    "zxc.20260122224753.1": "- scoop-cn/fzf\n",
-    "zxc.20260122224542.1": "- scoop-cn/everything-cli\n",
-    "zxc.20260122224234.1": "- scoop-cn/dog\n- scoop-cn/goodbyedpi\n",
-    "zxc.20260122225013.1": "- scoop-cn/gpg\n",
-    "zxc.20260122224958.1": "- scoop-cn/gopass\n",
-    "zxc.20260122224144.1": "- scoop-cn/git-lfs\n",
-    "zxc.20260122225339.1": "- scoop-cn/jj\n",
-    "zxc.20260122224200.1": "- scoop-cn/diff-so-fancy\n- scoop-cn/delta\n",
-    "zxc.20260122224900.1": "- scoop-cn/gitql\n",
-    "zxc.20260122224925.1": "- scoop-cn/gitui\n",
-    "zxc.20260121233854.1": "- scoop-cn/btop\n",
-    "zxc.20260121234012.1": "- scoop-cn/cacert\n",
-    "zxc.20260122225059.1": "- scoop-cn/haskell\n- scoop-cn/haskell-cabal\n- scoop-cn/haskell-language-server\n",
-    "zxc.20260121233656.1": "- scoop-cn/binutils\n",
-    "zxc.20260121233522.1": "- scoop-cn/autocorrect\n",
-    "zxc.20260122223535.1": "- scoop-cn/firefox\n- scoop-cn/brave\n",
-    "zxc.20260122224420.1": "- scoop-cn/espanso\n",
-    "zxc.20260122223606.1": "- scoop-cn/windows-terminal\n"
+    "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
+    "zxc.20260121233453.1": "- aichat\n",
+    "zxc.20260121233359.1": "- bat\n- less\n",
+    "zxc.20260121233751.1": "- broot\n",
+    "zxc.20260121233346.1": "- adb\n",
+    "zxc.20260121233331.1": "- sfsu\n",
+    "zxc.20260121233238.1": "- vim\n- helix\n",
+    "zxc.20260122225219.1": "- hugo\n",
+    "zxc.20260122224722.1": "- ffmpeg\n",
+    "zxc.20260122225232.1": "- imagemagick\n",
+    "zxc.20260121233923.1": "- coreutils\n- gsudo\n- innounp\n",
+    "zxc.20260122224346.1": "- dua\n- duf\n- dust\n",
+    "zxc.20260122224631.1": "- eza\n",
+    "zxc.20260122224711.1": "- fd\n",
+    "zxc.20260122225030.1": "- grep\n",
+    "zxc.20260122224604.1": "- exiftool\n",
+    "zxc.20260121234124.1": "- clipboard\n",
+    "zxc.20260121234048.1": "- clink\n- clink-completions\n- cmder-full\n",
+    "zxc.20260121233309.1": "- chezmoi\n",
+    "zxc.20260121234148.1": "- croc\n- cwrsync\n- dufs",
+    "zxc.20260124115459.1": "@\nhash check filed\n- ffsend\n@c",
+    "zxc.20260122224814.1": "- gallery-dl\n",
+    "zxc.20260122224753.1": "- fzf\n",
+    "zxc.20260122224542.1": "- everything-cli\n",
+    "zxc.20260122224234.1": "- dog\n- goodbyedpi\n",
+    "zxc.20260122225013.1": "- gpg\n",
+    "zxc.20260122224958.1": "- gopass\n",
+    "zxc.20260122224144.1": "- git-lfs\n",
+    "zxc.20260122225339.1": "- jj\n",
+    "zxc.20260122224200.1": "- diff-so-fancy\n- delta\n",
+    "zxc.20260122224900.1": "- gitql\n",
+    "zxc.20260122224925.1": "- gitui\n",
+    "zxc.20260121233854.1": "- btop\n",
+    "zxc.20260121234012.1": "- cacert\n",
+    "zxc.20260122225059.1": "- haskell\n- haskell-cabal\n- haskell-language-server\n",
+    "zxc.20260121233656.1": "- binutils\n",
+    "zxc.20260121233522.1": "- autocorrect\n",
+    "zxc.20260122223535.1": "- firefox\n- brave\n",
+    "zxc.20260122224420.1": "- espanso\n",
+    "zxc.20260122223606.1": "- windows-terminal\n"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769158786.5
+      "_mod_time": 1769227903.573
     }
   }
 }
