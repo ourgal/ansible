@@ -7,4 +7,5 @@ all: ${TARGETS}
 build: nuc-windows
 
 ${TARGETS}:
+	ansible-lint playbooks/$@.yml
 	ansible-playbook playbooks/$@.yml
