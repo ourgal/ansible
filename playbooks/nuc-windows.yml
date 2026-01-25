@@ -54,56 +54,38 @@
       delay: 5
       until: result is not failed
       loop:
+        - clink
+        - clink-completions
+        - cmder-full
+        - pwsh
+        - nu
+        - fastfetch
+        - ntop
+        - btop
+        - which
+        - ttyper
+        - fd
+        - bat
+        - less
+        - rnr
+        - shasum
+        - zoxide
+        - coreutils
+        - nircmd
+        - grep
+        - ripgrep
+        - dua
+        - dust
+        - tealdeer
+        - sd
+        - eza
+        - duf
+        - navi
+        - unrar
+        - unzip
+        - mcfly
+        - starship
         - aichat
-        - adb
-        - scrcpy
-        - cacert
-        - clipboard
-        - hugo
-        - chsrc
-        - dos2unix
-        - shellcheck
-        - binutils
-        - make
-        - task
-        - msys2
-        - haskell
-        - haskell-cabal
-        - haskell-language-server
-        - stack
-        - tectonic
-        - autocorrect
-        - nodejs-lts
-        - perl
-        - pandoc
-        - chezmoi
-        - gallery-dl
-        - yt-dlp
-        - vim
-        - helix
-        - neovim
-        - gpg
-        - openssl
-        - lf
-        - yazi
-        - everything-cli
-        - broot
-        - fzf
-        - git-lfs
-        - jj
-        - diff-so-fancy
-        - delta
-        - gitql
-        - gitui
-        - imagemagick
-        - dog
-        - goodbyedpi
-        - nali
-        - nmap
-        - q-dns
-        - tcping
-        - gopass
-        - scoop-search
         - croc
         - cwrsync
         - dufs
@@ -113,45 +95,158 @@
         - syncthing
         # hash check filed
         # - ffsend
-        - clink
-        - clink-completions
-        - cmder-full
-        - pwsh
-        - nu
-        - navi
-        - starship
-        - mcfly
-        - coreutils
-        - nircmd
-        - pipx
-        - winget
-        - gsudo
-        - nssm
+        - dos2unix
+        - goodbyedpi
         - innounp
         - lessmsi
-        - dua
-        - duf
-        - dust
-        - eza
-        - unrar
-        - unzip
-        - sd
-        - tealdeer
-        - fd
-        - grep
-        - ripgrep
-        - fastfetch
-        - rnr
-        - ntop
-        - zoxide
+        - gsudo
+        - nssm
+        - pipx
+        - winget
+        - clipboard
+        - adb
+        - scrcpy
+        - cacert
+        - scoop-search
+        - hugo
         - exiftool
-        - shasum
-        - which
-        - btop
-        - ttyper
+        - imagemagick
+        - vim
+        - helix
+        - neovim
         - ffmpeg
-        - bat
-        - less
+        - everything-cli
+        - jj
+        - git-lfs
+        - diff-so-fancy
+        - delta
+        - gitui
+        - gitql
+        - gallery-dl
+        - yt-dlp
+        - gpg
+        - openssl
+        - gopass
+        - dog
+        - nali
+        - nmap
+        - q-dns
+        - tcping
+        - pandoc
+        - broot
+        - fzf
+        - chezmoi
+        - lf
+        - yazi
+        - chsrc
+        - autocorrect
+        - perl
+        - nodejs-lts
+        - tectonic
+        - haskell
+        - haskell-cabal
+        - haskell-language-server
+        - stack
+        - make
+        - task
+        - msys2
+        - shellcheck
+        - binutils
+    - name: Install extras packages via scoop
+      tags: scoop-extras
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: true
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - kdeconnect
+        - autohotkey
+        - autoclicker
+        # install failed
+        # - calibre
+        # windows can't set default browser to this
+        # - firefox
+        - brave
+        - qutebrowser
+        - ungoogled-chromium
+        - telegram
+        - windowsdesktop-runtime-lts
+        - sioyek
+        - sumatrapdf
+        - zeal
+        - libreoffice
+        - wpsoffice
+        - aria-ng-gui
+        - eget
+        - transmission
+        - notepadplusplus
+        - anki
+        - cfssl
+        - mc
+        - vifm
+        - doublecmd
+        - locale-emulator
+        - ludusavi
+        - playnite
+        - sunshine
+        - lazygit
+        - gitu
+        - nomacs
+        # installed via choco
+        # - qview
+        - gimp
+        - qmk-toolbox
+        - vial
+        - kanata
+        - komokana
+        - qalculate
+        - fiddler
+        - siyuan-note
+        - qrscan
+        - rustdesk
+        - tightvnc
+        - flameshot
+        - television
+        - carapace-bin
+        - ttdl
+        - sfsu
+        - psfzf
+        - psreadline
+        - winspy
+        - windhawk
+        - glazewm
+        - zebar
+        - komorebi
+        - yasb
+        - whkd
+        - flclash
+        - diskgenius
+        - flow-launcher
+        - dhcp-server
+        - hourglass
+        - copyq
+        - everything
+        - deskflow
+        - coretemp
+        - bulk-crap-uninstaller
+        - windows-terminal
+        - alacritty
+        - wezterm
+        - espanso
+        - copytranslator
+        - rufus
+        - ventoy
+        - jellyfin-mpv-shim
+        # install failed
+        # - miru
+        # installed via choco
+        # - mpv
+        - handbrake
+        - openboard
     - name: Install extras packages via scoop
       tags: scoop-extras
       community.windows.win_scoop:
@@ -312,7 +407,7 @@
         - Downloads
         - Music
         - Pictures
-        - Video
+        - Videos
         - Documents
         - Favorites
         - Saved Games
@@ -325,7 +420,7 @@
         - Downloads
         - Music
         - Pictures
-        - Video
+        - Videos
         - Documents
         - Favorites
         - Saved Games
@@ -337,8 +432,48 @@
         - Downloads
         - Music
         - Pictures
-        - Video
+        - Videos
         - Documents
         - Favorites
         - Saved Games
         - Contacts
+    - name: Add pipx bin path to PATH
+      tags: path
+      ansible.windows.win_environment:
+        state: present
+        level: user
+        name: PATH
+        value: "{{ ansible_facts.env.Path }};{{ ansible_facts.user_dir }}\\.local\\bin"
+      when: (ansible_facts.user_dir + "\\.local\\bin") not in ansible_facts.env.Path
+    - name: Link pipx folder
+      tags: pipx_folder
+      block:
+        - name: Create folder
+          ansible.windows.win_file:
+            path: D:\pipx
+            state: directory
+        - name: Remove origin folder
+          ansible.windows.win_file:
+            path: "{{ ansible_facts.user_dir }}/pipx"
+            state: absent
+        - name: Link pipx folder
+          ansible.windows.win_shell: |
+            & cmd /c "mklink /j %userprofile%\pipx D:\pipx"
+    - name: Install packages
+      ansible.windows.win_shell: "pipx install {{ item }}"
+      loop:
+        - advance-touch
+    - name: Chezmoi dot file manager
+      tags: chezmoi
+      block:
+        - name: Add ssh keys to known_hosts
+          community.windows.win_lineinfile:
+            path: "{{ ansible_facts.user_dir }}/.ssh/known_hosts"
+            line: "{{ item }}"
+          loop:
+            - "[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u"
+            - "[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u"
+        - name: Init chezmoi
+          ansible.windows.win_shell: chezmoi init ssh://brix.local:23231/chezmoi.git
+        - name: Update chezmoi
+          ansible.windows.win_shell: chezmoi update

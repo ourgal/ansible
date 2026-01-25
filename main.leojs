@@ -20,216 +20,615 @@
           "vh": "@clean playbooks/nuc-windows.yml",
           "children": [
             {
-              "gnx": "zxc.20260122004348.1",
-              "vh": "<< user >>",
+              "gnx": "zxc.20260125024248.1",
+              "vh": "admin part",
               "children": [
                 {
-                  "gnx": "zxc.20260122004546.1",
-                  "vh": "install scoop"
+                  "gnx": "zxc.20260125024619.1",
+                  "vh": "facts"
                 },
                 {
-                  "gnx": "zxc.20260122004623.1",
-                  "vh": "add scoop extras bucket"
+                  "gnx": "zxc.20260125025003.1",
+                  "vh": "scoop",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260125024714.1",
+                      "vh": "remvoe user documents folder"
+                    },
+                    {
+                      "gnx": "zxc.20260125024741.1",
+                      "vh": "link scoop folder to d drive"
+                    },
+                    {
+                      "gnx": "zxc.20260125024918.1",
+                      "vh": "install scoop"
+                    },
+                    {
+                      "gnx": "zxc.20260125024520.1",
+                      "vh": "scoop buckets"
+                    },
+                    {
+                      "gnx": "zxc.20260125025055.1",
+                      "vh": "main packages",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260125120148.1",
+                          "vh": "shell",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125120941.1",
+                              "vh": "system info"
+                            },
+                            {
+                              "gnx": "zxc.20260125121058.1",
+                              "vh": "which"
+                            },
+                            {
+                              "gnx": "zxc.20260125121117.1",
+                              "vh": "typing"
+                            },
+                            {
+                              "gnx": "zxc.20260125120914.1",
+                              "vh": "find"
+                            },
+                            {
+                              "gnx": "zxc.20260125121256.1",
+                              "vh": "less"
+                            },
+                            {
+                              "gnx": "zxc.20260125120953.1",
+                              "vh": "rename"
+                            },
+                            {
+                              "gnx": "zxc.20260125121052.1",
+                              "vh": "shasum"
+                            },
+                            {
+                              "gnx": "zxc.20260125121014.1",
+                              "vh": "cd"
+                            },
+                            {
+                              "gnx": "zxc.20260125120452.1",
+                              "vh": "utils"
+                            },
+                            {
+                              "gnx": "zxc.20260125120924.1",
+                              "vh": "grep"
+                            },
+                            {
+                              "gnx": "zxc.20260125120746.1",
+                              "vh": "du"
+                            },
+                            {
+                              "gnx": "zxc.20260125120905.1",
+                              "vh": "man"
+                            },
+                            {
+                              "gnx": "zxc.20260125120854.1",
+                              "vh": "sed"
+                            },
+                            {
+                              "gnx": "zxc.20260125120830.1",
+                              "vh": "ls"
+                            },
+                            {
+                              "gnx": "zxc.20260125120822.1",
+                              "vh": "df"
+                            },
+                            {
+                              "gnx": "zxc.20260125120345.1",
+                              "vh": "snippets"
+                            },
+                            {
+                              "gnx": "zxc.20260125120843.1",
+                              "vh": "unzip"
+                            },
+                            {
+                              "gnx": "zxc.20260125120405.1",
+                              "vh": "history"
+                            },
+                            {
+                              "gnx": "zxc.20260125120424.1",
+                              "vh": "prompt"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125025138.1",
+                          "vh": "AI"
+                        },
+                        {
+                          "gnx": "zxc.20260125030646.1",
+                          "vh": "share",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125121412.1",
+                              "vh": "disabled"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125025233.1",
+                          "vh": "system",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125120657.1",
+                              "vh": "unpack"
+                            },
+                            {
+                              "gnx": "zxc.20260125120618.1",
+                              "vh": "sudo"
+                            },
+                            {
+                              "gnx": "zxc.20260125120634.1",
+                              "vh": "service"
+                            },
+                            {
+                              "gnx": "zxc.20260125120604.1",
+                              "vh": "package manager"
+                            },
+                            {
+                              "gnx": "zxc.20260125025238.1",
+                              "vh": "clipboard"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125025205.1",
+                          "vh": "android"
+                        },
+                        {
+                          "gnx": "zxc.20260125025223.1",
+                          "vh": "CA"
+                        },
+                        {
+                          "gnx": "zxc.20260125030627.1",
+                          "vh": "scoop helper"
+                        },
+                        {
+                          "gnx": "zxc.20260125025255.1",
+                          "vh": "CMS"
+                        },
+                        {
+                          "gnx": "zxc.20260125030319.1",
+                          "vh": "image",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125121032.1",
+                              "vh": "info"
+                            },
+                            {
+                              "gnx": "zxc.20260125030330.1",
+                              "vh": "edit"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125025907.1",
+                          "vh": "editor"
+                        },
+                        {
+                          "gnx": "zxc.20260125121154.1",
+                          "vh": "video",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125121216.1",
+                              "vh": "editor"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125030044.1",
+                          "vh": "search"
+                        },
+                        {
+                          "gnx": "zxc.20260125030122.1",
+                          "vh": "git",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125030139.1",
+                              "vh": "lfs"
+                            },
+                            {
+                              "gnx": "zxc.20260125030214.1",
+                              "vh": "diff"
+                            },
+                            {
+                              "gnx": "zxc.20260125030301.1",
+                              "vh": "tui"
+                            },
+                            {
+                              "gnx": "zxc.20260125030245.1",
+                              "vh": "search"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125025845.1",
+                          "vh": "downloader"
+                        },
+                        {
+                          "gnx": "zxc.20260125025943.1",
+                          "vh": "encrypt"
+                        },
+                        {
+                          "gnx": "zxc.20260125030353.1",
+                          "vh": "network"
+                        },
+                        {
+                          "gnx": "zxc.20260125025707.1",
+                          "vh": "document"
+                        },
+                        {
+                          "gnx": "zxc.20260125030104.1",
+                          "vh": "fuzzy finder"
+                        },
+                        {
+                          "gnx": "zxc.20260125025829.1",
+                          "vh": "dotfile manager"
+                        },
+                        {
+                          "gnx": "zxc.20260125025957.1",
+                          "vh": "file manager"
+                        },
+                        {
+                          "gnx": "zxc.20260125025310.1",
+                          "vh": "dev",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125025616.1",
+                              "vh": "markdown"
+                            },
+                            {
+                              "gnx": "zxc.20260125025649.1",
+                              "vh": "perl"
+                            },
+                            {
+                              "gnx": "zxc.20260125025640.1",
+                              "vh": "nodejs"
+                            },
+                            {
+                              "gnx": "zxc.20260125025604.1",
+                              "vh": "latex"
+                            },
+                            {
+                              "gnx": "zxc.20260125025549.1",
+                              "vh": "haskell"
+                            },
+                            {
+                              "gnx": "zxc.20260125025510.1",
+                              "vh": "compile"
+                            },
+                            {
+                              "gnx": "zxc.20260125025534.1",
+                              "vh": "environment"
+                            },
+                            {
+                              "gnx": "zxc.20260125025339.1",
+                              "vh": "bash"
+                            },
+                            {
+                              "gnx": "zxc.20260125025352.1",
+                              "vh": "binary"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "gnx": "zxc.20260125121500.1",
+                      "vh": "extras packages",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260125121633.1",
+                          "vh": "android"
+                        },
+                        {
+                          "gnx": "zxc.20260125121651.1",
+                          "vh": "automation"
+                        },
+                        {
+                          "gnx": "zxc.20260125121707.1",
+                          "vh": "book"
+                        },
+                        {
+                          "gnx": "zxc.20260125121729.1",
+                          "vh": "browser"
+                        },
+                        {
+                          "gnx": "zxc.20260125121756.1",
+                          "vh": "chat"
+                        },
+                        {
+                          "gnx": "zxc.20260125121858.1",
+                          "vh": "dev"
+                        },
+                        {
+                          "gnx": "zxc.20260125121926.1",
+                          "vh": "document"
+                        },
+                        {
+                          "gnx": "zxc.20260125121949.1",
+                          "vh": "download"
+                        },
+                        {
+                          "gnx": "zxc.20260125121959.1",
+                          "vh": "editor"
+                        },
+                        {
+                          "gnx": "zxc.20260125122011.1",
+                          "vh": "education"
+                        },
+                        {
+                          "gnx": "zxc.20260125121849.1",
+                          "vh": "encypt"
+                        },
+                        {
+                          "gnx": "zxc.20260125122022.1",
+                          "vh": "file manager"
+                        },
+                        {
+                          "gnx": "zxc.20260125122031.1",
+                          "vh": "game"
+                        },
+                        {
+                          "gnx": "zxc.20260125122040.1",
+                          "vh": "git"
+                        },
+                        {
+                          "gnx": "zxc.20260125122054.1",
+                          "vh": "image",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125122109.1",
+                              "vh": "view"
+                            },
+                            {
+                              "gnx": "zxc.20260125122059.1",
+                              "vh": "edit"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125122306.1",
+                          "vh": "keyboard"
+                        },
+                        {
+                          "gnx": "zxc.20260125122314.1",
+                          "vh": "math"
+                        },
+                        {
+                          "gnx": "zxc.20260125121911.1",
+                          "vh": "network"
+                        },
+                        {
+                          "gnx": "zxc.20260125122322.1",
+                          "vh": "note"
+                        },
+                        {
+                          "gnx": "zxc.20260125122329.1",
+                          "vh": "qr code"
+                        },
+                        {
+                          "gnx": "zxc.20260125122341.1",
+                          "vh": "remote control"
+                        },
+                        {
+                          "gnx": "zxc.20260125122353.1",
+                          "vh": "screen shot"
+                        },
+                        {
+                          "gnx": "zxc.20260125122412.1",
+                          "vh": "shell",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125122506.1",
+                              "vh": "fuzzy finder"
+                            },
+                            {
+                              "gnx": "zxc.20260125122546.1",
+                              "vh": "completion"
+                            },
+                            {
+                              "gnx": "zxc.20260125123243.1",
+                              "vh": "todo"
+                            },
+                            {
+                              "gnx": "zxc.20260125122532.1",
+                              "vh": "scoop helper"
+                            },
+                            {
+                              "gnx": "zxc.20260125122444.1",
+                              "vh": "powershell module"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125122737.1",
+                          "vh": "system",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125123048.1",
+                              "vh": "window manager"
+                            },
+                            {
+                              "gnx": "zxc.20260125123009.1",
+                              "vh": "proxy"
+                            },
+                            {
+                              "gnx": "zxc.20260125123134.1",
+                              "vh": "disk"
+                            },
+                            {
+                              "gnx": "zxc.20260125123102.1",
+                              "vh": "launcher"
+                            },
+                            {
+                              "gnx": "zxc.20260125122946.1",
+                              "vh": "dhcp"
+                            },
+                            {
+                              "gnx": "zxc.20260125123027.1",
+                              "vh": "timer"
+                            },
+                            {
+                              "gnx": "zxc.20260125122959.1",
+                              "vh": "clipboard"
+                            },
+                            {
+                              "gnx": "zxc.20260125123119.1",
+                              "vh": "search"
+                            },
+                            {
+                              "gnx": "zxc.20260125122932.1",
+                              "vh": "kvm"
+                            },
+                            {
+                              "gnx": "zxc.20260125122817.1",
+                              "vh": "comperature"
+                            },
+                            {
+                              "gnx": "zxc.20260125122744.1",
+                              "vh": "uninstall"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125123203.1",
+                          "vh": "terminal"
+                        },
+                        {
+                          "gnx": "zxc.20260125123227.1",
+                          "vh": "text expander"
+                        },
+                        {
+                          "gnx": "zxc.20260125123255.1",
+                          "vh": "translation"
+                        },
+                        {
+                          "gnx": "zxc.20260125123314.1",
+                          "vh": "usb drive"
+                        },
+                        {
+                          "gnx": "zxc.20260125123345.1",
+                          "vh": "video",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260125123423.1",
+                              "vh": "player"
+                            },
+                            {
+                              "gnx": "zxc.20260125123353.1",
+                              "vh": "edit"
+                            }
+                          ]
+                        },
+                        {
+                          "gnx": "zxc.20260125123442.1",
+                          "vh": "whiteboard"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             },
             {
-              "gnx": "zxc.20260121210025.1",
-              "vh": "facts"
-            },
-            {
-              "gnx": "zxc.20260121213948.1",
-              "vh": "link scoop folder"
-            },
-            {
-              "gnx": "zxc.20260121222725.1",
-              "vh": "init packages"
-            },
-            {
-              "gnx": "zxc.20260121220419.1",
-              "vh": "extras bucket"
-            },
-            {
-              "gnx": "zxc.20260121230040.1",
-              "vh": "scoop packages",
+              "gnx": "zxc.20260125024238.1",
+              "vh": "user part",
               "children": [
                 {
-                  "gnx": "zxc.20260121233046.1",
-                  "vh": "cli",
+                  "gnx": "zxc.20260125123950.1",
+                  "vh": "scoop",
                   "children": [
                     {
-                      "gnx": "zxc.20260121233453.1",
-                      "vh": "AI"
+                      "gnx": "zxc.20260125024431.1",
+                      "vh": "install scoop"
                     },
                     {
-                      "gnx": "zxc.20260121233359.1",
-                      "vh": "viewer"
-                    },
+                      "gnx": "zxc.20260125024520.1"
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260125124009.1",
+                  "vh": "user folders",
+                  "children": [
                     {
-                      "gnx": "zxc.20260121233751.1",
-                      "vh": "file tree"
-                    },
-                    {
-                      "gnx": "zxc.20260121233346.1",
-                      "vh": "android"
-                    },
-                    {
-                      "gnx": "zxc.20260121233331.1",
-                      "vh": "scoop helper"
-                    },
-                    {
-                      "gnx": "zxc.20260121233238.1",
-                      "vh": "editor"
-                    },
-                    {
-                      "gnx": "zxc.20260122225219.1",
-                      "vh": "CMS"
-                    },
-                    {
-                      "gnx": "zxc.20260122224722.1",
-                      "vh": "video"
-                    },
-                    {
-                      "gnx": "zxc.20260122225232.1",
-                      "vh": "image"
-                    },
-                    {
-                      "gnx": "zxc.20260121233923.1",
-                      "vh": "system",
+                      "gnx": "zxc.20260125030815.1",
+                      "vh": "remove user folders",
                       "children": [
                         {
-                          "gnx": "zxc.20260122224346.1",
-                          "vh": "file size"
-                        },
-                        {
-                          "gnx": "zxc.20260122224631.1",
-                          "vh": "ls"
-                        },
-                        {
-                          "gnx": "zxc.20260122224711.1",
-                          "vh": "find"
-                        },
-                        {
-                          "gnx": "zxc.20260122225030.1",
-                          "vh": "grep"
-                        },
-                        {
-                          "gnx": "zxc.20260122224604.1",
-                          "vh": "file info"
+                          "gnx": "zxc.20260125030831.1",
+                          "vh": "folders"
                         }
                       ]
                     },
                     {
-                      "gnx": "zxc.20260121234124.1",
-                      "vh": "clipboard"
-                    },
-                    {
-                      "gnx": "zxc.20260121234048.1",
-                      "vh": "shell"
-                    },
-                    {
-                      "gnx": "zxc.20260121233309.1",
-                      "vh": "dot file manager"
-                    },
-                    {
-                      "gnx": "zxc.20260121234148.1",
-                      "vh": "share",
+                      "gnx": "zxc.20260125030933.1",
+                      "vh": "create new folders",
                       "children": [
                         {
-                          "gnx": "zxc.20260124115459.1",
-                          "vh": "disabled"
+                          "gnx": "zxc.20260125030831.1"
                         }
                       ]
                     },
                     {
-                      "gnx": "zxc.20260122224814.1",
-                      "vh": "downloader"
-                    },
-                    {
-                      "gnx": "zxc.20260122224753.1",
-                      "vh": "fuzzy finder"
-                    },
-                    {
-                      "gnx": "zxc.20260122224542.1",
-                      "vh": "file search"
-                    },
-                    {
-                      "gnx": "zxc.20260122224234.1",
-                      "vh": "network"
-                    },
-                    {
-                      "gnx": "zxc.20260122225013.1",
-                      "vh": "encrypt"
-                    },
-                    {
-                      "gnx": "zxc.20260122224958.1",
-                      "vh": "password manager"
-                    },
-                    {
-                      "gnx": "zxc.20260122224144.1",
-                      "vh": "git",
+                      "gnx": "zxc.20260125031006.1",
+                      "vh": "link to new folder",
                       "children": [
                         {
-                          "gnx": "zxc.20260122225339.1",
-                          "vh": "jj"
-                        },
-                        {
-                          "gnx": "zxc.20260122224200.1",
-                          "vh": "diff"
-                        },
-                        {
-                          "gnx": "zxc.20260122224900.1",
-                          "vh": "search"
-                        },
-                        {
-                          "gnx": "zxc.20260122224925.1",
-                          "vh": "tui"
-                        }
-                      ]
-                    },
-                    {
-                      "gnx": "zxc.20260121233854.1",
-                      "vh": "system statics"
-                    },
-                    {
-                      "gnx": "zxc.20260121234012.1",
-                      "vh": "CA"
-                    },
-                    {
-                      "gnx": "zxc.20260121233511.1",
-                      "vh": "dev",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260122225059.1",
-                          "vh": "haskell"
-                        },
-                        {
-                          "gnx": "zxc.20260121233656.1",
-                          "vh": "binary"
-                        },
-                        {
-                          "gnx": "zxc.20260121233522.1",
-                          "vh": "markdown"
+                          "gnx": "zxc.20260125030831.1"
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "gnx": "zxc.20260121233143.1",
-                  "vh": "gui",
+                  "gnx": "zxc.20260125125332.1",
+                  "vh": "pipx",
                   "children": [
                     {
-                      "gnx": "zxc.20260122223535.1",
-                      "vh": "browser"
+                      "gnx": "zxc.20260125125341.1",
+                      "vh": "add to Path"
                     },
                     {
-                      "gnx": "zxc.20260122224420.1",
-                      "vh": "text expander"
+                      "gnx": "zxc.20260125133752.1",
+                      "vh": "link pipx folder to d drive"
                     },
                     {
-                      "gnx": "zxc.20260122223606.1",
-                      "vh": "terminal"
+                      "gnx": "zxc.20260125132006.1",
+                      "vh": "install",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260125132209.1",
+                          "vh": "packages"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260125200421.1",
+                  "vh": "chezmoi",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260125205936.1",
+                      "vh": "ssh know_hosts",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260125210054.1",
+                          "vh": "brix"
+                        }
+                      ]
+                    },
+                    {
+                      "gnx": "zxc.20260125200636.1",
+                      "vh": "chezmoi init"
+                    },
+                    {
+                      "gnx": "zxc.20260125200755.1",
+                      "vh": "chezmoi update"
                     }
                   ]
                 }
@@ -243,58 +642,141 @@
   "tnodes": {
     "zxc.20260121215923.1": "- name: Update powershell help\n  tags: powershell-help\n  ansible.windows.win_shell: Update-help\n",
     "zxc.20260123161541.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
-    "zxc.20260121205603.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tasks:\n    << user >>\n- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tasks:\n    @others\n",
-    "zxc.20260122004348.1": "@others\n",
-    "zxc.20260122004546.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
-    "zxc.20260122004623.1": "- name: Add scoop bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
-    "zxc.20260121210025.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
-    "zxc.20260121213948.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Check stat\n      ansible.builtin.debug:\n        var: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.isjunction is false\n",
-    "zxc.20260121222725.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - git\n",
-    "zxc.20260121220419.1": "- name: Add extra bucket\n  community.windows.win_scoop_bucket:\n    name: extras\n",
-    "zxc.20260121230040.1": "- name: Install base packages via scoop\n  tags: pkg\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
-    "zxc.20260121233453.1": "- aichat\n",
-    "zxc.20260121233359.1": "- bat\n- less\n",
-    "zxc.20260121233751.1": "- broot\n",
-    "zxc.20260121233346.1": "- adb\n",
-    "zxc.20260121233331.1": "- sfsu\n",
-    "zxc.20260121233238.1": "- vim\n- helix\n",
-    "zxc.20260122225219.1": "- hugo\n",
-    "zxc.20260122224722.1": "- ffmpeg\n",
-    "zxc.20260122225232.1": "- imagemagick\n",
-    "zxc.20260121233923.1": "- coreutils\n- gsudo\n- innounp\n",
-    "zxc.20260122224346.1": "- dua\n- duf\n- dust\n",
-    "zxc.20260122224631.1": "- eza\n",
-    "zxc.20260122224711.1": "- fd\n",
-    "zxc.20260122225030.1": "- grep\n",
-    "zxc.20260122224604.1": "- exiftool\n",
-    "zxc.20260121234124.1": "- clipboard\n",
-    "zxc.20260121234048.1": "- clink\n- clink-completions\n- cmder-full\n",
-    "zxc.20260121233309.1": "- chezmoi\n",
-    "zxc.20260121234148.1": "- croc\n- cwrsync\n- dufs\n",
-    "zxc.20260124115459.1": "@\nhash check filed\n- ffsend\n@c\n",
-    "zxc.20260122224814.1": "- gallery-dl\n",
-    "zxc.20260122224753.1": "- fzf\n",
-    "zxc.20260122224542.1": "- everything-cli\n",
-    "zxc.20260122224234.1": "- dog\n- goodbyedpi\n",
-    "zxc.20260122225013.1": "- gpg\n",
-    "zxc.20260122224958.1": "- gopass\n",
-    "zxc.20260122224144.1": "- git-lfs\n",
-    "zxc.20260122225339.1": "- jj\n",
-    "zxc.20260122224200.1": "- diff-so-fancy\n- delta\n",
-    "zxc.20260122224900.1": "- gitql\n",
-    "zxc.20260122224925.1": "- gitui\n",
-    "zxc.20260121233854.1": "- btop\n",
-    "zxc.20260121234012.1": "- cacert\n",
-    "zxc.20260122225059.1": "- haskell\n- haskell-cabal\n- haskell-language-server\n",
-    "zxc.20260121233656.1": "- binutils\n",
-    "zxc.20260121233522.1": "- autocorrect\n",
-    "zxc.20260122223535.1": "- firefox\n- brave\n",
-    "zxc.20260122224420.1": "- espanso\n",
-    "zxc.20260122223606.1": "- windows-terminal\n"
+    "zxc.20260121205603.1": "---\n@others\n",
+    "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n    - name: Install extras packages via scoop\n      tags: scoop-extras\n      community.windows.win_scoop:\n        name: '{{ item }}'\n        global: true\n        no_cache: true\n      register: result\n      retries: 3\n      delay: 5\n      until: result is not failed\n      loop:\n        - kdeconnect\n        - autohotkey\n        - autoclicker\n        # install failed\n        # - calibre\n        # windows can't set default browser to this\n        # - firefox\n        - brave\n        - qutebrowser\n        - ungoogled-chromium\n        - telegram\n        - cfssl\n        - windowsdesktop-runtime-lts\n        - fiddler\n        - sioyek\n        - sumatrapdf\n        - zeal\n        - libreoffice\n        - wpsoffice\n        - aria-ng-gui\n        - eget\n        - transmission\n        - notepadplusplus\n        - anki\n        - mc\n        - vifm\n        - locale-emulator\n        - ludusavi\n        - playnite\n        - sunshine\n        - lazygit\n        - gitu\n        - gimp\n        - nomacs\n        # installed via choco\n        # - qview\n        - qmk-toolbox\n        - vial\n        - kanata\n        - komokana\n        - qalculate\n        - siyuan-note\n        - qrscan\n        - rustdesk\n        - tightvnc\n        - flameshot\n        - carapace-bin\n        - psfzf\n        - psreadline\n        - television\n        - sfsu\n        - bulk-crap-uninstaller\n        - coretemp\n        - winspy\n        - windhawk\n        - deskflow\n        - dhcp-server\n        - copyq\n        - flclash\n        - hourglass\n        - glazewm\n        - zebar\n        - komorebi\n        - yasb\n        - whkd\n        - flow-launcher\n        - everything\n        - diskgenius\n        - doublecmd\n        - windows-terminal\n        - alacritty\n        - wezterm\n        - espanso\n        - ttdl\n        - copytranslator\n        - rufus\n        - ventoy\n        - handbrake\n        - jellyfin-mpv-shim\n        # install failed\n        # - miru\n        # installed via choco\n        # - mpv\n        - openboard\n    - name: Install nerd-fonts packages via scoop\n      tags: scoop-fonts\n      community.windows.win_scoop:\n        name: '{{ item }}'\n        global: true\n        no_cache: true\n      register: result\n      retries: 3\n      delay: 5\n      until: result is not failed\n      loop:\n        - Maple-Mono-NF-CN\n    - name: Uninstall packages\n      tags: scoop-uninstall\n      community.windows.win_scoop:\n        name: '{{ item }}'\n        state: absent\n        global: true\n      register: result\n      retries: 3\n      delay: 5\n      until: result is not failed\n      loop:\n        - firefox\n        - qview\n        - mpv\n    - name: Install pacakges via choco\n      tags: choco\n      chocolatey.chocolatey.win_chocolatey:\n        name: '{{ item }}'\n        state: present\n      loop:\n        - calibre\n        - firefox\n        - qview\n        - mpv\n    - name: Uninstall pacakges via choco\n      tags: choco\n      chocolatey.chocolatey.win_chocolatey:\n        name: '{{ item }}'\n        state: absent\n      loop:\n        # user can't access\n        - brave\n",
+    "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
+    "zxc.20260125024714.1": "- name: Remove user documents folder\n  ansible.windows.win_file:\n    path: C:/Users/User/Documents\n    state: absent\n",
+    "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.isjunction is false\n",
+    "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop: [aria2, git]\n",
+    "zxc.20260125024520.1": "- name: Add bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    - extras\n    - nerd-fonts\n",
+    "zxc.20260125025055.1": "- name: Install amin packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
+    "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n",
+    "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
+    "zxc.20260125121058.1": "- which\n",
+    "zxc.20260125121117.1": "- ttyper\n",
+    "zxc.20260125120914.1": "- fd\n",
+    "zxc.20260125121256.1": "- bat\n- less\n",
+    "zxc.20260125120953.1": "- rnr\n",
+    "zxc.20260125121052.1": "- shasum\n",
+    "zxc.20260125121014.1": "- zoxide\n",
+    "zxc.20260125120452.1": "- coreutils\n- nircmd\n",
+    "zxc.20260125120924.1": "- grep\n- ripgrep\n",
+    "zxc.20260125120746.1": "- dua\n- dust\n",
+    "zxc.20260125120905.1": "- tealdeer\n",
+    "zxc.20260125120854.1": "- sd\n",
+    "zxc.20260125120830.1": "- eza\n",
+    "zxc.20260125120822.1": "- duf\n",
+    "zxc.20260125120345.1": "- navi\n",
+    "zxc.20260125120843.1": "- unrar\n- unzip\n",
+    "zxc.20260125120405.1": "- mcfly\n",
+    "zxc.20260125120424.1": "- starship\n",
+    "zxc.20260125025138.1": "- aichat\n",
+    "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n",
+    "zxc.20260125121412.1": "# hash check filed\n# - ffsend\n",
+    "zxc.20260125025233.1": "- dos2unix\n- goodbyedpi\n",
+    "zxc.20260125120657.1": "- innounp\n- lessmsi\n",
+    "zxc.20260125120618.1": "- gsudo\n",
+    "zxc.20260125120634.1": "- nssm\n",
+    "zxc.20260125120604.1": "- pipx\n- winget\n",
+    "zxc.20260125025238.1": "- clipboard\n",
+    "zxc.20260125025205.1": "- adb\n- scrcpy\n",
+    "zxc.20260125025223.1": "- cacert\n",
+    "zxc.20260125030627.1": "- scoop-search\n",
+    "zxc.20260125025255.1": "- hugo\n",
+    "zxc.20260125121032.1": "- exiftool\n",
+    "zxc.20260125030330.1": "- imagemagick\n",
+    "zxc.20260125025907.1": "- vim\n- helix\n- neovim\n",
+    "zxc.20260125121216.1": "- ffmpeg\n",
+    "zxc.20260125030044.1": "- everything-cli\n",
+    "zxc.20260125030122.1": "- jj\n",
+    "zxc.20260125030139.1": "- git-lfs\n",
+    "zxc.20260125030214.1": "- diff-so-fancy\n- delta\n",
+    "zxc.20260125030301.1": "- gitui\n",
+    "zxc.20260125030245.1": "- gitql\n",
+    "zxc.20260125025845.1": "- gallery-dl\n- yt-dlp\n",
+    "zxc.20260125025943.1": "- gpg\n- openssl\n- gopass\n",
+    "zxc.20260125030353.1": "- dog\n- nali\n- nmap\n- q-dns\n- tcping\n",
+    "zxc.20260125025707.1": "- pandoc\n",
+    "zxc.20260125030104.1": "- broot\n- fzf\n",
+    "zxc.20260125025829.1": "- chezmoi\n",
+    "zxc.20260125025957.1": "- lf\n- yazi\n",
+    "zxc.20260125025310.1": "- chsrc\n",
+    "zxc.20260125025616.1": "- autocorrect\n",
+    "zxc.20260125025649.1": "- perl\n",
+    "zxc.20260125025640.1": "- nodejs-lts\n",
+    "zxc.20260125025604.1": "- tectonic\n",
+    "zxc.20260125025549.1": "- haskell\n- haskell-cabal\n- haskell-language-server\n- stack\n",
+    "zxc.20260125025510.1": "- make\n- task\n",
+    "zxc.20260125025534.1": "- msys2\n",
+    "zxc.20260125025339.1": "- shellcheck\n",
+    "zxc.20260125025352.1": "- binutils\n",
+    "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
+    "zxc.20260125121633.1": "- kdeconnect\n",
+    "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
+    "zxc.20260125121707.1": "# install failed\n# - calibre\n",
+    "zxc.20260125121729.1": "# windows can't set default browser to this\n# - firefox\n- brave\n- qutebrowser\n- ungoogled-chromium\n",
+    "zxc.20260125121756.1": "- telegram\n",
+    "zxc.20260125121858.1": "- windowsdesktop-runtime-lts\n",
+    "zxc.20260125121926.1": "- sioyek\n- sumatrapdf\n- zeal\n- libreoffice\n- wpsoffice\n",
+    "zxc.20260125121949.1": "- aria-ng-gui\n- eget\n- transmission\n",
+    "zxc.20260125121959.1": "- notepadplusplus\n",
+    "zxc.20260125122011.1": "- anki\n",
+    "zxc.20260125121849.1": "- cfssl\n",
+    "zxc.20260125122022.1": "- mc\n- vifm\n- doublecmd\n",
+    "zxc.20260125122031.1": "- locale-emulator\n- ludusavi\n- playnite\n- sunshine\n",
+    "zxc.20260125122040.1": "- lazygit\n- gitu\n",
+    "zxc.20260125122109.1": "- nomacs\n# installed via choco\n# - qview\n",
+    "zxc.20260125122059.1": "- gimp\n",
+    "zxc.20260125122306.1": "- qmk-toolbox\n- vial\n- kanata\n- komokana\n",
+    "zxc.20260125122314.1": "- qalculate\n",
+    "zxc.20260125121911.1": "- fiddler\n",
+    "zxc.20260125122322.1": "- siyuan-note\n",
+    "zxc.20260125122329.1": "- qrscan\n",
+    "zxc.20260125122341.1": "- rustdesk\n- tightvnc\n",
+    "zxc.20260125122353.1": "- flameshot\n",
+    "zxc.20260125122506.1": "- television\n",
+    "zxc.20260125122546.1": "- carapace-bin\n",
+    "zxc.20260125123243.1": "- ttdl\n",
+    "zxc.20260125122532.1": "- sfsu\n",
+    "zxc.20260125122444.1": "- psfzf\n- psreadline\n",
+    "zxc.20260125122737.1": "- winspy\n- windhawk\n",
+    "zxc.20260125123048.1": "- glazewm\n- zebar\n- komorebi\n- yasb\n- whkd\n",
+    "zxc.20260125123009.1": "- flclash\n",
+    "zxc.20260125123134.1": "- diskgenius\n",
+    "zxc.20260125123102.1": "- flow-launcher\n",
+    "zxc.20260125122946.1": "- dhcp-server\n",
+    "zxc.20260125123027.1": "- hourglass\n",
+    "zxc.20260125122959.1": "- copyq\n",
+    "zxc.20260125123119.1": "- everything\n",
+    "zxc.20260125122932.1": "- deskflow\n",
+    "zxc.20260125122817.1": "- coretemp\n",
+    "zxc.20260125122744.1": "- bulk-crap-uninstaller\n",
+    "zxc.20260125123203.1": "- windows-terminal\n- alacritty\n- wezterm\n",
+    "zxc.20260125123227.1": "- espanso\n",
+    "zxc.20260125123255.1": "- copytranslator\n",
+    "zxc.20260125123314.1": "- rufus\n- ventoy\n",
+    "zxc.20260125123423.1": "- jellyfin-mpv-shim\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
+    "zxc.20260125123353.1": "- handbrake\n",
+    "zxc.20260125123442.1": "- openboard\n",
+    "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
+    "zxc.20260125024431.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
+    "zxc.20260125030815.1": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
+    "zxc.20260125030831.1": "- Downloads\n- Music\n- Pictures\n- Videos\n- Documents\n- Favorites\n- Saved Games\n- Contacts\n",
+    "zxc.20260125030933.1": "- name: Create folder\n  ansible.windows.win_file:\n    path: D:/{{ item }}\n    state: directory\n  loop:\n    @others\n",
+    "zxc.20260125031006.1": "- name: Link to new folder\n  ansible.windows.win_shell: |\n    & cmd /c \"mklink /j \"\"{{ ansible_facts.user_dir }}\\{{ item }}\"\" \"\"D:\\{{ item }}\"\"\"\n  loop:\n    @others\n",
+    "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_environment:\n    state: present\n    level: user\n    name: PATH\n    value: \"{{ ansible_facts.env.Path }};{{ ansible_facts.user_dir }}\\\\.local\\\\bin\"\n  when: (ansible_facts.user_dir + \"\\\\.local\\\\bin\") not in ansible_facts.env.Path\n",
+    "zxc.20260125133752.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
+    "zxc.20260125132006.1": "- name: Install packages\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others",
+    "zxc.20260125132209.1": "- advance-touch",
+    "zxc.20260125200421.1": "- name: Chezmoi dot file manager\n  tags: chezmoi\n  block:\n    @others",
+    "zxc.20260125205936.1": "- name: Add ssh keys to known_hosts\n  community.windows.win_lineinfile:\n    path: \"{{ ansible_facts.user_dir }}/.ssh/known_hosts\"\n    line: \"{{ item }}\"\n  loop:\n    @others",
+    "zxc.20260125210054.1": "- \"[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n- \"[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"",
+    "zxc.20260125200636.1": "- name: Init chezmoi\n  ansible.windows.win_shell: chezmoi init ssh://brix.local:23231/chezmoi.git",
+    "zxc.20260125200755.1": "- name: Update chezmoi\n  ansible.windows.win_shell: chezmoi update"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769242244.442
+      "_mod_time": 1769346152.026
     }
   }
 }
