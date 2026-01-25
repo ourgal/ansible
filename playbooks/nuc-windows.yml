@@ -20,7 +20,7 @@
         - name: Create scoop folder
           ansible.windows.win_shell: |
             & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
-          when: scoop_stat.stat.isjunction is false
+          when: scoop_stat.stat.exists is false or scoop_stat.stat.isjunction is false
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: '{{ item }}'
@@ -414,12 +414,10 @@
         - Downloads
     - name: Add pipx bin path to PATH
       tags: path
-      ansible.windows.win_environment:
+      ansible.windows.win_path:
         state: present
         level: user
-        name: PATH
-        value: "{{ ansible_facts.env.Path }};{{ ansible_facts.user_dir }}\\.local\\bin"
-      when: (ansible_facts.user_dir + "\\.local\\bin") not in ansible_facts.env.Path
+        elements: '%userprofile%\.local\bin'
     - name: Link pipx folder
       tags: pipx_folder
       block:
