@@ -317,6 +317,6 @@
             - "[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u"
             - "[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u"
         - name: Init chezmoi
-          ansible.windows.win_shell: chezmoi init ssh://brix.local:23231/chezmoi.git
+          ansible.windows.win_shell: C:\\ProgramData\\scoop\\shims\\chezmoi init ssh://brix.local:23231/chezmoi.git
         - name: Update chezmoi
-          ansible.windows.win_shell: chezmoi update
+          ansible.windows.win_shell: C:\\ProgramData\\scoop\\shims\\chezmoi update
