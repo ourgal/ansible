@@ -32,10 +32,6 @@
                   "vh": "scoop",
                   "children": [
                     {
-                      "gnx": "zxc.20260125024714.1",
-                      "vh": "remvoe user documents folder"
-                    },
-                    {
                       "gnx": "zxc.20260125024741.1",
                       "vh": "link scoop folder to d drive"
                     },
@@ -645,7 +641,6 @@
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n    - name: Install extras packages via scoop\n      tags: scoop-extras\n      community.windows.win_scoop:\n        name: '{{ item }}'\n        global: true\n        no_cache: true\n      register: result\n      retries: 3\n      delay: 5\n      until: result is not failed\n      loop:\n        - kdeconnect\n        - autohotkey\n        - autoclicker\n        # install failed\n        # - calibre\n        # windows can't set default browser to this\n        # - firefox\n        - brave\n        - qutebrowser\n        - ungoogled-chromium\n        - telegram\n        - cfssl\n        - windowsdesktop-runtime-lts\n        - fiddler\n        - sioyek\n        - sumatrapdf\n        - zeal\n        - libreoffice\n        - wpsoffice\n        - aria-ng-gui\n        - eget\n        - transmission\n        - notepadplusplus\n        - anki\n        - mc\n        - vifm\n        - locale-emulator\n        - ludusavi\n        - playnite\n        - sunshine\n        - lazygit\n        - gitu\n        - gimp\n        - nomacs\n        # installed via choco\n        # - qview\n        - qmk-toolbox\n        - vial\n        - kanata\n        - komokana\n        - qalculate\n        - siyuan-note\n        - qrscan\n        - rustdesk\n        - tightvnc\n        - flameshot\n        - carapace-bin\n        - psfzf\n        - psreadline\n        - television\n        - sfsu\n        - bulk-crap-uninstaller\n        - coretemp\n        - winspy\n        - windhawk\n        - deskflow\n        - dhcp-server\n        - copyq\n        - flclash\n        - hourglass\n        - glazewm\n        - zebar\n        - komorebi\n        - yasb\n        - whkd\n        - flow-launcher\n        - everything\n        - diskgenius\n        - doublecmd\n        - windows-terminal\n        - alacritty\n        - wezterm\n        - espanso\n        - ttdl\n        - copytranslator\n        - rufus\n        - ventoy\n        - handbrake\n        - jellyfin-mpv-shim\n        # install failed\n        # - miru\n        # installed via choco\n        # - mpv\n        - openboard\n    - name: Install nerd-fonts packages via scoop\n      tags: scoop-fonts\n      community.windows.win_scoop:\n        name: '{{ item }}'\n        global: true\n        no_cache: true\n      register: result\n      retries: 3\n      delay: 5\n      until: result is not failed\n      loop:\n        - Maple-Mono-NF-CN\n    - name: Uninstall packages\n      tags: scoop-uninstall\n      community.windows.win_scoop:\n        name: '{{ item }}'\n        state: absent\n        global: true\n      register: result\n      retries: 3\n      delay: 5\n      until: result is not failed\n      loop:\n        - firefox\n        - qview\n        - mpv\n    - name: Install pacakges via choco\n      tags: choco\n      chocolatey.chocolatey.win_chocolatey:\n        name: '{{ item }}'\n        state: present\n      loop:\n        - calibre\n        - firefox\n        - qview\n        - mpv\n    - name: Uninstall pacakges via choco\n      tags: choco\n      chocolatey.chocolatey.win_chocolatey:\n        name: '{{ item }}'\n        state: absent\n      loop:\n        # user can't access\n        - brave\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
-    "zxc.20260125024714.1": "- name: Remove user documents folder\n  ansible.windows.win_file:\n    path: C:/Users/User/Documents\n    state: absent\n",
     "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.isjunction is false\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop: [aria2, git]\n",
     "zxc.20260125024520.1": "- name: Add bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    - extras\n    - nerd-fonts\n",
@@ -761,7 +756,7 @@
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024431.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
     "zxc.20260125030815.1": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
-    "zxc.20260125030831.1": "- Downloads\n- Music\n- Pictures\n- Videos\n- Documents\n- Favorites\n- Saved Games\n- Contacts\n",
+    "zxc.20260125030831.1": "- Downloads",
     "zxc.20260125030933.1": "- name: Create folder\n  ansible.windows.win_file:\n    path: D:/{{ item }}\n    state: directory\n  loop:\n    @others\n",
     "zxc.20260125031006.1": "- name: Link to new folder\n  ansible.windows.win_shell: |\n    & cmd /c \"mklink /j \"\"{{ ansible_facts.user_dir }}\\{{ item }}\"\" \"\"D:\\{{ item }}\"\"\"\n  loop:\n    @others\n",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_environment:\n    state: present\n    level: user\n    name: PATH\n    value: \"{{ ansible_facts.env.Path }};{{ ansible_facts.user_dir }}\\\\.local\\\\bin\"\n  when: (ansible_facts.user_dir + \"\\\\.local\\\\bin\") not in ansible_facts.env.Path\n",
@@ -776,7 +771,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769346152.026
+      "_mod_time": 1769349282.003
     }
   }
 }

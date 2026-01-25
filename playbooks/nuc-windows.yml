@@ -6,10 +6,6 @@
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
-    - name: Remove user documents folder
-      ansible.windows.win_file:
-        path: C:/Users/User/Documents
-        state: absent
     - name: Link scoop folder
       tags: scoop_folder
       block:
@@ -405,38 +401,17 @@
         state: absent
       loop:
         - Downloads
-        - Music
-        - Pictures
-        - Videos
-        - Documents
-        - Favorites
-        - Saved Games
-        - Contacts
     - name: Create folder
       ansible.windows.win_file:
         path: D:/{{ item }}
         state: directory
       loop:
         - Downloads
-        - Music
-        - Pictures
-        - Videos
-        - Documents
-        - Favorites
-        - Saved Games
-        - Contacts
     - name: Link to new folder
       ansible.windows.win_shell: |
         & cmd /c "mklink /j ""{{ ansible_facts.user_dir }}\{{ item }}"" ""D:\{{ item }}"""
       loop:
         - Downloads
-        - Music
-        - Pictures
-        - Videos
-        - Documents
-        - Favorites
-        - Saved Games
-        - Contacts
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_environment:
