@@ -6,6 +6,15 @@
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
+    - name: Choco pacakges
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - qview
+        - firefox
+        - mpv
+        - gimp
     - name: Link scoop folder
       tags: scoop_folder
       block:
@@ -194,7 +203,6 @@
         - nomacs
         # installed via choco
         # - qview
-        - gimp
         - qmk-toolbox
         - vial
         - kanata
