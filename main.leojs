@@ -775,14 +775,14 @@
     "zxc.20260125132006.1": "- name: Install packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260125132209.1": "- advance-touch\n",
     "zxc.20260125200421.1": "- name: Chezmoi dot file manager\n  tags: chezmoi\n  block:\n    @others\n",
-    "zxc.20260125205936.1": "- name: Add ssh keys to known_hosts\n  community.windows.win_lineinfile:\n    path: \"{{ ansible_facts.user_dir }}/.ssh/known_hosts\"\n    line: \"{{ item }}\"\n  loop:\n    @others\n",
+    "zxc.20260125205936.1": "- name: Add ssh keys to known_hosts\n  community.windows.win_lineinfile:\n    path: \"{{ ansible_facts.user_dir }}/.ssh/known_hosts\"\n    line: \"{{ item }}\"\n    create: true\n  loop:\n    @others\n",
     "zxc.20260125210054.1": "- \"[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n- \"[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n",
     "zxc.20260125200636.1": "- name: Init chezmoi\n  ansible.windows.win_shell: chezmoi init ssh://brix.local:23231/chezmoi.git\n",
     "zxc.20260125200755.1": "- name: Update chezmoi\n  ansible.windows.win_shell: chezmoi update\n"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769368577.894
+      "_mod_time": 1769368789.921
     }
   }
 }
