@@ -12,6 +12,30 @@
       "vh": "scoop cn bucket"
     },
     {
+      "gnx": "zxc.20260126184021.1",
+      "vh": "chezmoi",
+      "children": [
+        {
+          "gnx": "zxc.20260126184021.2",
+          "vh": "ssh know_hosts",
+          "children": [
+            {
+              "gnx": "zxc.20260126184021.3",
+              "vh": "brix"
+            }
+          ]
+        },
+        {
+          "gnx": "zxc.20260126184021.4",
+          "vh": "chezmoi init"
+        },
+        {
+          "gnx": "zxc.20260126184021.5",
+          "vh": "chezmoi update"
+        }
+      ]
+    },
+    {
       "gnx": "zxc.20260121205511.1",
       "vh": "nuc-windows",
       "children": [
@@ -613,30 +637,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "gnx": "zxc.20260125200421.1",
-                  "vh": "chezmoi",
-                  "children": [
-                    {
-                      "gnx": "zxc.20260125205936.1",
-                      "vh": "ssh know_hosts",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260125210054.1",
-                          "vh": "brix"
-                        }
-                      ]
-                    },
-                    {
-                      "gnx": "zxc.20260125200636.1",
-                      "vh": "chezmoi init"
-                    },
-                    {
-                      "gnx": "zxc.20260125200755.1",
-                      "vh": "chezmoi update"
-                    }
-                  ]
                 }
               ]
             }
@@ -648,6 +648,11 @@
   "tnodes": {
     "zxc.20260121215923.1": "- name: Update powershell help\n  tags: powershell-help\n  ansible.windows.win_shell: Update-help\n",
     "zxc.20260123161541.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
+    "zxc.20260126184021.1": "- name: Chezmoi dot file manager\n  tags: chezmoi\n  block:\n    @others\n",
+    "zxc.20260126184021.2": "- name: Add ssh keys to known_hosts\n  community.windows.win_lineinfile:\n    path: \"{{ ansible_facts.user_dir }}/.ssh/known_hosts\"\n    line: \"{{ item }}\"\n    create: true\n  loop:\n    @others\n",
+    "zxc.20260126184021.3": "- \"[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n- \"[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n",
+    "zxc.20260126184021.4": "- name: Init chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi init ssh://brix.local:23231/chezmoi.git\n",
+    "zxc.20260126184021.5": "- name: Update chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi update\n",
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
@@ -773,16 +778,11 @@
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125133752.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
     "zxc.20260125132006.1": "- name: Install packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
-    "zxc.20260125132209.1": "- advance-touch\n- leo\n",
-    "zxc.20260125200421.1": "- name: Chezmoi dot file manager\n  tags: chezmoi\n  block:\n    @others\n",
-    "zxc.20260125205936.1": "- name: Add ssh keys to known_hosts\n  community.windows.win_lineinfile:\n    path: \"{{ ansible_facts.user_dir }}/.ssh/known_hosts\"\n    line: \"{{ item }}\"\n    create: true\n  loop:\n    @others\n",
-    "zxc.20260125210054.1": "- \"[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n- \"[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n",
-    "zxc.20260125200636.1": "- name: Init chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi init ssh://brix.local:23231/chezmoi.git\n",
-    "zxc.20260125200755.1": "- name: Update chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi update\n"
+    "zxc.20260125132209.1": "- advance-touch\n- leo\n"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769423961.57
+      "_mod_time": 1769424030.871
     }
   }
 }

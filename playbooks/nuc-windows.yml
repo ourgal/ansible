@@ -306,18 +306,3 @@
       loop:
         - advance-touch
         - leo
-    - name: Chezmoi dot file manager
-      tags: chezmoi
-      block:
-        - name: Add ssh keys to known_hosts
-          community.windows.win_lineinfile:
-            path: "{{ ansible_facts.user_dir }}/.ssh/known_hosts"
-            line: "{{ item }}"
-            create: true
-          loop:
-            - "[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u"
-            - "[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u"
-        - name: Init chezmoi
-          ansible.windows.win_shell: C:\\ProgramData\\scoop\\shims\\chezmoi init ssh://brix.local:23231/chezmoi.git
-        - name: Update chezmoi
-          ansible.windows.win_shell: C:\\ProgramData\\scoop\\shims\\chezmoi update
