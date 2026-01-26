@@ -12,6 +12,26 @@
       "vh": "scoop buckets"
     },
     {
+      "gnx": "zxc.20260126211045.1",
+      "vh": "scoop mirror bucket",
+      "children": [
+        {
+          "gnx": "zxc.20260126211045.2",
+          "vh": "scoop buckets"
+        }
+      ]
+    },
+    {
+      "gnx": "zxc.20260126211135.1",
+      "vh": "scoop cn bucket",
+      "children": [
+        {
+          "gnx": "zxc.20260126211135.2",
+          "vh": "scoop buckets"
+        }
+      ]
+    },
+    {
       "gnx": "zxc.20260126184021.1",
       "vh": "chezmoi",
       "children": [
@@ -74,14 +94,7 @@
                       "vh": "install scoop"
                     },
                     {
-                      "gnx": "zxc.20260126195032.1",
-                      "vh": "scoop cn bucket",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260126195032.2",
-                          "vh": "scoop buckets"
-                        }
-                      ]
+                      "gnx": "zxc.20260126195012.1"
                     },
                     {
                       "gnx": "zxc.20260125025055.1",
@@ -582,8 +595,7 @@
                       "vh": "install scoop"
                     },
                     {
-                      "gnx": "zxc.20260126194952.1",
-                      "vh": "scoop buckets"
+                      "gnx": "zxc.20260126195012.1"
                     }
                   ]
                 },
@@ -691,6 +703,10 @@
   "tnodes": {
     "zxc.20260121215923.1": "- name: Update powershell help\n  tags: powershell-help\n  ansible.windows.win_shell: Update-help\n",
     "zxc.20260126195012.1": "- name: Add bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    - extras\n    - nerd-fonts\n",
+    "zxc.20260126211045.1": "- name: Add scoop-mirror bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-mirror\n    repo: https://github.com/ExceptionsOccur/scoop-mirror\n",
+    "zxc.20260126211045.2": "- name: Remove other bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    - extras\n    - main\n",
+    "zxc.20260126211135.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
+    "zxc.20260126211135.2": "- name: Remove bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    - extras\n    - main\n",
     "zxc.20260126184021.1": "- name: Chezmoi dot file manager\n  tags: chezmoi\n  block:\n    @others\n",
     "zxc.20260126184021.2": "- name: Add ssh keys to known_hosts\n  community.windows.win_lineinfile:\n    path: \"{{ ansible_facts.user_dir }}/.ssh/known_hosts\"\n    line: \"{{ item }}\"\n    create: true\n  loop:\n    @others\n",
     "zxc.20260126184021.3": "- \"[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n- \"[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n",
@@ -703,8 +719,6 @@
     "zxc.20260126014227.1": "- qview\n- firefox\n- mpv\n- gimp",
     "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.exists is false or scoop_stat.stat.isjunction is false\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop: [aria2, git]\n",
-    "zxc.20260126195032.1": "- name: Add scoop-cn bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-cn\n    repo: https://github.com/duzyn/scoop-cn\n",
-    "zxc.20260126195032.2": "- name: Add bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    - extras\n    - main\n",
     "zxc.20260125025055.1": "- name: Install amin packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n",
     "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
@@ -815,7 +829,6 @@
     "zxc.20260125123442.1": "- openboard\n",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024431.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
-    "zxc.20260126194952.1": "- name: Add bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    - extras\n    - nerd-fonts\n",
     "zxc.20260125030815.1": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260125030831.1": "- Downloads\n",
     "zxc.20260125030933.1": "- name: Create folder\n  ansible.windows.win_file:\n    path: D:/{{ item }}\n    state: directory\n  loop:\n    @others\n",
@@ -834,7 +847,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769428234.351
+      "_mod_time": 1769434203.21
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769431891.775
