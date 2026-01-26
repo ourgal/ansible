@@ -731,7 +731,7 @@
     "zxc.20260125121858.1": "- windowsdesktop-runtime-lts\n",
     "zxc.20260125121926.1": "- sioyek\n- sumatrapdf\n- zeal\n- libreoffice\n- wpsoffice\n",
     "zxc.20260125121949.1": "- aria-ng-gui\n- eget\n- transmission\n",
-    "zxc.20260125121959.1": "- notepadplusplus\n- vscodium",
+    "zxc.20260125121959.1": "- notepadplusplus\n- vscodium\n- emacs",
     "zxc.20260125122011.1": "- anki\n",
     "zxc.20260125121849.1": "- cfssl\n",
     "zxc.20260125122022.1": "- mc\n- vifm\n- doublecmd\n",
@@ -782,7 +782,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769427492.877
+      "_mod_time": 1769427520.754
     }
   }
 }
