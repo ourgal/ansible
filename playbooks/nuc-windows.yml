@@ -11,10 +11,20 @@
         name: "{{ item }}"
         state: present
       loop:
-        - qview
-        - firefox
-        - mpv
-        - gimp
+        - name: Install choco pacakges
+          chocolatey.chocolatey.win_chocolatey:
+            name: "{{ item }}"
+            state: present
+          loop:
+            - qview
+            - firefox
+            - mpv
+        - name: Uninstall choco pacakges
+          chocolatey.chocolatey.win_chocolatey:
+            name: "{{ item }}"
+            state: absent
+          loop:
+            - gimp
     - name: Link scoop folder
       tags: scoop_folder
       block:
@@ -205,6 +215,7 @@
         - nomacs
         # installed via choco
         # - qview
+        - gimp
         - qmk-toolbox
         - vial
         - kanata

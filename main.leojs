@@ -4,54 +4,60 @@
   },
   "vnodes": [
     {
-      "gnx": "zxc.20260121215923.1",
-      "vh": "powershell help"
-    },
-    {
-      "gnx": "zxc.20260126195012.1",
-      "vh": "scoop buckets"
-    },
-    {
-      "gnx": "zxc.20260126211045.1",
-      "vh": "scoop mirror bucket",
+      "gnx": "zxc.20260126220036.1",
+      "vh": "code snippets",
       "children": [
         {
-          "gnx": "zxc.20260126211045.2",
+          "gnx": "zxc.20260121215923.1",
+          "vh": "powershell help"
+        },
+        {
+          "gnx": "zxc.20260126195012.1",
           "vh": "scoop buckets"
-        }
-      ]
-    },
-    {
-      "gnx": "zxc.20260126211135.1",
-      "vh": "scoop cn bucket",
-      "children": [
+        },
         {
-          "gnx": "zxc.20260126211135.2",
-          "vh": "scoop buckets"
-        }
-      ]
-    },
-    {
-      "gnx": "zxc.20260126184021.1",
-      "vh": "chezmoi",
-      "children": [
-        {
-          "gnx": "zxc.20260126184021.2",
-          "vh": "ssh know_hosts",
+          "gnx": "zxc.20260126211045.1",
+          "vh": "scoop mirror bucket",
           "children": [
             {
-              "gnx": "zxc.20260126184021.3",
-              "vh": "brix"
+              "gnx": "zxc.20260126211045.2",
+              "vh": "scoop buckets"
             }
           ]
         },
         {
-          "gnx": "zxc.20260126184021.4",
-          "vh": "chezmoi init"
+          "gnx": "zxc.20260126211135.1",
+          "vh": "scoop cn bucket",
+          "children": [
+            {
+              "gnx": "zxc.20260126211135.2",
+              "vh": "scoop buckets"
+            }
+          ]
         },
         {
-          "gnx": "zxc.20260126184021.5",
-          "vh": "chezmoi update"
+          "gnx": "zxc.20260126184021.1",
+          "vh": "chezmoi",
+          "children": [
+            {
+              "gnx": "zxc.20260126184021.2",
+              "vh": "ssh know_hosts",
+              "children": [
+                {
+                  "gnx": "zxc.20260126184021.3",
+                  "vh": "brix"
+                }
+              ]
+            },
+            {
+              "gnx": "zxc.20260126184021.4",
+              "vh": "chezmoi init"
+            },
+            {
+              "gnx": "zxc.20260126184021.5",
+              "vh": "chezmoi update"
+            }
+          ]
         }
       ]
     },
@@ -76,8 +82,24 @@
                   "vh": "choco",
                   "children": [
                     {
-                      "gnx": "zxc.20260126014227.1",
-                      "vh": "packages"
+                      "gnx": "zxc.20260126223153.1",
+                      "vh": "install",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260126014227.1",
+                          "vh": "packages"
+                        }
+                      ]
+                    },
+                    {
+                      "gnx": "zxc.20260126223217.1",
+                      "vh": "uninstall",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260126223217.2",
+                          "vh": "packages"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -577,20 +599,20 @@
                           "vh": "whiteboard"
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260126215320.1",
+                  "vh": "wsl",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260126215328.1",
+                      "vh": "install"
                     },
                     {
-                      "gnx": "zxc.20260126215320.1",
-                      "vh": "wsl",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260126215328.1",
-                          "vh": "install"
-                        },
-                        {
-                          "gnx": "zxc.20260126215348.1",
-                          "vh": "reboot"
-                        }
-                      ]
+                      "gnx": "zxc.20260126215348.1",
+                      "vh": "reboot"
                     }
                   ]
                 }
@@ -686,28 +708,48 @@
           "vh": "@clean ansible.cfg",
           "children": [
             {
-              "gnx": "zxc.20260126204835.1",
-              "vh": "inventory folder"
+              "gnx": "zxc.20260126221252.1",
+              "vh": "default",
+              "children": [
+                {
+                  "gnx": "zxc.20260126221509.1",
+                  "vh": "gather facts"
+                },
+                {
+                  "gnx": "zxc.20260126204835.1",
+                  "vh": "inventory folder"
+                },
+                {
+                  "gnx": "zxc.20260126204904.1",
+                  "vh": "roles folder"
+                },
+                {
+                  "gnx": "zxc.20260126205016.1",
+                  "vh": "lookup plugin folder"
+                },
+                {
+                  "gnx": "zxc.20260126204920.1",
+                  "vh": "no cow say"
+                },
+                {
+                  "gnx": "zxc.20260126204956.1",
+                  "vh": "show result in yaml"
+                },
+                {
+                  "gnx": "zxc.20260126205125.1",
+                  "vh": "summary"
+                }
+              ]
             },
             {
-              "gnx": "zxc.20260126204904.1",
-              "vh": "roles folder"
-            },
-            {
-              "gnx": "zxc.20260126205016.1",
-              "vh": "lookup plugin folder"
-            },
-            {
-              "gnx": "zxc.20260126204920.1",
-              "vh": "no cow say"
-            },
-            {
-              "gnx": "zxc.20260126204956.1",
-              "vh": "show result in yaml"
-            },
-            {
-              "gnx": "zxc.20260126205125.1",
-              "vh": "summary"
+              "gnx": "zxc.20260126221321.1",
+              "vh": "ssh connection",
+              "children": [
+                {
+                  "gnx": "zxc.20260126221212.1",
+                  "vh": "pipelining"
+                }
+              ]
             }
           ]
         }
@@ -730,7 +772,10 @@
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126013845.1": "- name: Choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    @others",
-    "zxc.20260126014227.1": "- qview\n- firefox\n- mpv\n- gimp",
+    "zxc.20260126223153.1": "- name: Install choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    @others\n",
+    "zxc.20260126014227.1": "- qview\n- firefox\n- mpv",
+    "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
+    "zxc.20260126223217.2": "- gimp",
     "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.exists is false or scoop_stat.stat.isjunction is false\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop: [aria2, git]\n",
     "zxc.20260125025055.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
@@ -810,6 +855,7 @@
     "zxc.20260125122031.1": "- locale-emulator\n- ludusavi\n- playnite\n- sunshine\n",
     "zxc.20260125122040.1": "- lazygit\n- gitu\n",
     "zxc.20260125122109.1": "- nomacs\n# installed via choco\n# - qview\n",
+    "zxc.20260125122059.1": "- gimp",
     "zxc.20260125122306.1": "- qmk-toolbox\n- vial\n- kanata\n- komokana\n",
     "zxc.20260125122314.1": "- qalculate\n",
     "zxc.20260125121911.1": "- fiddler\n",
@@ -853,20 +899,24 @@
     "zxc.20260125133752.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
     "zxc.20260125132006.1": "- name: Install packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260125132209.1": "- advance-touch\n- leo\n",
-    "zxc.20260126204754.1": "[defaults]\n@others",
+    "zxc.20260126204754.1": "@others",
+    "zxc.20260126221252.1": "[defaults]\n@others",
+    "zxc.20260126221509.1": "gathering = smart",
     "zxc.20260126204835.1": "inventory = inventory\n",
     "zxc.20260126204904.1": "roles_path = roles\n",
     "zxc.20260126205016.1": "lookup_plugins = lookup_plugins\n",
     "zxc.20260126204920.1": "nocows = True\n",
     "zxc.20260126204956.1": "callback_result_format = yaml\n",
-    "zxc.20260126205125.1": "callback_whitelist = profile_tasks\n"
+    "zxc.20260126205125.1": "callback_whitelist = timer, profile_tasks\n",
+    "zxc.20260126221321.1": "[ssh_connection]\n@others\n",
+    "zxc.20260126221212.1": "pipelining = True"
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769435642.004
+      "_mod_time": 1769438013.233
     },
     "zxc.20260126204754.1": {
-      "_mod_time": 1769431891.775
+      "_mod_time": 1769436947.059
     }
   }
 }
