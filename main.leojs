@@ -577,6 +577,20 @@
                           "vh": "whiteboard"
                         }
                       ]
+                    },
+                    {
+                      "gnx": "zxc.20260126215320.1",
+                      "vh": "wsl",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260126215328.1",
+                          "vh": "install"
+                        },
+                        {
+                          "gnx": "zxc.20260126215348.1",
+                          "vh": "reboot"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -827,6 +841,8 @@
     "zxc.20260125123423.1": "- jellyfin-mpv-shim\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
     "zxc.20260125123353.1": "- handbrake\n",
     "zxc.20260125123442.1": "- openboard\n",
+    "zxc.20260126215328.1": "- name: Install Microsoft Subsystem for Linux\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status",
+    "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024431.1": "- name: Install scoop to user\n  ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\n",
     "zxc.20260125030815.1": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
@@ -847,7 +863,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769435193.447
+      "_mod_time": 1769435642.004
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769431891.775
