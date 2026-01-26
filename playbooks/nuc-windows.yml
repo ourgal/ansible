@@ -40,13 +40,17 @@
       delay: 5
       until: result is not failed
       loop: [aria2, git]
+    - name: Add scoop-cn bucket
+      community.windows.win_scoop_bucket:
+        name: scoop-cn
+        repo: https://github.com/duzyn/scoop-cn
     - name: Add bucket
       community.windows.win_scoop_bucket:
         name: "{{ item }}"
-        state: present
+        state: absent
       loop:
         - extras
-        - nerd-fonts
+        - main
     - name: Install amin packages via scoop
       tags: scoop-main
       community.windows.win_scoop:
