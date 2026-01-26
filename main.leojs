@@ -719,7 +719,7 @@
     "zxc.20260126014227.1": "- qview\n- firefox\n- mpv\n- gimp",
     "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.exists is false or scoop_stat.stat.isjunction is false\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop: [aria2, git]\n",
-    "zxc.20260125025055.1": "- name: Install amin packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
+    "zxc.20260125025055.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n",
     "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
     "zxc.20260125121058.1": "- which\n",
@@ -847,7 +847,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769434203.21
+      "_mod_time": 1769435193.447
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769431891.775
