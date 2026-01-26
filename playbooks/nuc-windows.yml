@@ -52,6 +52,8 @@
       loop:
         - extras
         - nerd-fonts
+    - name: Update scoop
+      ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update"
     - name: Install main packages via scoop
       tags: scoop-main
       community.windows.win_scoop:
@@ -322,5 +324,3 @@
       loop:
         - leo
         - advance-touch
-    - name: Install leo console dependency
-      ansible.windows.win_shell: "C:\\ProgramData\\scoop\\shims\\pipx inject leo windows-curses"

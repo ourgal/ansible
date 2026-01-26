@@ -119,6 +119,10 @@
                       "gnx": "zxc.20260126195012.1"
                     },
                     {
+                      "gnx": "zxc.20260126225858.1",
+                      "vh": "scoop update"
+                    },
+                    {
                       "gnx": "zxc.20260125025055.1",
                       "vh": "main packages",
                       "children": [
@@ -694,10 +698,6 @@
                           "vh": "ad"
                         }
                       ]
-                    },
-                    {
-                      "gnx": "zxc.20260126224402.1",
-                      "vh": "install leo-console dependency"
                     }
                   ]
                 }
@@ -785,6 +785,7 @@
     "zxc.20260126223217.2": "- gimp",
     "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\scoop\n        state: directory\n    - name: Global scoop folder stat\n      ansible.windows.win_stat:\n        path: C:\\ProgramData\\scoop\n      register: scoop_stat\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %ProgramData%\\scoop D:\\scoop\"\n      when: scoop_stat.stat.exists is false or scoop_stat.stat.isjunction is false\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop: [aria2, git]\n",
+    "zxc.20260126225858.1": "- name: Update scoop\n  ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update\"\n",
     "zxc.20260125025055.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: true\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n",
     "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
@@ -907,7 +908,6 @@
     "zxc.20260125132006.1": "- name: Install pipx packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223746.1": "- leo",
     "zxc.20260126223811.1": "- advance-touch\n",
-    "zxc.20260126224402.1": "- name: Install leo console dependency\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx inject leo windows-curses\"",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -922,7 +922,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769438947.704
+      "_mod_time": 1769439760.77
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769436947.059
