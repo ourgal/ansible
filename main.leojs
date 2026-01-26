@@ -683,13 +683,21 @@
                     },
                     {
                       "gnx": "zxc.20260125132006.1",
-                      "vh": "install",
+                      "vh": "install packages",
                       "children": [
                         {
-                          "gnx": "zxc.20260125132209.1",
-                          "vh": "packages"
+                          "gnx": "zxc.20260126223746.1",
+                          "vh": "leo"
+                        },
+                        {
+                          "gnx": "zxc.20260126223811.1",
+                          "vh": "ad"
                         }
                       ]
+                    },
+                    {
+                      "gnx": "zxc.20260126224402.1",
+                      "vh": "install leo-console dependency"
                     }
                   ]
                 }
@@ -771,7 +779,6 @@
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
-    "zxc.20260126013845.1": "- name: Choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    @others",
     "zxc.20260126223153.1": "- name: Install choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    @others\n",
     "zxc.20260126014227.1": "- qview\n- firefox\n- mpv",
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
@@ -897,8 +904,10 @@
     "zxc.20260125031006.1": "- name: Link to new folder\n  ansible.windows.win_shell: |\n    & cmd /c \"mklink /j \"\"{{ ansible_facts.user_dir }}\\{{ item }}\"\" \"\"D:\\{{ item }}\"\"\"\n  loop:\n    @others\n",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125133752.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
-    "zxc.20260125132006.1": "- name: Install packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
-    "zxc.20260125132209.1": "- advance-touch\n- leo\n",
+    "zxc.20260125132006.1": "- name: Install pipx packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
+    "zxc.20260126223746.1": "- leo",
+    "zxc.20260126223811.1": "- advance-touch\n",
+    "zxc.20260126224402.1": "- name: Install leo console dependency\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx inject leo windows-curses\"",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -913,7 +922,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769438013.233
+      "_mod_time": 1769438947.704
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769436947.059

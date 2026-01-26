@@ -6,25 +6,20 @@
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
-    - name: Choco pacakges
+    - name: Install choco pacakges
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
         state: present
       loop:
-        - name: Install choco pacakges
-          chocolatey.chocolatey.win_chocolatey:
-            name: "{{ item }}"
-            state: present
-          loop:
-            - qview
-            - firefox
-            - mpv
-        - name: Uninstall choco pacakges
-          chocolatey.chocolatey.win_chocolatey:
-            name: "{{ item }}"
-            state: absent
-          loop:
-            - gimp
+        - qview
+        - firefox
+        - mpv
+    - name: Uninstall choco pacakges
+      chocolatey.chocolatey.win_chocolatey:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - gimp
     - name: Link scoop folder
       tags: scoop_folder
       block:
@@ -322,8 +317,10 @@
         - name: Link pipx folder
           ansible.windows.win_shell: |
             & cmd /c "mklink /j %userprofile%\pipx D:\pipx"
-    - name: Install packages
+    - name: Install pipx packages
       ansible.windows.win_shell: "C:\\ProgramData\\scoop\\shims\\pipx install {{ item }}"
       loop:
-        - advance-touch
         - leo
+        - advance-touch
+    - name: Install leo console dependency
+      ansible.windows.win_shell: "C:\\ProgramData\\scoop\\shims\\pipx inject leo windows-curses"
