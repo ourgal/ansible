@@ -324,3 +324,4 @@
       loop:
         - leo
         - advance-touch
+        - xonsh[full]
