@@ -926,7 +926,7 @@
     "zxc.20260126205016.1": "lookup_plugins = lookup_plugins\n",
     "zxc.20260126204920.1": "nocows = True\n",
     "zxc.20260126204956.1": "callback_result_format = yaml\n",
-    "zxc.20260126205125.1": "callback_whitelist = timer, profile_tasks\n",
+    "zxc.20260126205125.1": "callbacks_enabled = profile_tasks\n",
     "zxc.20260126221321.1": "[ssh_connection]\n@others\n",
     "zxc.20260126221212.1": "pipelining = True"
   },
@@ -935,7 +935,7 @@
       "_mod_time": 1769440333.52
     },
     "zxc.20260126204754.1": {
-      "_mod_time": 1769525903.408
+      "_mod_time": 1769530179.959
     }
   }
 }
