@@ -728,6 +728,10 @@
                   "vh": "gather facts"
                 },
                 {
+                  "gnx": "zxc.20260127225658.1",
+                  "vh": "fact caching"
+                },
+                {
                   "gnx": "zxc.20260126204835.1",
                   "vh": "inventory folder"
                 },
@@ -916,6 +920,7 @@
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
+    "zxc.20260127225658.1": "fact_caching = jsonfile\nfact_caching_connection = ~/.cache/ansible/facts",
     "zxc.20260126204835.1": "inventory = inventory\n",
     "zxc.20260126204904.1": "roles_path = roles\n",
     "zxc.20260126205016.1": "lookup_plugins = lookup_plugins\n",
@@ -930,7 +935,7 @@
       "_mod_time": 1769440333.52
     },
     "zxc.20260126204754.1": {
-      "_mod_time": 1769436947.059
+      "_mod_time": 1769525903.408
     }
   }
 }
