@@ -269,6 +269,13 @@
     - name: Reboot if installing Linux Subsytem as feature requires it
       ansible.windows.win_reboot:
       when: wsl_status.reboot_required
+    - name: Hide admin account
+      tags: hide-admin
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+        type: dword
+        name: Admin
+        data: 0
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
