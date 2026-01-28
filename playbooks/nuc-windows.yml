@@ -20,31 +20,85 @@
         state: absent
       loop:
         - gimp
-    - name: Link scoop folder
-      tags: scoop_folder
-      block:
-        - name: Create folder
-          ansible.windows.win_file:
-            path: D:\scoop
-            state: directory
-        - name: Global scoop folder stat
-          ansible.windows.win_stat:
-            path: C:\ProgramData\scoop
-          register: scoop_stat
-        - name: Create scoop folder
-          ansible.windows.win_shell: |
-            & cmd /c "mklink /j %ProgramData%\scoop D:\scoop"
-          when: scoop_stat.stat.exists is false or scoop_stat.stat.isjunction is false
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: '{{ item }}'
-        global: true
+        global: false
         no_cache: true
       register: result
       retries: 3
       delay: 5
       until: result is not failed
-      loop: [aria2, git]
+      loop:
+        - aria2
+    - name: Add bucket
+      community.windows.win_scoop_bucket:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - extras
+        - nerd-fonts
+    - name: Install Microsoft Subsystem for Linux
+      ansible.windows.win_optional_feature:
+        name: Microsoft-Windows-Subsystem-Linux
+        state: present
+      register: wsl_status
+    - name: Reboot if installing Linux Subsytem as feature requires it
+      ansible.windows.win_reboot:
+      when: wsl_status.reboot_required
+    - name: Hide admin account
+      tags: hide-admin
+      ansible.windows.win_regedit:
+        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+        type: dword
+        name: Admin
+        data: 0
+- name: Configure windows user
+  hosts: nuc-windows-user
+  tags: user
+  tasks:
+    - name: Link scoop folder
+      tags: scoop_folder
+      block:
+        - name: Create folder
+          ansible.windows.win_file:
+            path: "{{ item }}"
+            state: directory
+          loop:
+            - D:\scoop_apps
+            - "{{ ansible_facts.user_dir }}\\scoop"
+        - name: Remove target folder
+          ansible.windows.win_file:
+            path: "{{ ansible_facts.user_dir }}\\scoop\\apps"
+            state: absent
+        - name: Create scoop folder
+          ansible.windows.win_shell: |
+            & cmd /c "mklink /j {{ ansible_facts.user_dir }}\scoop\apps D:\scoop_apps"
+    - name: Install init packages via scoop
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - aria2
+        - lessmsi
+    - name: Using lessmsi
+      ansible.windows.win_shell: scoop config use_lessmsi true
+    - name: Install init packages via scoop
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - git
     - name: Add bucket
       community.windows.win_scoop_bucket:
         name: "{{ item }}"
@@ -59,7 +113,7 @@
       community.windows.win_scoop:
         name: "{{ item }}"
         state: present
-        global: true
+        global: false
         no_cache: true
       register: result
       retries: 3
@@ -110,7 +164,6 @@
         - dos2unix
         - goodbyedpi
         - innounp
-        - lessmsi
         - gsudo
         - nssm
         - pipx
@@ -168,7 +221,7 @@
       tags: scoop-extras
       community.windows.win_scoop:
         name: '{{ item }}'
-        global: true
+        global: false
         no_cache: true
       register: result
       retries: 3
@@ -261,34 +314,6 @@
         # - mpv
         - handbrake
         - openboard
-    - name: Install Microsoft Subsystem for Linux
-      ansible.windows.win_optional_feature:
-        name: Microsoft-Windows-Subsystem-Linux
-        state: present
-      register: wsl_status
-    - name: Reboot if installing Linux Subsytem as feature requires it
-      ansible.windows.win_reboot:
-      when: wsl_status.reboot_required
-    - name: Hide admin account
-      tags: hide-admin
-      ansible.windows.win_regedit:
-        path: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
-        type: dword
-        name: Admin
-        data: 0
-- name: Configure windows user
-  hosts: nuc-windows-user
-  tags: user
-  tasks:
-    - name: Install scoop to user
-      ansible.windows.win_shell: Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-    - name: Add bucket
-      community.windows.win_scoop_bucket:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - extras
-        - nerd-fonts
     - name: Remove origin folder
       ansible.windows.win_file:
         path: '{{ ansible_facts.user_dir }}/{{ item }}'
