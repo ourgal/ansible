@@ -928,7 +928,7 @@
     "zxc.20260125031006.1": "- name: Link to new folder\n  ansible.windows.win_shell: |\n    & cmd /c \"mklink /j \"\"{{ ansible_facts.user_dir }}\\{{ item }}\"\" \"\"D:\\{{ item }}\"\"\"\n  loop:\n    @others\n",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125133752.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
-    "zxc.20260125132006.1": "- name: Install pipx packages\n  ansible.windows.win_shell: \"C:\\\\ProgramData\\\\scoop\\\\shims\\\\pipx install {{ item }}\"\n  loop:\n    @others\n",
+    "zxc.20260125132006.1": "- name: Install pipx packages\n  tags: pipx-install\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223746.1": "- leo\n",
     "zxc.20260126223811.1": "- advance-touch\n",
     "zxc.20260126231151.1": "- xonsh[full]\n",
@@ -947,7 +947,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769618698.686
+      "_mod_time": 1769695583.301
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959

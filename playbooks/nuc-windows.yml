@@ -352,7 +352,8 @@
           ansible.windows.win_shell: |
             & cmd /c "mklink /j %userprofile%\pipx D:\pipx"
     - name: Install pipx packages
-      ansible.windows.win_shell: "C:\\ProgramData\\scoop\\shims\\pipx install {{ item }}"
+      tags: pipx-install
+      ansible.windows.win_shell: "pipx install {{ item }}"
       loop:
         - leo
         - advance-touch
