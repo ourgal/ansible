@@ -648,6 +648,16 @@
                           "vh": "whiteboard"
                         }
                       ]
+                    },
+                    {
+                      "gnx": "zxc.20260130231621.1",
+                      "vh": "nerd fonts packages",
+                      "children": [
+                        {
+                          "gnx": "zxc.20260130231633.1",
+                          "vh": "maple"
+                        }
+                      ]
                     }
                   ]
                 },
@@ -922,6 +932,8 @@
     "zxc.20260125123423.1": "- jellyfin-mpv-shim\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
     "zxc.20260125123353.1": "- handbrake\n",
     "zxc.20260125123442.1": "- openboard\n",
+    "zxc.20260130231621.1": "- name: Install nerd fonts packages via scoop\n  tags: scoop-fonts\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others",
+    "zxc.20260130231633.1": "- Maple-Mono-NF-CN",
     "zxc.20260125030815.1": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260125030831.1": "- Downloads\n",
     "zxc.20260125030933.1": "- name: Create folder\n  ansible.windows.win_file:\n    path: D:/{{ item }}\n    state: directory\n  loop:\n    @others\n",
@@ -947,7 +959,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769695583.301
+      "_mod_time": 1769786221.758
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
