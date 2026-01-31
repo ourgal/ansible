@@ -313,6 +313,7 @@
         - whkd
         - flclash
         - diskgenius
+        - smartmontools
         - flow-launcher
         - dhcp-server
         - hourglass
