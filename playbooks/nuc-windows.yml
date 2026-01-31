@@ -128,6 +128,7 @@
         - extras
         - nerd-fonts
     - name: Update scoop
+      tags: scoop-update
       ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update"
     - name: Install main packages via scoop
       tags: scoop-main

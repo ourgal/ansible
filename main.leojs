@@ -834,7 +834,7 @@
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - lessmsi\n",
     "zxc.20260128232859.1": "- name: Using lessmsi\n  ansible.windows.win_shell: scoop config use_lessmsi true\n",
     "zxc.20260129004447.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - git\n",
-    "zxc.20260126225858.1": "- name: Update scoop\n  ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update\"\n",
+    "zxc.20260126225858.1": "- name: Update scoop\n  tags: scoop-update\n  ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update\"\n",
     "zxc.20260125025055.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n",
     "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
@@ -971,7 +971,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769868179.083
+      "_mod_time": 1769868297.185
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
