@@ -133,6 +133,16 @@
                 {
                   "gnx": "zxc.20260128212532.1",
                   "vh": "hide account"
+                },
+                {
+                  "gnx": "zxc.20260131000001.1",
+                  "vh": "firewall",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260131000016.1",
+                      "vh": "croc"
+                    }
+                  ]
                 }
               ]
             },
@@ -817,6 +827,8 @@
     "zxc.20260126215328.1": "- name: Install Microsoft Subsystem for Linux\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status\n",
     "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required\n",
     "zxc.20260128212532.1": "- name: Hide admin account\n  tags: hide-admin\n  ansible.windows.win_regedit:\n    path: HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\n    type: dword\n    name: Admin\n    data: 0\n",
+    "zxc.20260131000001.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others",
+    "zxc.20260131000016.1": "- name: Croc firewall rule in\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule in\n    localport: 9009-9013\n    action: allow\n    direction: in\n    protocol: tcp\n    state: absent\n    enabled: true\n- name: Croc firewall rule out\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule out\n    localport: 9009-9013\n    action: allow\n    direction: out\n    protocol: tcp\n    state: absent\n    enabled: true",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: \"{{ item }}\"\n        state: directory\n      loop:\n        - D:\\scoop_apps\n        - \"{{ ansible_facts.user_dir }}\\\\scoop\"\n    - name: Remove target folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}\\\\scoop\\\\apps\"\n        state: absent\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j {{ ansible_facts.user_dir }}\\scoop\\apps D:\\scoop_apps\"\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - lessmsi\n",
@@ -959,7 +971,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769786221.758
+      "_mod_time": 1769792160.361
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
