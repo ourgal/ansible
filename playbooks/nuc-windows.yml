@@ -90,6 +90,8 @@
       loop:
         - aria2
         - lessmsi
+        - 7zip
+        - git
     - name: Update scoop config
       tags: scoop-config
       block:
@@ -115,6 +117,7 @@
               show_manifest: true
               use_sqlite_cache: true
               force_update: true
+              use_external_7zip: true
           ansible.windows.win_copy:
             dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
             content: "{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}"
@@ -129,21 +132,11 @@
               show_manifest: true
               use_sqlite_cache: true
               force_update: true
+              use_external_7zip: true
           ansible.windows.win_copy:
             dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
             content: "{{ config | to_json }}"
           when: scoop_config_stat.stat.exists is false
-    - name: Install init packages via scoop
-      community.windows.win_scoop:
-        name: '{{ item }}'
-        global: false
-        no_cache: true
-      register: result
-      retries: 3
-      delay: 5
-      until: result is not failed
-      loop:
-        - git
     - name: Add bucket
       community.windows.win_scoop_bucket:
         name: "{{ item }}"
