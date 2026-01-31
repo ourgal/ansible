@@ -8,6 +8,48 @@
       "vh": "code snippets",
       "children": [
         {
+          "gnx": "zxc.20260131235931.1",
+          "vh": "link pipx folder to d drive"
+        },
+        {
+          "gnx": "zxc.20260131235917.1",
+          "vh": "user folders",
+          "children": [
+            {
+              "gnx": "zxc.20260131235917.2",
+              "vh": "remove user folders",
+              "children": [
+                {
+                  "gnx": "zxc.20260131235917.7",
+                  "vh": "folders"
+                }
+              ]
+            },
+            {
+              "gnx": "zxc.20260131235917.4",
+              "vh": "create new folders",
+              "children": [
+                {
+                  "gnx": "zxc.20260131235917.7"
+                }
+              ]
+            },
+            {
+              "gnx": "zxc.20260131235917.6",
+              "vh": "link to new folder",
+              "children": [
+                {
+                  "gnx": "zxc.20260131235917.7"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "gnx": "zxc.20260131235857.1",
+          "vh": "link scoop folder to d drive"
+        },
+        {
           "gnx": "zxc.20260121215923.1",
           "vh": "powershell help"
         },
@@ -154,10 +196,6 @@
                   "gnx": "zxc.20260125123950.1",
                   "vh": "scoop",
                   "children": [
-                    {
-                      "gnx": "zxc.20260125024741.1",
-                      "vh": "link scoop folder to d drive"
-                    },
                     {
                       "gnx": "zxc.20260125024918.1",
                       "vh": "install scoop"
@@ -672,50 +710,12 @@
                   ]
                 },
                 {
-                  "gnx": "zxc.20260125124009.1",
-                  "vh": "user folders",
-                  "children": [
-                    {
-                      "gnx": "zxc.20260125030815.1",
-                      "vh": "remove user folders",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260125030831.1",
-                          "vh": "folders"
-                        }
-                      ]
-                    },
-                    {
-                      "gnx": "zxc.20260125030933.1",
-                      "vh": "create new folders",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260125030831.1"
-                        }
-                      ]
-                    },
-                    {
-                      "gnx": "zxc.20260125031006.1",
-                      "vh": "link to new folder",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260125030831.1"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
                   "gnx": "zxc.20260125125332.1",
                   "vh": "pipx",
                   "children": [
                     {
                       "gnx": "zxc.20260125125341.1",
                       "vh": "add to Path"
-                    },
-                    {
-                      "gnx": "zxc.20260125133752.1",
-                      "vh": "link pipx folder to d drive"
                     },
                     {
                       "gnx": "zxc.20260125132006.1",
@@ -805,6 +805,12 @@
     }
   ],
   "tnodes": {
+    "zxc.20260131235931.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
+    "zxc.20260131235917.2": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
+    "zxc.20260131235917.7": "- Downloads\n",
+    "zxc.20260131235917.4": "- name: Create folder\n  ansible.windows.win_file:\n    path: D:/{{ item }}\n    state: directory\n  loop:\n    @others\n",
+    "zxc.20260131235917.6": "- name: Link to new folder\n  ansible.windows.win_shell: |\n    & cmd /c \"mklink /j \"\"{{ ansible_facts.user_dir }}\\{{ item }}\"\" \"\"D:\\{{ item }}\"\"\"\n  loop:\n    @others\n",
+    "zxc.20260131235857.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: \"{{ item }}\"\n        state: directory\n      loop:\n        - D:\\scoop_apps\n        - \"{{ ansible_facts.user_dir }}\\\\scoop\"\n    - name: Remove target folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}\\\\scoop\\\\apps\"\n        state: absent\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j {{ ansible_facts.user_dir }}\\scoop\\apps D:\\scoop_apps\"\n",
     "zxc.20260121215923.1": "- name: Update powershell help\n  tags: powershell-help\n  ansible.windows.win_shell: Update-help\n",
     "zxc.20260126195012.1": "- name: Add bucket\n  community.windows.win_scoop_bucket:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    - extras\n    - nerd-fonts\n",
     "zxc.20260126211045.1": "- name: Add scoop-mirror bucket\n  community.windows.win_scoop_bucket:\n    name: scoop-mirror\n    repo: https://github.com/ExceptionsOccur/scoop-mirror\n",
@@ -830,11 +836,10 @@
     "zxc.20260131000001.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others",
     "zxc.20260131000016.1": "- name: Croc firewall rule in\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule in\n    localport: 9009-9013\n    action: allow\n    direction: in\n    protocol: tcp\n    state: absent\n    enabled: true\n- name: Croc firewall rule out\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule out\n    localport: 9009-9013\n    action: allow\n    direction: out\n    protocol: tcp\n    state: absent\n    enabled: true",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
-    "zxc.20260125024741.1": "- name: Link scoop folder\n  tags: scoop_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: \"{{ item }}\"\n        state: directory\n      loop:\n        - D:\\scoop_apps\n        - \"{{ ansible_facts.user_dir }}\\\\scoop\"\n    - name: Remove target folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}\\\\scoop\\\\apps\"\n        state: absent\n    - name: Create scoop folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j {{ ansible_facts.user_dir }}\\scoop\\apps D:\\scoop_apps\"\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - lessmsi\n",
     "zxc.20260128232859.1": "- name: Using lessmsi\n  ansible.windows.win_shell: scoop config use_lessmsi true\n",
     "zxc.20260129004447.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - git\n",
-    "zxc.20260126225858.1": "- name: Update scoop\n  tags: scoop-update\n  ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update\"\n",
+    "zxc.20260126225858.1": "- name: Update scoop\n  tags: scoop-update\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Update scoop\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update\"\n    - name: Update scoop packages\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update --all\"\n    - name: Remove scoop cache\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 cache remove *\"\n    - name: Clean up scoop packages\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 cleanup --all\"\n",
     "zxc.20260125025055.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n",
     "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
@@ -946,12 +951,7 @@
     "zxc.20260125123442.1": "- openboard\n",
     "zxc.20260130231621.1": "- name: Install nerd fonts packages via scoop\n  tags: scoop-fonts\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others",
     "zxc.20260130231633.1": "- Maple-Mono-NF-CN",
-    "zxc.20260125030815.1": "- name: Remove origin folder\n  ansible.windows.win_file:\n    path: '{{ ansible_facts.user_dir }}/{{ item }}'\n    state: absent\n  loop:\n    @others\n",
-    "zxc.20260125030831.1": "- Downloads\n",
-    "zxc.20260125030933.1": "- name: Create folder\n  ansible.windows.win_file:\n    path: D:/{{ item }}\n    state: directory\n  loop:\n    @others\n",
-    "zxc.20260125031006.1": "- name: Link to new folder\n  ansible.windows.win_shell: |\n    & cmd /c \"mklink /j \"\"{{ ansible_facts.user_dir }}\\{{ item }}\"\" \"\"D:\\{{ item }}\"\"\"\n  loop:\n    @others\n",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
-    "zxc.20260125133752.1": "- name: Link pipx folder\n  tags: pipx_folder\n  block:\n    - name: Create folder\n      ansible.windows.win_file:\n        path: D:\\pipx\n        state: directory\n    - name: Remove origin folder\n      ansible.windows.win_file:\n        path: \"{{ ansible_facts.user_dir }}/pipx\"\n        state: absent\n    - name: Link pipx folder\n      ansible.windows.win_shell: |\n        & cmd /c \"mklink /j %userprofile%\\pipx D:\\pipx\"\n",
     "zxc.20260125132006.1": "- name: Install pipx packages\n  tags: pipx-install\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223746.1": "- leo\n",
     "zxc.20260126223811.1": "- advance-touch\n",
@@ -971,7 +971,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769868297.185
+      "_mod_time": 1769875232.719
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959

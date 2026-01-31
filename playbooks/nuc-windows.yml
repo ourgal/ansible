@@ -78,23 +78,6 @@
   hosts: nuc-windows-user
   tags: user
   tasks:
-    - name: Link scoop folder
-      tags: scoop_folder
-      block:
-        - name: Create folder
-          ansible.windows.win_file:
-            path: "{{ item }}"
-            state: directory
-          loop:
-            - D:\scoop_apps
-            - "{{ ansible_facts.user_dir }}\\scoop"
-        - name: Remove target folder
-          ansible.windows.win_file:
-            path: "{{ ansible_facts.user_dir }}\\scoop\\apps"
-            state: absent
-        - name: Create scoop folder
-          ansible.windows.win_shell: |
-            & cmd /c "mklink /j {{ ansible_facts.user_dir }}\scoop\apps D:\scoop_apps"
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: '{{ item }}'
@@ -129,7 +112,18 @@
         - nerd-fonts
     - name: Update scoop
       tags: scoop-update
-      ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update"
+      block:
+        - name: Facts
+          ansible.builtin.gather_facts:
+          when: ansible_facts is not defined
+        - name: Update scoop
+          ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update"
+        - name: Update scoop packages
+          ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update --all"
+        - name: Remove scoop cache
+          ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 cache remove *"
+        - name: Clean up scoop packages
+          ansible.windows.win_shell: "{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 cleanup --all"
     - name: Install main packages via scoop
       tags: scoop-main
       community.windows.win_scoop:
@@ -349,43 +343,12 @@
       until: result is not failed
       loop:
         - Maple-Mono-NF-CN
-    - name: Remove origin folder
-      ansible.windows.win_file:
-        path: '{{ ansible_facts.user_dir }}/{{ item }}'
-        state: absent
-      loop:
-        - Downloads
-    - name: Create folder
-      ansible.windows.win_file:
-        path: D:/{{ item }}
-        state: directory
-      loop:
-        - Downloads
-    - name: Link to new folder
-      ansible.windows.win_shell: |
-        & cmd /c "mklink /j ""{{ ansible_facts.user_dir }}\{{ item }}"" ""D:\{{ item }}"""
-      loop:
-        - Downloads
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
         state: present
         scope: user
         elements: '%userprofile%\.local\bin'
-    - name: Link pipx folder
-      tags: pipx_folder
-      block:
-        - name: Create folder
-          ansible.windows.win_file:
-            path: D:\pipx
-            state: directory
-        - name: Remove origin folder
-          ansible.windows.win_file:
-            path: "{{ ansible_facts.user_dir }}/pipx"
-            state: absent
-        - name: Link pipx folder
-          ansible.windows.win_shell: |
-            & cmd /c "mklink /j %userprofile%\pipx D:\pipx"
     - name: Install pipx packages
       tags: pipx-install
       ansible.windows.win_shell: "pipx install {{ item }}"
