@@ -354,6 +354,7 @@
         - dhcp-server
         - hourglass
         - copyq
+        - bleachbit
         - everything
         - deskflow
         - coretemp
