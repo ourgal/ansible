@@ -978,7 +978,7 @@
     "zxc.20260125123227.1": "- espanso\n",
     "zxc.20260125123255.1": "- copytranslator\n",
     "zxc.20260125123314.1": "- rufus\n- ventoy\n",
-    "zxc.20260125123423.1": "- jellyfin-mpv-shim\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
+    "zxc.20260125123423.1": "- jellyfin-mpv-shim\n- vlc\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
     "zxc.20260125123353.1": "- handbrake\n",
     "zxc.20260125123442.1": "- openboard\n",
     "zxc.20260130231621.1": "- name: Install nerd fonts packages via scoop\n  tags: scoop-fonts\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others",
@@ -1003,7 +1003,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769929193.62
+      "_mod_time": 1769929641.726
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959

@@ -364,6 +364,7 @@
         - rufus
         - ventoy
         - jellyfin-mpv-shim
+        - vlc
         # install failed
         # - miru
         # installed via choco
