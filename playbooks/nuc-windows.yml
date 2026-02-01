@@ -320,6 +320,7 @@
         # installed via choco
         # - qview
         - gimp
+        - photodemon
         - qmk-toolbox
         - vial
         - kanata
