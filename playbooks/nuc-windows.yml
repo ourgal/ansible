@@ -232,6 +232,7 @@
         - ffmpeg
         - everything-cli
         - jj
+        - git-bug
         - git-lfs
         - diff-so-fancy
         - delta
