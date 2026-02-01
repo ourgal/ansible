@@ -319,6 +319,7 @@
         - gcc
         - anki
         - cfssl
+        - keepassxc
         - mc
         - vifm
         - doublecmd
