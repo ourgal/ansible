@@ -948,7 +948,7 @@
     "zxc.20260125122031.1": "- locale-emulator\n- ludusavi\n- playnite\n- sunshine\n",
     "zxc.20260125122040.1": "- lazygit\n- gitu\n",
     "zxc.20260125122109.1": "- nomacs\n# installed via choco\n# - qview\n",
-    "zxc.20260125122059.1": "- gimp\n- photodemon",
+    "zxc.20260125122059.1": "- gimp\n- photodemon\n- photoflare",
     "zxc.20260125122306.1": "- qmk-toolbox\n- vial\n- kanata\n- komokana\n",
     "zxc.20260125122314.1": "- qalculate\n",
     "zxc.20260125121911.1": "- fiddler\n",
@@ -1003,7 +1003,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769929948.492
+      "_mod_time": 1769929965.222
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
