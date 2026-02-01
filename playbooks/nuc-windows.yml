@@ -258,6 +258,7 @@
         - lf
         - yazi
         - chsrc
+        - editorconfig
         - autocorrect
         - perl
         - nodejs-lts
