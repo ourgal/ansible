@@ -355,6 +355,7 @@
         - diskgenius
         - smartmontools
         - crystaldiskinfo
+        - wiztree
         - flow-launcher
         - dhcp-server
         - hourglass

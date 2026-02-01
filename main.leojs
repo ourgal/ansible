@@ -976,7 +976,7 @@
     "zxc.20260125122737.1": "- winspy\n- windhawk\n",
     "zxc.20260125123048.1": "- glazewm\n- zebar\n- komorebi\n- yasb\n- whkd\n",
     "zxc.20260125123009.1": "- flclash\n",
-    "zxc.20260125123134.1": "- diskgenius\n- smartmontools\n- crystaldiskinfo",
+    "zxc.20260125123134.1": "- diskgenius\n- smartmontools\n- crystaldiskinfo\n- wiztree",
     "zxc.20260125123102.1": "- flow-launcher\n",
     "zxc.20260125122946.1": "- dhcp-server\n",
     "zxc.20260125123027.1": "- hourglass\n",
@@ -1015,7 +1015,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769931416.416
+      "_mod_time": 1769932235.473
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
