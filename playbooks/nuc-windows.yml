@@ -74,12 +74,6 @@
             protocol: tcp
             state: absent
             enabled: true
-    - name: Start ssh agent service
-      tags: ssh-agent
-      ansible.windows.win_service:
-        name: ssh-agent
-        state: stopped
-        start_mode: disabled
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
@@ -413,10 +407,3 @@
         - leo
         - advance-touch
         - xonsh[full]
-    - name: Set SSH_AUTH_SOCKET
-      tags: ssh-agent
-      ansible.windows.win_environment:
-        state: present
-        level: user
-        name: SSH_AUTH_SOCKET
-        value: \\.\pipe\openssh-ssh-agent

@@ -189,10 +189,6 @@
                       "vh": "croc"
                     }
                   ]
-                },
-                {
-                  "gnx": "zxc.20260201212528.1",
-                  "vh": "ssh-agent"
                 }
               ]
             },
@@ -780,10 +776,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "gnx": "zxc.20260201220824.1",
-                  "vh": "ssh-agent"
                 }
               ]
             }
@@ -884,7 +876,6 @@
     "zxc.20260128212532.1": "- name: Hide admin account\n  tags: hide-admin\n  ansible.windows.win_regedit:\n    path: HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\n    type: dword\n    name: Admin\n    data: 0\n",
     "zxc.20260131000001.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others",
     "zxc.20260131000016.1": "- name: Croc firewall rule in\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule in\n    localport: 9009-9013\n    action: allow\n    direction: in\n    protocol: tcp\n    state: absent\n    enabled: true\n- name: Croc firewall rule out\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule out\n    localport: 9009-9013\n    action: allow\n    direction: out\n    protocol: tcp\n    state: absent\n    enabled: true",
-    "zxc.20260201212528.1": "- name: Start ssh agent service\n  tags: ssh-agent\n  ansible.windows.win_service:\n    name: ssh-agent\n    state: stopped\n    start_mode: disabled",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024918.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - lessmsi\n    - 7zip\n    - git\n",
     "zxc.20260201002237.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false",
@@ -1014,7 +1005,6 @@
     "zxc.20260126223746.1": "- leo\n",
     "zxc.20260126223811.1": "- advance-touch\n",
     "zxc.20260126231151.1": "- xonsh[full]\n",
-    "zxc.20260201220824.1": "- name: Set SSH_AUTH_SOCKET\n  tags: ssh-agent\n  ansible.windows.win_environment:\n    state: present\n    level: user\n    name: SSH_AUTH_SOCKET\n    value: \\\\.\\pipe\\openssh-ssh-agent",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -1030,7 +1020,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769961175.542
+      "_mod_time": 1769962873.594
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
