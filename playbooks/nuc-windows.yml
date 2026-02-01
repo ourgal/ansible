@@ -241,6 +241,7 @@
         - everything-cli
         - jj
         - git-bug
+        - gh
         - git-lfs
         - git-absorb
         - diff-so-fancy
@@ -411,3 +412,10 @@
         - leo
         - advance-touch
         - xonsh[full]
+    - name: Set SSH_AUTH_SOCKET
+      tags: ssh-agent
+      ansible.windows.win_environment:
+        state: present
+        level: user
+        name: SSH_AUTH_SOCKET
+        value: \\.\pipe\openssh-ssh-agent

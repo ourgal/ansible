@@ -412,6 +412,10 @@
                               "vh": "bug"
                             },
                             {
+                              "gnx": "zxc.20260201232635.1",
+                              "vh": "github"
+                            },
+                            {
                               "gnx": "zxc.20260125030139.1",
                               "vh": "lfs"
                             },
@@ -776,6 +780,10 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "gnx": "zxc.20260201220824.1",
+                  "vh": "ssh-agent"
                 }
               ]
             }
@@ -924,6 +932,7 @@
     "zxc.20260125030044.1": "- everything-cli\n",
     "zxc.20260125030122.1": "- jj\n",
     "zxc.20260201145657.1": "- git-bug",
+    "zxc.20260201232635.1": "- gh",
     "zxc.20260125030139.1": "- git-lfs\n",
     "zxc.20260201145946.1": "- git-absorb",
     "zxc.20260125030214.1": "- diff-so-fancy\n- delta\n",
@@ -1005,6 +1014,7 @@
     "zxc.20260126223746.1": "- leo\n",
     "zxc.20260126223811.1": "- advance-touch\n",
     "zxc.20260126231151.1": "- xonsh[full]\n",
+    "zxc.20260201220824.1": "- name: Set SSH_AUTH_SOCKET\n  tags: ssh-agent\n  ansible.windows.win_environment:\n    state: present\n    level: user\n    name: SSH_AUTH_SOCKET\n    value: \\\\.\\pipe\\openssh-ssh-agent",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -1020,7 +1030,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769952971.473
+      "_mod_time": 1769959599.185
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
