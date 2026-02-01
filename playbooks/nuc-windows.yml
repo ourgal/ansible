@@ -235,6 +235,7 @@
         - jj
         - git-bug
         - git-lfs
+        - git-absorb
         - diff-so-fancy
         - delta
         - git-crypt
