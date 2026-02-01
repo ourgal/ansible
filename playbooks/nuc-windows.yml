@@ -230,6 +230,7 @@
         - helix
         - neovim
         - ffmpeg
+        - git-annex
         - everything-cli
         - jj
         - git-bug
