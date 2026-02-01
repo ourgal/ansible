@@ -261,6 +261,7 @@
         - chsrc
         - editorconfig
         - autocorrect
+        - taplo
         - perl
         - nodejs-lts
         - tectonic
