@@ -236,6 +236,7 @@
         - git-lfs
         - diff-so-fancy
         - delta
+        - git-crypt
         - gitui
         - gitql
         - gallery-dl
