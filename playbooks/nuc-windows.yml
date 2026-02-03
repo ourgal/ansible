@@ -374,6 +374,7 @@
         - copytranslator
         - rufus
         - ventoy
+        - ani-cli
         - jellyfin-mpv-shim
         - vlc
         # install failed

@@ -995,6 +995,7 @@
     "zxc.20260125123227.1": "- espanso\n",
     "zxc.20260125123255.1": "- copytranslator\n",
     "zxc.20260125123314.1": "- rufus\n- ventoy\n",
+    "zxc.20260125123345.1": "- ani-cli",
     "zxc.20260125123423.1": "- jellyfin-mpv-shim\n- vlc\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
     "zxc.20260125123353.1": "- handbrake\n",
     "zxc.20260125123442.1": "- openboard\n",
@@ -1020,7 +1021,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1769962873.594
+      "_mod_time": 1770115796.592
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
