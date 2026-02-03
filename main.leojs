@@ -900,7 +900,7 @@
     "zxc.20260125120822.1": "- duf\n",
     "zxc.20260125120345.1": "- navi\n",
     "zxc.20260125120843.1": "- unrar\n- unzip\n",
-    "zxc.20260125120405.1": "- mcfly\n",
+    "zxc.20260125120405.1": "- mcfly\n- atuin\n",
     "zxc.20260125120424.1": "- starship\n",
     "zxc.20260125025138.1": "- aichat\n",
     "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n",
@@ -1021,7 +1021,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1770115796.592
+      "_mod_time": 1770117534.225
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
