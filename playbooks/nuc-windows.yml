@@ -113,8 +113,6 @@
               use_lessmsi: true
               aria2-enabled: true
               aria2-warning-enabled: false
-              cat_style: auto
-              show_manifest: true
               use_sqlite_cache: true
               force_update: true
               use_external_7zip: true
@@ -128,8 +126,6 @@
               use_lessmsi: true
               aria2-enabled: true
               aria2-warning-enabled: false
-              cat_style: auto
-              show_manifest: true
               use_sqlite_cache: true
               force_update: true
               use_external_7zip: true
@@ -276,6 +272,39 @@
         - msys2
         - shellcheck
         - binutils
+    - name: Update scoop config
+      tags: scoop-config
+      block:
+        - name: Facts
+          ansible.builtin.gather_facts:
+          when: ansible_facts is not defined
+        - name: Check scoop config file
+          ansible.windows.win_stat:
+            path: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+          register: scoop_config_stat
+        - name: Get scoop config content
+          ansible.windows.slurp:
+            src: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+          register: scoop_config_content
+          when: scoop_config_stat.stat.exists is true
+        - name: Set scoop config
+          vars:
+            config:
+              cat_style: auto
+              show_manifest: true
+          ansible.windows.win_copy:
+            dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+            content: "{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}"
+          when: scoop_config_stat.stat.exists is true
+        - name: Set scoop config
+          vars:
+            config:
+              cat_style: auto
+              show_manifest: true
+          ansible.windows.win_copy:
+            dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+            content: "{{ config | to_json }}"
+          when: scoop_config_stat.stat.exists is false
     - name: Install extras packages via scoop
       tags: scoop-extras
       community.windows.win_scoop:
