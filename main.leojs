@@ -784,6 +784,28 @@
       ]
     },
     {
+      "gnx": "zxc.20260211203747.1",
+      "vh": "nixos-uos-arm",
+      "children": [
+        {
+          "gnx": "zxc.20260211203811.1",
+          "vh": "@clean playbooks/nixos-uos-arm.yml",
+          "children": [
+            {
+              "gnx": "zxc.20260211203923.1",
+              "vh": "content",
+              "children": [
+                {
+                  "gnx": "zxc.20260211204116.1",
+                  "vh": "facts"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "gnx": "zxc.20260126204729.1",
       "vh": "ansible cfg",
       "children": [
@@ -1006,6 +1028,9 @@
     "zxc.20260126223746.1": "- leo\n",
     "zxc.20260126223811.1": "- advance-touch\n",
     "zxc.20260126231151.1": "- xonsh[full]\n",
+    "zxc.20260211203811.1": "---\n@others\n",
+    "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
+    "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -1022,6 +1047,9 @@
   "uas": {
     "zxc.20260121205603.1": {
       "_mod_time": 1770117534.225
+    },
+    "zxc.20260211203811.1": {
+      "_mod_time": 1770813702.075
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
