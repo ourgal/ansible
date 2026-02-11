@@ -425,6 +425,24 @@
       until: result is not failed
       loop:
         - Maple-Mono-NF-CN
+    - name: Add aki bucket
+      community.windows.win_scoop_bucket:
+        name: aki
+        repo: https://github.com/akirco/aki-apps
+        state: present
+    - name: Install main packages via scoop
+      tags: scoop-main
+      community.windows.win_scoop:
+        name: "{{ item }}"
+        state: present
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - wegame
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
