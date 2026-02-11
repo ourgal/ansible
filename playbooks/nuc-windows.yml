@@ -89,9 +89,9 @@
       until: result is not failed
       loop:
         - aria2
+        - git
         - lessmsi
         - 7zip
-        - git
     - name: Update scoop config
       tags: scoop-config
       block:
