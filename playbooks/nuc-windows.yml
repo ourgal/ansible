@@ -420,6 +420,5 @@
       tags: pipx-install
       ansible.windows.win_shell: "pipx install {{ item }}"
       loop:
-        - leo
         - advance-touch
         - xonsh[full]
