@@ -104,6 +104,16 @@
               "vh": "chezmoi update"
             }
           ]
+        },
+        {
+          "gnx": "zxc.20260212194835.1",
+          "vh": "enable bat related scoop config",
+          "children": [
+            {
+              "gnx": "zxc.20260212194835.2",
+              "vh": "<< config >>"
+            }
+          ]
         }
       ]
     },
@@ -514,16 +524,6 @@
                       ]
                     },
                     {
-                      "gnx": "zxc.20260212001813.1",
-                      "vh": "enable bat related scoop config",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260212001813.2",
-                          "vh": "<< config >>"
-                        }
-                      ]
-                    },
-                    {
                       "gnx": "zxc.20260125121500.1",
                       "vh": "extras packages",
                       "children": [
@@ -909,6 +909,8 @@
     "zxc.20260126184021.3": "- \"[brix.local]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n- \"[192.168.123.206]:23231 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAqhuTozhEUlnOCkH1LXw55IUaZHzcO4IKmr1uPOT41u\"\n",
     "zxc.20260126184021.4": "- name: Init chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi init ssh://brix.local:23231/chezmoi.git\n",
     "zxc.20260126184021.5": "- name: Update chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi update\n",
+    "zxc.20260212194835.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false",
+    "zxc.20260212194835.2": "config:\n  cat_style: auto\n  show_manifest: true\n",
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
@@ -994,8 +996,6 @@
     "zxc.20260125025534.1": "- msys2\n",
     "zxc.20260125025339.1": "- shellcheck\n",
     "zxc.20260125025352.1": "- binutils\n",
-    "zxc.20260212001813.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false",
-    "zxc.20260212001813.2": "config:\n  cat_style: auto\n  show_manifest: true\n",
     "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125121633.1": "- kdeconnect\n",
     "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
@@ -1075,7 +1075,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1770827314.408
+      "_mod_time": 1770896916.716
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
