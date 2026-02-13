@@ -74,6 +74,13 @@
             protocol: tcp
             state: absent
             enabled: true
+    - name: Set user groups
+      tags: user-admin
+      ansible.windows.win_user:
+        name: User
+        state: present
+        groups:
+          - Users
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
