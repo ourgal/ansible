@@ -103,6 +103,12 @@
         state: present
         groups:
           - Users
+    - name: Start ssh-agent service
+      tags: ssh-agent
+      ansible.windows.win_service:
+        name: ssh-agent
+        state: started
+        start_mode: auto
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
