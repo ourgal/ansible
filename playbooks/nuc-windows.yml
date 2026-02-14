@@ -274,6 +274,7 @@
         - haskell-cabal
         - haskell-language-server
         - stack
+        - rust
         - make
         - task
         - msys2
