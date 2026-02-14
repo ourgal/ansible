@@ -1018,7 +1018,7 @@
     "zxc.20260125030301.1": "- gitui\n",
     "zxc.20260125030245.1": "- gitql\n",
     "zxc.20260125025845.1": "- gallery-dl\n- yt-dlp\n",
-    "zxc.20260125025943.1": "- gpg\n- openssl\n- gopass",
+    "zxc.20260125025943.1": "- gpg\n- openssl\n- gopass\n- sops",
     "zxc.20260125030353.1": "- dog\n- nali\n- nmap\n- q-dns\n- tcping\n",
     "zxc.20260125025707.1": "- pandoc\n",
     "zxc.20260125030104.1": "- broot\n- fzf\n",
@@ -1118,7 +1118,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771078336.499
+      "_mod_time": 1771083309.566
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

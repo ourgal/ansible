@@ -280,6 +280,7 @@
         - gpg
         - openssl
         - gopass
+        - sops
         - dog
         - nali
         - nmap
