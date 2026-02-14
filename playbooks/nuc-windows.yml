@@ -109,6 +109,13 @@
         name: ssh-agent
         state: started
         start_mode: auto
+    - name: Update openssh
+      tags: openssh
+      chocolatey.chocolatey.win_chocolatey:
+        name: openssh
+        state: latest
+        allow_prerelease: true
+        package_params: /SSHServerFeature
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
