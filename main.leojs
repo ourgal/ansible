@@ -114,6 +114,20 @@
               "vh": "<< config >>"
             }
           ]
+        },
+        {
+          "gnx": "zxc.20260215012409.1",
+          "vh": "aki packages",
+          "children": [
+            {
+              "gnx": "zxc.20260215012409.2",
+              "vh": "game"
+            },
+            {
+              "gnx": "zxc.20260215012409.3",
+              "vh": "remvo scoop buckets aki"
+            }
+          ]
         }
       ]
     },
@@ -780,20 +794,6 @@
                     {
                       "gnx": "zxc.20260212002539.1",
                       "vh": "scoop buckets aki"
-                    },
-                    {
-                      "gnx": "zxc.20260212002813.1",
-                      "vh": "aki packages",
-                      "children": [
-                        {
-                          "gnx": "zxc.20260212002829.1",
-                          "vh": "game"
-                        }
-                      ]
-                    },
-                    {
-                      "gnx": "zxc.20260214110419.1",
-                      "vh": "remvo scoop buckets aki"
                     }
                   ]
                 },
@@ -951,6 +951,9 @@
     "zxc.20260126184021.5": "- name: Update chezmoi\n  ansible.windows.win_shell: C:\\\\ProgramData\\\\scoop\\\\shims\\\\chezmoi update\n",
     "zxc.20260212194835.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false",
     "zxc.20260212194835.2": "config:\n  cat_style: auto\n  show_manifest: true\n",
+    "zxc.20260215012409.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others",
+    "zxc.20260215012409.2": "- wegame",
+    "zxc.20260215012409.3": "- name: Remove aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: absent",
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
@@ -1095,9 +1098,6 @@
     "zxc.20260130231621.1": "- name: Install nerd fonts packages via scoop\n  tags: scoop-fonts\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others",
     "zxc.20260130231633.1": "- Maple-Mono-NF-CN",
     "zxc.20260212002539.1": "- name: Add aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: present",
-    "zxc.20260212002813.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others",
-    "zxc.20260212002829.1": "- wegame",
-    "zxc.20260214110419.1": "- name: Remove aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: absent",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125132006.1": "- name: Install pipx packages\n  tags: pipx-install\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223811.1": "- advance-touch\n",
@@ -1123,7 +1123,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771089813.281
+      "_mod_time": 1771089852.929
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
