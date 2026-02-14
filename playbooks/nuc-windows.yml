@@ -10,7 +10,7 @@
       tags: choco-install
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
-        state: present
+        state: latest
       loop:
         - qview
         - firefox
