@@ -922,8 +922,8 @@
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
-    "zxc.20260126223153.1": "- name: Install choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    @others\n",
-    "zxc.20260126014227.1": "- qview\n- firefox\n- mpv\n",
+    "zxc.20260126223153.1": "- name: Install choco pacakges\n  tags: choco-install\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: present\n  loop:\n    @others\n",
+    "zxc.20260126014227.1": "- qview\n- firefox\n- mpv\n- visualstudio2026-workload-vctools\n",
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260126223217.2": "- gimp\n",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n",
@@ -1085,7 +1085,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771038382.912
+      "_mod_time": 1771045349.618
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
