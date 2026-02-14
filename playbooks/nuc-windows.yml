@@ -320,6 +320,7 @@
         - gcc
         - anki
         - cfssl
+        - age
         - keepassxc
         - mc
         - vifm
@@ -437,3 +438,14 @@
       loop:
         - advance-touch
         - xonsh[full]
+    - name: Add cargo bin path to PATH
+      tags: path
+      ansible.windows.win_path:
+        state: present
+        scope: user
+        elements: '%userprofile%\.cargo\bin'
+    - name: Install cargo packages
+      tags: cargo-install
+      ansible.windows.win_shell: "cargo install --locked --git {{ item }}"
+      loop:
+        - https://github.com/estin/simple-completion-language-server.git
