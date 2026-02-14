@@ -12,9 +12,8 @@
         name: "{{ item }}"
         state: latest
       loop:
-        - qview
         - firefox
-        - mpv
+        - mpvio
         - visualstudio2026-workload-vctools
     - name: Uninstall choco pacakges
       chocolatey.chocolatey.win_chocolatey:
@@ -366,8 +365,7 @@
         - lazygit
         - gitu
         - nomacs
-        # installed via choco
-        # - qview
+        - qview
         - gimp
         - photodemon
         - photoflare
