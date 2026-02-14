@@ -417,6 +417,11 @@
       until: result is not failed
       loop:
         - wegame
+    - name: Remove aki bucket
+      community.windows.win_scoop_bucket:
+        name: aki
+        repo: https://github.com/akirco/aki-apps
+        state: absent
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
