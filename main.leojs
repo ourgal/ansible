@@ -229,6 +229,10 @@
                 {
                   "gnx": "zxc.20260215005207.1",
                   "vh": "update openssh"
+                },
+                {
+                  "gnx": "zxc.20260215131131.1",
+                  "vh": "optimize powershell startup time"
                 }
               ]
             },
@@ -985,6 +989,7 @@
     "zxc.20260213005645.1": "- name: Set user groups\n  tags: user-admin\n  ansible.windows.win_user:\n    name: User\n    state: present\n    groups:\n      - Users",
     "zxc.20260214221021.1": "- name: Start ssh-agent service\n  tags: ssh-agent\n  ansible.windows.win_service:\n    name: ssh-agent\n    state: started\n    start_mode: auto",
     "zxc.20260215005207.1": "- name: Update openssh\n  tags: openssh\n  chocolatey.chocolatey.win_chocolatey:\n    name: openssh\n    state: latest\n    allow_prerelease: true\n    package_params: /SSHServerFeature",
+    "zxc.20260215131131.1": "- name: Optimize powershell\n  tags: optimize-powershell\n  ansible.windows.win_shell: |\n    function Optimize-Assemblies {\n        param (\n            [string]$assemblyFilter = \"Microsoft.PowerShell.\",\n            [string]$activity = \"Native Image Installation\"\n        )\n\n        try {\n            # Get the path to the ngen executable dynamically\n            $ngenPath = [System.IO.Path]::Combine([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory(), \"ngen.exe\")\n\n            # Check if ngen.exe exists\n            if (-Not (Test-Path $ngenPath)) {\n                Write-Host \"Ngen.exe not found at $ngenPath. Make sure .NET Framework is installed.\"\n                return\n            }\n\n            # Get a list of loaded assemblies\n            $assemblies = [AppDomain]::CurrentDomain.GetAssemblies()\n\n            # Filter assemblies based on the provided filter\n            $filteredAssemblies = $assemblies | Where-Object { $_.FullName -ilike \"$assemblyFilter*\" }\n\n            if ($filteredAssemblies.Count -eq 0) {\n                Write-Host \"No matching assemblies found for optimization.\"\n                return\n            }\n\n            foreach ($assembly in $filteredAssemblies) {\n                # Get the name of the assembly\n                $name = [System.IO.Path]::GetFileName($assembly.Location)\n\n                # Display progress\n                Write-Progress -Activity $activity -Status \"Optimizing $name\"\n\n                # Use Ngen to install the assembly\n                Start-Process -FilePath $ngenPath -ArgumentList \"install `\"$($assembly.Location)`\"\" -Wait -WindowStyle Hidden\n            }\n\n            Write-Host \"Optimization complete.\"\n        } catch {\n            Write-Host \"An error occurred: $_\"\n        }\n    }\n\n    # Optimize PowerShell assemblies:\n    Optimize-Assemblies -assemblyFilter \"Microsoft.PowerShell.\"",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024918.1": "- name: Install aria2 and lessmsi via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - lessmsi",
     "zxc.20260201002237.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false",
@@ -1140,7 +1145,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771126162.841
+      "_mod_time": 1771135935.086
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
