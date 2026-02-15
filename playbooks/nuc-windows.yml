@@ -549,6 +549,7 @@
       loop:
         - advance-touch
         - xonsh[full]
+        - mutagen
     - name: Add cargo bin path to PATH
       tags: path
       ansible.windows.win_path:
