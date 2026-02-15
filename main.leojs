@@ -1113,7 +1113,7 @@
     "zxc.20260125122022.1": "- mc\n- vifm\n- doublecmd\n",
     "zxc.20260125122031.1": "- locale-emulator\n- ludusavi\n- playnite\n- sunshine\n",
     "zxc.20260125122040.1": "- lazygit\n- gitu\n",
-    "zxc.20260125122109.1": "- nomacs\n- qview\n",
+    "zxc.20260125122109.1": "- nomacs\n- qview\n- oculante",
     "zxc.20260125122059.1": "- gimp\n- photodemon\n- photoflare",
     "zxc.20260125122306.1": "- qmk-toolbox\n- vial\n- kanata\n- komokana\n",
     "zxc.20260125122314.1": "- qalculate\n",
@@ -1181,7 +1181,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771138253.118
+      "_mod_time": 1771152836.332
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
