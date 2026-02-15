@@ -164,6 +164,16 @@
 
         # Optimize PowerShell assemblies:
         Optimize-Assemblies -assemblyFilter "Microsoft.PowerShell."
+    - name: Add game user
+      tags: game-user
+      ansible.windows.win_user:
+        name: Game
+        password_expired: false
+        password_never_expires: true
+        state: present
+        groups:
+          - Users
+          - Administrators
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
@@ -553,3 +563,127 @@
       ansible.windows.win_shell: "cargo install --locked --git {{ item }}"
       loop:
         - https://github.com/estin/simple-completion-language-server.git
+- name: Configure windows game user
+  hosts: nuc-windows-game
+  tags: game
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Install aria2 and lessmsi via scoop
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - aria2
+        - lessmsi
+    - name: Update scoop config
+      tags: scoop-config
+      block:
+        - name: Facts
+          ansible.builtin.gather_facts:
+          when: ansible_facts is not defined
+        - name: Check scoop config file
+          ansible.windows.win_stat:
+            path: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+          register: scoop_config_stat
+        - name: Get scoop config content
+          ansible.windows.slurp:
+            src: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+          register: scoop_config_content
+          when: scoop_config_stat.stat.exists is true
+        - name: Set scoop config
+          vars:
+            config:
+              use_lessmsi: true
+              aria2-enabled: true
+              aria2-warning-enabled: false
+              use_sqlite_cache: true
+              force_update: true
+              use_external_7zip: false
+          ansible.windows.win_copy:
+            dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+            content: "{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}"
+          when: scoop_config_stat.stat.exists is true
+        - name: Set scoop config
+          vars:
+            config:
+              use_lessmsi: true
+              aria2-enabled: true
+              aria2-warning-enabled: false
+              use_sqlite_cache: true
+              force_update: true
+              use_external_7zip: false
+          ansible.windows.win_copy:
+            dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+            content: "{{ config | to_json }}"
+          when: scoop_config_stat.stat.exists is false
+    - name: Install 7zip and git via scoop
+      community.windows.win_scoop:
+        name: '{{ item }}'
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - 7zip
+        - git
+    - name: Using external 7zip
+      tags: scoop-config
+      block:
+        - name: Facts
+          ansible.builtin.gather_facts:
+          when: ansible_facts is not defined
+        - name: Check scoop config file
+          ansible.windows.win_stat:
+            path: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+          register: scoop_config_stat
+        - name: Get scoop config content
+          ansible.windows.slurp:
+            src: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+          register: scoop_config_content
+          when: scoop_config_stat.stat.exists is true
+        - name: Set scoop config
+          vars:
+            config:
+              use_external_7zip: true
+          ansible.windows.win_copy:
+            dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+            content: "{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}"
+          when: scoop_config_stat.stat.exists is true
+        - name: Set scoop config
+          vars:
+            config:
+              use_external_7zip: true
+          ansible.windows.win_copy:
+            dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
+            content: "{{ config | to_json }}"
+          when: scoop_config_stat.stat.exists is false
+    - name: Add aki bucket
+      community.windows.win_scoop_bucket:
+        name: aki
+        repo: https://github.com/akirco/aki-apps
+        state: present
+    - name: Install wegame
+      tags: wegame
+      community.windows.win_scoop:
+        name: wegame
+        state: present
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+    - name: Remove aki bucket
+      community.windows.win_scoop_bucket:
+        name: aki
+        repo: https://github.com/akirco/aki-apps
+        state: absent
