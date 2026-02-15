@@ -867,6 +867,9 @@
                   "children": [
                     {
                       "gnx": "zxc.20260215141835.1"
+                    },
+                    {
+                      "gnx": "zxc.20260126195012.1"
                     }
                   ]
                 },
@@ -887,6 +890,10 @@
                       "vh": "remvo scoop buckets aki"
                     }
                   ]
+                },
+                {
+                  "gnx": "zxc.20260216001635.1",
+                  "vh": "ldplayer"
                 }
               ]
             }
@@ -1158,6 +1165,7 @@
     "zxc.20260215142237.2": "- name: Add aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: present",
     "zxc.20260215142237.3": "- name: Install wegame\n  tags: wegame\n  community.windows.win_scoop:\n    name: wegame\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed",
     "zxc.20260215142237.4": "- name: Remove aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: absent",
+    "zxc.20260216001635.1": "- name: Install ldplayer\n  community.windows.win_scoop:\n    name: ldplayer\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed",
     "zxc.20260211203811.1": "---\n@others\n",
     "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
     "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
@@ -1176,7 +1184,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771168540.936
+      "_mod_time": 1771172441.087
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
