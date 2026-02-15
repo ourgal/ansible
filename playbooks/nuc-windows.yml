@@ -446,6 +446,7 @@
         - aria-ng-gui
         - eget
         - transmission
+        - transgui
         - notepadplusplus
         - vscodium
         - emacs
@@ -699,3 +700,7 @@
       retries: 3
       delay: 5
       until: result is not failed
+    - name: Install bluestacks
+      chocolatey.chocolatey.win_chocolatey:
+        name: bluestacks
+        state: latest
