@@ -1180,7 +1180,7 @@
     "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125121633.1": "- kdeconnect\n",
     "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
-    "zxc.20260125121707.1": "# install failed\n# - calibre\n",
+    "zxc.20260125121707.1": "- calibre",
     "zxc.20260125121729.1": "# windows can't set default browser to this\n# - firefox\n- brave\n- qutebrowser\n- ungoogled-chromium\n",
     "zxc.20260125121756.1": "- telegram\n",
     "zxc.20260125121858.1": "- windowsdesktop-runtime-lts\n",
@@ -1274,7 +1274,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771251048.422
+      "_mod_time": 1771251938.579
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
