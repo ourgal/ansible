@@ -556,6 +556,7 @@
         - advance-touch
         - xonsh[full]
         - mutagen
+        - jedi-language-server
     - name: Add cargo bin path to PATH
       tags: path
       ansible.windows.win_path:

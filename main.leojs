@@ -844,6 +844,10 @@
                         {
                           "gnx": "zxc.20260216015502.1",
                           "vh": "mutagen"
+                        },
+                        {
+                          "gnx": "zxc.20260216213715.1",
+                          "vh": "jedi-language-server"
                         }
                       ]
                     }
@@ -1222,6 +1226,7 @@
     "zxc.20260126223811.1": "- advance-touch\n",
     "zxc.20260126231151.1": "- xonsh[full]\n",
     "zxc.20260216015502.1": "- mutagen\n",
+    "zxc.20260216213715.1": "- jedi-language-server",
     "zxc.20260214133505.1": "- name: Add cargo bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.cargo\\bin'\n",
     "zxc.20260214134044.1": "- name: Install cargo packages\n  tags: cargo-install\n  ansible.windows.win_shell: \"cargo install --locked --git {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260214134128.1": "- https://github.com/estin/simple-completion-language-server.git\n",
@@ -1259,7 +1264,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771248806.071
+      "_mod_time": 1771249045.918
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
