@@ -1163,7 +1163,7 @@
     "zxc.20260125025829.1": "- chezmoi\n",
     "zxc.20260125025957.1": "- lf\n- yazi\n",
     "zxc.20260125025310.1": "- chsrc\n- editorconfig\n",
-    "zxc.20260125025616.1": "- autocorrect\n",
+    "zxc.20260125025616.1": "- autocorrect\n- marksman",
     "zxc.20260201153647.1": "- taplo\n- tombi",
     "zxc.20260216213322.1": "- ruff\n- ty",
     "zxc.20260216215830.1": "- lua-language-server\n- stylua",
@@ -1274,7 +1274,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771250370.198
+      "_mod_time": 1771251048.422
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

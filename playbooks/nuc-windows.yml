@@ -402,6 +402,7 @@
         - chsrc
         - editorconfig
         - autocorrect
+        - marksman
         - taplo
         - tombi
         - ruff
