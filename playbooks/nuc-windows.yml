@@ -571,6 +571,7 @@
         - prettier
         - vscode-langservers-extracted
         - yaml-language-server
+        - "@ansible/ansible-language-server"
     - name: Facts
       tags: user-env
       ansible.builtin.gather_facts:
@@ -592,7 +593,7 @@
       ansible.windows.win_regedit:
         path: HKCU:\Keyboard Layout\Preload
         name: 1
-        data: 00000804 
+        data: 00000804
     - name: Set en as second input method
       ansible.windows.win_regedit:
         path: HKCU:\Keyboard Layout\Preload
