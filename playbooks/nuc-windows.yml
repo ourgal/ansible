@@ -403,6 +403,7 @@
         - editorconfig
         - autocorrect
         - taplo
+        - tombi
         - perl
         - nodejs-lts
         - yarn
