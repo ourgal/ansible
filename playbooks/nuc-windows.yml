@@ -15,6 +15,7 @@
         - firefox
         - mpvio
         - visualstudio2026-workload-vctools
+        - weasel
     - name: Uninstall choco pacakges
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
