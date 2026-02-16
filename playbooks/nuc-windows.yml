@@ -404,6 +404,7 @@
         - autocorrect
         - taplo
         - tombi
+        - ruff
         - perl
         - nodejs-lts
         - yarn
