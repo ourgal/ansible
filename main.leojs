@@ -866,6 +866,10 @@
                     {
                       "gnx": "zxc.20260216191908.1",
                       "vh": "vscode-langservers-extracted"
+                    },
+                    {
+                      "gnx": "zxc.20260216203621.1",
+                      "vh": "yaml-language-server"
                     }
                   ]
                 },
@@ -1204,6 +1208,7 @@
     "zxc.20260216182729.1": "- name: Install npm packages\n  tags: npm\n  ansible.windows.win_shell: npm install -g \"{{ item }}\"\n  loop:\n    @others",
     "zxc.20260216191851.1": "- prettier",
     "zxc.20260216191908.1": "- vscode-langservers-extracted",
+    "zxc.20260216203621.1": "- yaml-language-server",
     "zxc.20260216155251.1": "- name: Facts\n  tags: user-env\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n",
     "zxc.20260216155257.1": "- name: Set home environment variable\n  tags: user-env\n  ansible.windows.win_environment:\n    state: present\n    name: HOME\n    value: \"{{ ansible_facts.user_dir }}\"\n    level: user",
     "zxc.20260216162853.1": "- name: Add doom bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.emacs.d\\bin'",
@@ -1233,7 +1238,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771244139.653
+      "_mod_time": 1771245400.337
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

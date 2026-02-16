@@ -570,6 +570,7 @@
       loop:
         - prettier
         - vscode-langservers-extracted
+        - yaml-language-server
     - name: Facts
       tags: user-env
       ansible.builtin.gather_facts:
