@@ -405,6 +405,7 @@
         - taplo
         - tombi
         - ruff
+        - ty
         - perl
         - nodejs-lts
         - yarn
