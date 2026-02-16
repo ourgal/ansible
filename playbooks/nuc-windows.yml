@@ -405,6 +405,8 @@
         - taplo
         - perl
         - nodejs-lts
+        - yarn
+        - pnpm
         - tectonic
         - haskell
         - haskell-cabal
