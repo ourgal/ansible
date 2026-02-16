@@ -408,6 +408,7 @@
         - yarn
         - pnpm
         - tectonic
+        - yamlfmt
         - haskell
         - haskell-cabal
         - haskell-language-server
