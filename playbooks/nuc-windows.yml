@@ -406,6 +406,7 @@
         - tombi
         - ruff
         - ty
+        - lua-language-server
         - perl
         - nodejs-lts
         - yarn
