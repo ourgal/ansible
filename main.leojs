@@ -1166,7 +1166,7 @@
     "zxc.20260125025616.1": "- autocorrect\n",
     "zxc.20260201153647.1": "- taplo\n- tombi",
     "zxc.20260216213322.1": "- ruff\n- ty",
-    "zxc.20260216215830.1": "- lua-language-server",
+    "zxc.20260216215830.1": "- lua-language-server\n- stylua",
     "zxc.20260125025649.1": "- perl\n",
     "zxc.20260125025640.1": "- nodejs-lts\n- yarn\n- pnpm\n",
     "zxc.20260125025604.1": "- tectonic\n",
@@ -1274,7 +1274,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771250318.776
+      "_mod_time": 1771250370.198
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

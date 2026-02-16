@@ -407,6 +407,7 @@
         - ruff
         - ty
         - lua-language-server
+        - stylua
         - perl
         - nodejs-lts
         - yarn
