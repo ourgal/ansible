@@ -854,6 +854,24 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "gnx": "zxc.20260216155251.1",
+                  "vh": "env",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260216155257.1",
+                      "vh": "home"
+                    },
+                    {
+                      "gnx": "zxc.20260216162853.1",
+                      "vh": "doom emacs"
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260216180449.1",
+                  "vh": "rime as default input method"
                 }
               ]
             },
@@ -1169,6 +1187,10 @@
     "zxc.20260214133505.1": "- name: Add cargo bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.cargo\\bin'\n",
     "zxc.20260214134044.1": "- name: Install cargo packages\n  tags: cargo-install\n  ansible.windows.win_shell: \"cargo install --locked --git {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260214134128.1": "- https://github.com/estin/simple-completion-language-server.git",
+    "zxc.20260216155251.1": "- name: Facts\n  tags: user-env\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n",
+    "zxc.20260216155257.1": "- name: Set home environment variable\n  tags: user-env\n  ansible.windows.win_environment:\n    state: present\n    name: HOME\n    value: \"{{ ansible_facts.user_dir }}\"\n    level: user",
+    "zxc.20260216162853.1": "- name: Add doom bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.emacs.d\\bin'",
+    "zxc.20260216180449.1": "- name: Set rime as default input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 1\n    data: 00000804 \n- name: Set en as second input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 2\n    data: 00000409",
     "zxc.20260215141824.1": "- name: Configure windows game user\n  hosts: nuc-windows-game\n  tags: game\n  tasks:\n    @others\n",
     "zxc.20260215142414.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260215142237.2": "- name: Add aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: present",
@@ -1194,7 +1216,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771211158.267
+      "_mod_time": 1771236578.617
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
