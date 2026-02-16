@@ -557,6 +557,7 @@
         - xonsh[full]
         - mutagen
         - jedi-language-server
+        - python-lsp-server
     - name: Add cargo bin path to PATH
       tags: path
       ansible.windows.win_path:
