@@ -425,6 +425,7 @@
         - make
         - task
         - msys2
+        - direnv
         - shellcheck
         - binutils
     - name: Install extras packages via scoop
