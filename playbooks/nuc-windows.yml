@@ -405,6 +405,7 @@
         - editorconfig
         - autocorrect
         - marksman
+        - clangd
         - taplo
         - tombi
         - ruff
