@@ -570,6 +570,8 @@
         - jedi-language-server
         - python-lsp-server
         - basedpyright
+        - ansible
+        - ansible-lint
     - name: Add cargo bin path to PATH
       tags: path
       ansible.windows.win_path:
