@@ -366,6 +366,7 @@
         - cacert
         - scoop-search
         - hugo
+        - gnuplot
         - exiftool
         - imagemagick
         - vim
