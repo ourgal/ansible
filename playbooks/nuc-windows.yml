@@ -406,6 +406,7 @@
         - autocorrect
         - marksman
         - clangd
+        - taxlab
         - taplo
         - tombi
         - ruff
