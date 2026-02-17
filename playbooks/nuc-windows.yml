@@ -642,14 +642,22 @@
     - name: Rename binary
       tags: eget-install
       ansible.windows.win_copy:
-        src: "{{ ansible_facts.user_dir }}\\.local\\bin\\dockfmt"
-        dest: "{{ ansible_facts.user_dir }}\\.local\\bin\\dockfmt.exe"
+        src: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item.old }}"
+        dest: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item.new }}"
         remote_src: true
+      loop:
+        - old: dockfmt
+          new: dockfmt.exe 
+        - old: keep-sorted_windows.exe
+          new: keep-sorted.exe
     - name: Remove origin
       tags: eget-install
       ansible.windows.win_file:
-        path: "{{ ansible_facts.user_dir }}\\.local\\bin\\dockfmt"
+        path: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item }}"
         state: absent
+      loop:
+        - dockfmt
+        - keep-sorted_windows.exe
     - name: Add msys bin path to PATH
       tags: path
       ansible.windows.win_path:
