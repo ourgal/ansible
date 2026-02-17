@@ -638,6 +638,7 @@
       loop:
         - alajmo/mani
         - jessfraz/dockfmt /a dockfmt-windows-amd64
+        - google/keep-sorted
     - name: Rename binary
       tags: eget-install
       ansible.windows.win_copy:
