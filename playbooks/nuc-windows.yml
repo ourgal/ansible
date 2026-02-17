@@ -637,6 +637,18 @@
       when: eget_config_stat.stat.exists is true
       loop:
         - alajmo/mani
+        - jessfraz/dockfmt /a dockfmt-windows-amd64
+    - name: Rename binary
+      tags: eget-install
+      ansible.windows.win_copy:
+        src: "{{ ansible_facts.user_dir }}\\.local\\bin\\dockfmt"
+        dest: "{{ ansible_facts.user_dir }}\\.local\\bin\\dockfmt.exe"
+        remote_src: true
+    - name: Remove origin
+      tags: eget-install
+      ansible.windows.win_file:
+        path: "{{ ansible_facts.user_dir }}\\.local\\bin\\dockfmt"
+        state: absent
     - name: Add msys bin path to PATH
       tags: path
       ansible.windows.win_path:
