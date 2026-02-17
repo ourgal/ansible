@@ -430,6 +430,7 @@
         - msys2
         - direnv
         - tree-sitter
+        - dirhash
         - shellcheck
         - binutils
     - name: Install extras packages via scoop
