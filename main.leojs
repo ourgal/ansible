@@ -1084,8 +1084,8 @@
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126223153.1": "- name: Install choco pacakges\n  tags: choco-install\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: latest\n  loop:\n    @others\n",
     "zxc.20260126014227.1": "- firefox\n- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n",
-    "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
-    "zxc.20260126223217.2": "- gimp\n",
+    "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  tags: choco-uninstall\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
+    "zxc.20260126223217.2": "- gimp\n- gpg4win",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n",
     "zxc.20260126215328.1": "- name: Install Microsoft Subsystem for Linux\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status\n",
     "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required\n",
@@ -1274,7 +1274,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771251938.579
+      "_mod_time": 1771318550.039
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

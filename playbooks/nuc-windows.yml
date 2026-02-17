@@ -17,11 +17,13 @@
         - visualstudio2026-workload-vctools
         - weasel
     - name: Uninstall choco pacakges
+      tags: choco-uninstall
       chocolatey.chocolatey.win_chocolatey:
         name: "{{ item }}"
         state: absent
       loop:
         - gimp
+        - gpg4win
     - name: Install init packages via scoop
       community.windows.win_scoop:
         name: '{{ item }}'
