@@ -630,10 +630,10 @@
       when: eget_config_stat.stat.exists is true
       loop:
         - alajmo/mani
-    - name: Remove msys bin path to PATH
+    - name: Add msys bin path to PATH
       tags: path
       ansible.windows.win_path:
-        state: absent
+        state: present
         scope: user
         elements: '%userprofile%\scoop\apps\msys2\current\mingw64\bin'
 - name: Configure windows game user
