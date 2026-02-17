@@ -468,7 +468,8 @@
         - vscodium
         - emacs
         - lunarvim
-        - gcc
+        # replace with msys2
+        # - gcc
         - anki
         - cfssl
         - age
@@ -630,6 +631,12 @@
       when: eget_config_stat.stat.exists is true
       loop:
         - alajmo/mani
+    - name: Add msys bin path to PATH
+      tags: path
+      ansible.windows.win_path:
+        state: present
+        scope: user
+        elements: '%userprofile%\scoop\apps\msys2\current\mingw64\bin'
 - name: Configure windows game user
   hosts: nuc-windows-game
   tags: game
