@@ -433,6 +433,7 @@
         - tree-sitter
         - dirhash
         - shellcheck
+        - shfmt
         - binutils
     - name: Install extras packages via scoop
       tags: scoop-extras
