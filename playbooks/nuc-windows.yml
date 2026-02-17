@@ -414,6 +414,7 @@
         - ty
         - lua-language-server
         - stylua
+        - sqlite
         - perl
         - nodejs-lts
         - yarn
