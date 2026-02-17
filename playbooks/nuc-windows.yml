@@ -385,6 +385,7 @@
         - git-crypt
         - gitui
         - gitql
+        - lefthook
         - gallery-dl
         - yt-dlp
         - gpg
