@@ -427,6 +427,7 @@
         - rust
         - make
         - task
+        - cmake
         - msys2
         - direnv
         - tree-sitter

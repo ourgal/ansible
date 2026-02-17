@@ -1216,7 +1216,7 @@
     "zxc.20260216205015.1": "- yamlfmt",
     "zxc.20260125025549.1": "- haskell\n- haskell-cabal\n- haskell-language-server\n- stack\n",
     "zxc.20260214110617.1": "- rust\n",
-    "zxc.20260125025510.1": "- make\n- task\n",
+    "zxc.20260125025510.1": "- make\n- task\n- cmake",
     "zxc.20260125025534.1": "- msys2\n- direnv\n- tree-sitter\n- dirhash",
     "zxc.20260125025339.1": "- shellcheck\n",
     "zxc.20260125025352.1": "- binutils\n",
@@ -1323,7 +1323,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771354070.645
+      "_mod_time": 1771354103.66
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
