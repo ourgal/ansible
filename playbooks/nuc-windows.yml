@@ -644,6 +644,7 @@
         - alajmo/mani
         - jessfraz/dockfmt /a dockfmt-windows-amd64
         - google/keep-sorted
+        - blahgeek/emacs-lsp-booster
     - name: Rename binary
       tags: eget-install
       ansible.windows.win_copy:
