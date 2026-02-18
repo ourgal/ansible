@@ -1167,7 +1167,7 @@
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  tags: choco-uninstall\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260126223217.2": "- gimp\n- gpg4win\n",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n",
-    "zxc.20260126215328.1": "- name: Enable Virtual Machine Platform\n  tags: wsl\n  ansible.windows.win_optional_feature:\n    name: VirtualMachinePlatform\n    state: present\n  register: vmp_status\n- name: Install Microsoft Subsystem for Linux\n  tags: wsl\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status",
+    "zxc.20260126215328.1": "- name: Enable Virtual Machine Platform\n  tags: wsl\n  ansible.windows.win_optional_feature:\n    name: VirtualMachinePlatform\n    state: present\n  register: vmp_status\n- name: Install Microsoft Subsystem for Linux\n  tags: wsl\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status\n",
     "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  tags: wsl\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required or vmp_status.reboot_required\n",
     "zxc.20260128212532.1": "- name: Hide admin account\n  tags: hide-admin\n  ansible.windows.win_regedit:\n    path: HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\n    type: dword\n    name: Admin\n    data: 0\n",
     "zxc.20260131000001.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others\n",
@@ -1211,7 +1211,7 @@
     "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n",
     "zxc.20260125121412.1": "# hash check filed\n# - ffsend\n",
     "zxc.20260125025233.1": "- dos2unix\n- goodbyedpi\n",
-    "zxc.20260125120657.1": "- innounp\n- gzip",
+    "zxc.20260125120657.1": "- innounp\n- gzip\n",
     "zxc.20260125120618.1": "- gsudo\n",
     "zxc.20260125120634.1": "- nssm\n",
     "zxc.20260125120604.1": "- pipx\n- winget\n",
@@ -1247,7 +1247,7 @@
     "zxc.20260125025310.1": "- chsrc\n- editorconfig\n",
     "zxc.20260125025616.1": "- autocorrect\n- marksman\n",
     "zxc.20260217195910.1": "- clangd\n",
-    "zxc.20260217200306.1": "- taxlab\n",
+    "zxc.20260217200306.1": "- texlab",
     "zxc.20260201153647.1": "- taplo\n- tombi\n",
     "zxc.20260216213322.1": "- ruff\n- ty\n",
     "zxc.20260216215830.1": "- lua-language-server\n- stylua\n",
@@ -1315,9 +1315,9 @@
     "zxc.20260125123442.1": "- openboard\n",
     "zxc.20260130231621.1": "- name: Install nerd fonts packages via scoop\n  tags: scoop-fonts\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260130231633.1": "- Maple-Mono-NF-CN\n",
-    "zxc.20260218121524.1": "- NerdFontsSymbolsOnly",
-    "zxc.20260218121953.1": "- FiraCode-NF-Mono",
-    "zxc.20260218122032.1": "- Noto-CJK-Mega-OTC",
+    "zxc.20260218121524.1": "- NerdFontsSymbolsOnly\n",
+    "zxc.20260218121953.1": "- FiraCode-NF-Mono\n",
+    "zxc.20260218122032.1": "- Noto-CJK-Mega-OTC\n",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125132006.1": "- name: Install pipx packages\n  tags: pipx-install\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223811.1": "- advance-touch\n",
@@ -1345,7 +1345,7 @@
     "zxc.20260217183548.1": "- alajmo/mani\n",
     "zxc.20260218030313.1": "- jessfraz/dockfmt /a dockfmt-windows-amd64\n",
     "zxc.20260218031907.1": "- google/keep-sorted\n",
-    "zxc.20260218191753.1": "- blahgeek/emacs-lsp-booster",
+    "zxc.20260218191753.1": "- blahgeek/emacs-lsp-booster\n",
     "zxc.20260218030929.1": "- name: Rename binary\n  tags: eget-install\n  ansible.windows.win_copy:\n    src: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.old }}\"\n    dest: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.new }}\"\n    remote_src: true\n  loop:\n    - old: dockfmt\n      new: dockfmt.exe\n    - old: keep-sorted_windows.exe\n      new: keep-sorted.exe\n- name: Remove origin\n  tags: eget-install\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item }}\"\n    state: absent\n  loop:\n    - dockfmt\n    - keep-sorted_windows.exe\n",
     "zxc.20260217213824.1": "- name: Add msys bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\scoop\\apps\\msys2\\current\\mingw64\\bin'\n",
     "zxc.20260215141824.1": "- name: Configure windows game user\n  hosts: nuc-windows-game\n  tags: game\n  tasks:\n    @others\n",
@@ -1373,7 +1373,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771422992.835
+      "_mod_time": 1771432760.485
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

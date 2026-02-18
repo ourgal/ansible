@@ -417,7 +417,7 @@
         - autocorrect
         - marksman
         - clangd
-        - taxlab
+        - texlab
         - taplo
         - tombi
         - ruff
