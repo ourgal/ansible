@@ -16,6 +16,7 @@
         - mpvio
         - visualstudio2026-workload-vctools
         - weasel
+        - calibre
     - name: Uninstall choco pacakges
       tags: choco-uninstall
       chocolatey.chocolatey.win_chocolatey:
@@ -460,7 +461,7 @@
         - kdeconnect
         - autohotkey
         - autoclicker
-        - calibre
+        # - calibre
         # windows can't set default browser to this
         # - firefox
         - brave

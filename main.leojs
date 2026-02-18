@@ -1163,7 +1163,7 @@
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126223153.1": "- name: Install choco pacakges\n  tags: choco-install\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: latest\n  loop:\n    @others\n",
-    "zxc.20260126014227.1": "- firefox\n- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n",
+    "zxc.20260126014227.1": "- firefox\n- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n- calibre\n",
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  tags: choco-uninstall\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260126223217.2": "- gimp\n- gpg4win\n",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n",
@@ -1265,7 +1265,7 @@
     "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125121633.1": "- kdeconnect\n",
     "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
-    "zxc.20260125121707.1": "- calibre\n",
+    "zxc.20260125121707.1": "# - calibre",
     "zxc.20260125121729.1": "# windows can't set default browser to this\n# - firefox\n- brave\n- qutebrowser\n- ungoogled-chromium\n",
     "zxc.20260125121756.1": "- telegram\n",
     "zxc.20260125121858.1": "- windowsdesktop-runtime-lts\n",
@@ -1373,7 +1373,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771432760.485
+      "_mod_time": 1771439200.346
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
