@@ -1167,8 +1167,8 @@
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  tags: choco-uninstall\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260126223217.2": "- gimp\n- gpg4win\n",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n",
-    "zxc.20260126215328.1": "- name: Install Microsoft Subsystem for Linux\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status\n",
-    "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required\n",
+    "zxc.20260126215328.1": "- name: Enable Virtual Machine Platform\n  tags: wsl\n  ansible.windows.win_optional_feature:\n    name: VirtualMachinePlatform\n    state: present\n  register: vmp_status\n- name: Install Microsoft Subsystem for Linux\n  tags: wsl\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status",
+    "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  tags: wsl\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required or vmp_status.reboot_required\n",
     "zxc.20260128212532.1": "- name: Hide admin account\n  tags: hide-admin\n  ansible.windows.win_regedit:\n    path: HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\n    type: dword\n    name: Admin\n    data: 0\n",
     "zxc.20260131000001.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others\n",
     "zxc.20260131000016.1": "- name: Croc firewall rule in\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule in\n    localport: 9009-9013\n    action: allow\n    direction: in\n    protocol: tcp\n    state: absent\n    enabled: true\n- name: Croc firewall rule out\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule out\n    localport: 9009-9013\n    action: allow\n    direction: out\n    protocol: tcp\n    state: absent\n    enabled: true\n",
@@ -1373,7 +1373,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771413494.298
+      "_mod_time": 1771422992.835
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
