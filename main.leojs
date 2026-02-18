@@ -844,6 +844,10 @@
                         {
                           "gnx": "zxc.20260218121953.1",
                           "vh": "fira code"
+                        },
+                        {
+                          "gnx": "zxc.20260218122032.1",
+                          "vh": "noto cjk"
                         }
                       ]
                     }
@@ -1309,6 +1313,7 @@
     "zxc.20260130231633.1": "- Maple-Mono-NF-CN\n",
     "zxc.20260218121524.1": "- NerdFontsSymbolsOnly",
     "zxc.20260218121953.1": "- FiraCode-NF-Mono",
+    "zxc.20260218122032.1": "- Noto-CJK-Mega-OTC",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125132006.1": "- name: Install pipx packages\n  tags: pipx-install\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223811.1": "- advance-touch\n",
@@ -1363,7 +1368,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771388404.657
+      "_mod_time": 1771388444.011
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

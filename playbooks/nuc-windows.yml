@@ -560,6 +560,7 @@
         - Maple-Mono-NF-CN
         - NerdFontsSymbolsOnly
         - FiraCode-NF-Mono
+        - Noto-CJK-Mega-OTC
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
