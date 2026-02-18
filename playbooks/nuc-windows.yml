@@ -356,6 +356,7 @@
         - dos2unix
         - goodbyedpi
         - innounp
+        - gzip
         - gsudo
         - nssm
         - pipx
