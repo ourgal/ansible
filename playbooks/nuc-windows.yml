@@ -558,6 +558,7 @@
       until: result is not failed
       loop:
         - Maple-Mono-NF-CN
+        - NerdFontsSymbolsOnly
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
@@ -631,7 +632,7 @@
       tags: eget-install
       ansible.windows.win_stat:
         path: "{{ ansible_facts.user_dir }}\\.eget.toml"
-      register: eget_config_stat 
+      register: eget_config_stat
     - name: Install eget packages
       tags: eget-install
       ansible.windows.win_shell: "eget {{ item }}"
@@ -648,7 +649,7 @@
         remote_src: true
       loop:
         - old: dockfmt
-          new: dockfmt.exe 
+          new: dockfmt.exe
         - old: keep-sorted_windows.exe
           new: keep-sorted.exe
     - name: Remove origin
