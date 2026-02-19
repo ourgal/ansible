@@ -570,6 +570,8 @@
         # - mpv
         - handbrake
         - openboard
+        - archwsl
+        - alpinewsl
     - name: Install nerd fonts packages via scoop
       tags: scoop-fonts
       community.windows.win_scoop:
