@@ -130,6 +130,10 @@
               "vh": "admin part",
               "children": [
                 {
+                  "gnx": "zxc.20260219201707.1",
+                  "vh": "<< reboot >>"
+                },
+                {
                   "gnx": "zxc.20260125024619.1",
                   "vh": "facts"
                 },
@@ -604,6 +608,10 @@
                           ]
                         }
                       ]
+                    },
+                    {
+                      "gnx": "zxc.20260219200426.1",
+                      "vh": "install npm"
                     },
                     {
                       "gnx": "zxc.20260125121500.1",
@@ -1160,7 +1168,8 @@
     "zxc.20260212194835.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false",
     "zxc.20260212194835.2": "config:\n  cat_style: auto\n  show_manifest: true\n",
     "zxc.20260121205603.1": "---\n@others\n",
-    "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
+    "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  handlers:\n    << reboot >>\n  tasks:\n    @others\n",
+    "zxc.20260219201707.1": "- name: Reboot\n  ansible.windows.win_reboot:\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126223153.1": "- name: Install choco pacakges\n  tags: choco-install\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: latest\n  loop:\n    @others\n",
     "zxc.20260126014227.1": "- firefox\n- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n- calibre\n",
@@ -1253,7 +1262,7 @@
     "zxc.20260216215830.1": "- lua-language-server\n- stylua\n",
     "zxc.20260218030039.1": "- sqlite\n",
     "zxc.20260125025649.1": "- perl\n",
-    "zxc.20260125025640.1": "- nodejs-lts\n- yarn\n- pnpm\n",
+    "zxc.20260125025640.1": "- yarn\n- pnpm",
     "zxc.20260125025604.1": "- tectonic\n",
     "zxc.20260216205015.1": "- yamlfmt\n",
     "zxc.20260125025549.1": "- haskell\n- haskell-cabal\n- haskell-language-server\n- stack\n",
@@ -1262,6 +1271,7 @@
     "zxc.20260125025534.1": "- msys2\n- direnv\n- tree-sitter\n- dirhash\n",
     "zxc.20260125025339.1": "- shellcheck\n- shfmt\n",
     "zxc.20260125025352.1": "- binutils\n",
+    "zxc.20260219200426.1": "- name: Install nodejs via scoop\n  community.windows.win_scoop:\n    name: nodejs-lts\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  notify: Reboot",
     "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125121633.1": "- kdeconnect\n",
     "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
@@ -1373,7 +1383,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771499549.926
+      "_mod_time": 1771503569.58
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

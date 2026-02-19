@@ -2,6 +2,9 @@
 - name: Configure windows admin
   hosts: nuc-windows-admin
   tags: admin
+  handlers:
+    - name: Reboot
+      ansible.windows.win_reboot:
   tasks:
     - name: Debug variables
       ansible.builtin.debug:
@@ -427,7 +430,6 @@
         - stylua
         - sqlite
         - perl
-        - nodejs-lts
         - yarn
         - pnpm
         - tectonic
@@ -447,6 +449,17 @@
         - shellcheck
         - shfmt
         - binutils
+    - name: Install nodejs via scoop
+      community.windows.win_scoop:
+        name: nodejs-lts
+        state: present
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      notify: Reboot
     - name: Install extras packages via scoop
       tags: scoop-extras
       community.windows.win_scoop:
