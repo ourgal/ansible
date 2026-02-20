@@ -37,6 +37,7 @@
         - gnupg
         - scdaemon
         - pcscd
+        - nodejs
     - name: Install xz-utils
       ansible.builtin.apt:
         name: xz-utils
