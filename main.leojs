@@ -1400,7 +1400,7 @@
     "zxc.20260125025604.1": "- tectonic\n",
     "zxc.20260216205015.1": "- yamlfmt\n",
     "zxc.20260125025549.1": "- haskell\n- haskell-cabal\n- haskell-language-server\n- stack\n",
-    "zxc.20260214110617.1": "- rust\n",
+    "zxc.20260214110617.1": "- rust\n- cargo-binstall",
     "zxc.20260125025510.1": "- make\n- task\n- cmake\n",
     "zxc.20260125025534.1": "- msys2\n- direnv\n- tree-sitter\n- dirhash\n",
     "zxc.20260125025339.1": "- shellcheck\n- shfmt\n",
@@ -1542,7 +1542,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771589543.581
+      "_mod_time": 1771589597.047
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
