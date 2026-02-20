@@ -28,6 +28,7 @@
         - emacs
         - vim
         - hx
+        - mpv
         - curl
         - wget
         - fish
