@@ -1094,6 +1094,40 @@
       ]
     },
     {
+      "gnx": "zxc.20260220112215.1",
+      "vh": "wsl-arch",
+      "children": [
+        {
+          "gnx": "zxc.20260220112240.1",
+          "vh": "@clean playbooks/wsl-debian.yml",
+          "children": [
+            {
+              "gnx": "zxc.20260220112255.1",
+              "vh": "facts"
+            },
+            {
+              "gnx": "zxc.20260220112432.1",
+              "vh": "apt",
+              "children": [
+                {
+                  "gnx": "zxc.20260220112706.1",
+                  "vh": "git"
+                },
+                {
+                  "gnx": "zxc.20260220112724.1",
+                  "vh": "editor"
+                },
+                {
+                  "gnx": "zxc.20260220134639.1",
+                  "vh": "download"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "gnx": "zxc.20260126204729.1",
       "vh": "ansible cfg",
       "children": [
@@ -1378,6 +1412,12 @@
     "zxc.20260211203811.1": "---\n@others\n",
     "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
     "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
+    "zxc.20260220112240.1": "---\n- name: Configure windows admin\n  hosts: nuc-windows-wsl-debian\n  become: true\n  tasks:\n    @others",
+    "zxc.20260220112255.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
+    "zxc.20260220112432.1": "- name: Install apt packages\n  ansible.builtin.apt:\n    name: \"{{ item }}\"\n    update_cache: true\n  loop:\n    @others",
+    "zxc.20260220112706.1": "- git",
+    "zxc.20260220112724.1": "- emacs",
+    "zxc.20260220134639.1": "- curl\n- wget",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -1397,6 +1437,9 @@
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
+    },
+    "zxc.20260220112240.1": {
+      "_mod_time": 1771566406.054
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959

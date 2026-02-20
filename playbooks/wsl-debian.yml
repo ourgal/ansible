@@ -1,0 +1,17 @@
+---
+- name: Configure windows admin
+  hosts: nuc-windows-wsl-debian
+  become: true
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Install apt packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        update_cache: true
+      loop:
+        - git
+        - emacs
+        - curl
+        - wget
