@@ -1141,7 +1141,13 @@
                 },
                 {
                   "gnx": "zxc.20260220182854.1",
-                  "vh": "system"
+                  "vh": "system",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260220195000.1",
+                      "vh": "less"
+                    }
+                  ]
                 },
                 {
                   "gnx": "zxc.20260220184159.1",
@@ -1500,6 +1506,7 @@
     "zxc.20260220134639.1": "- curl\n- wget",
     "zxc.20260220175034.1": "- fish",
     "zxc.20260220182854.1": "- xclip\n- dos2unix",
+    "zxc.20260220195000.1": "- bat",
     "zxc.20260220184159.1": "- gnupg\n- scdaemon\n- pcscd",
     "zxc.20260220191020.1": "- nodejs",
     "zxc.20260220174627.1": "- name: Install xz-utils\n  ansible.builtin.apt:\n    name: xz-utils\n- name: Install chezmoi\n  ansible.builtin.apt:\n    deb: https://github.com/twpayne/chezmoi/releases/download/v2.69.4/chezmoi_2.69.4_linux_amd64.deb",
@@ -1531,7 +1538,7 @@
       "_mod_time": 1770813702.075
     },
     "zxc.20260220112240.1": {
-      "_mod_time": 1771587059.37
+      "_mod_time": 1771588204.688
     },
     "zxc.20260220163617.2": {
       "_mod_time": 1771578548.094

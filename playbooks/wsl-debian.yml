@@ -35,6 +35,7 @@
         - fish
         - xclip
         - dos2unix
+        - bat
         - gnupg
         - scdaemon
         - pcscd
