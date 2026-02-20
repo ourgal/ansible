@@ -1495,7 +1495,7 @@
     "zxc.20260220180651.1": "- name: Set mirror\n  block:\n    - name: First mirror url\n      ansible.builtin.replace:\n        path: /etc/apt/sources.list\n        regexp: http://deb.debian.org/\n        replace: https://mirrors.aliyun.com/\n    - name: Second mirror url\n      ansible.builtin.replace:\n        path: /etc/apt/sources.list\n        regexp: http://security.debian.org/\n        replace: https://mirrors.aliyun.com/\n",
     "zxc.20260220112432.1": "- name: Update apt\n  ansible.builtin.apt:\n    update_cache: true\n- name: Install apt packages\n  ansible.builtin.apt:\n    name: \"{{ item }}\"\n  loop:\n    @others",
     "zxc.20260220112706.1": "- git\n- lazygit",
-    "zxc.20260220112724.1": "- emacs\n- vim\n- hx",
+    "zxc.20260220112724.1": "- emacs\n- vim-gtk3\n- hx",
     "zxc.20260220181032.1": "- mpv",
     "zxc.20260220134639.1": "- curl\n- wget",
     "zxc.20260220175034.1": "- fish",
@@ -1531,7 +1531,7 @@
       "_mod_time": 1770813702.075
     },
     "zxc.20260220112240.1": {
-      "_mod_time": 1771586906.73
+      "_mod_time": 1771587059.37
     },
     "zxc.20260220163617.2": {
       "_mod_time": 1771578548.094

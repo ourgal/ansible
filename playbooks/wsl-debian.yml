@@ -27,7 +27,7 @@
         - git
         - lazygit
         - emacs
-        - vim
+        - vim-gtk3
         - hx
         - mpv
         - curl
