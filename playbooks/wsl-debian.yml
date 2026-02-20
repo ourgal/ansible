@@ -5,6 +5,18 @@
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
+    - name: Set mirror
+      block:
+        - name: First mirror url
+          ansible.builtin.replace:
+            path: /etc/apt/sources.list
+            regexp: http://deb.debian.org/
+            replace: https://mirrors.aliyun.com/
+        - name: Second mirror url
+          ansible.builtin.replace:
+            path: /etc/apt/sources.list
+            regexp: http://security.debian.org/
+            replace: https://mirrors.aliyun.com/
     - name: Update apt
       ansible.builtin.apt:
         update_cache: true

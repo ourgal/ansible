@@ -1106,6 +1106,10 @@
               "vh": "facts"
             },
             {
+              "gnx": "zxc.20260220180651.1",
+              "vh": "apt mirror"
+            },
+            {
               "gnx": "zxc.20260220112432.1",
               "vh": "apt",
               "children": [
@@ -1460,6 +1464,7 @@
     "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
     "zxc.20260220112240.1": "---\n- name: Configure wsl debian\n  hosts: nuc-windows-wsl-debian\n  tasks:\n    @others",
     "zxc.20260220112255.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
+    "zxc.20260220180651.1": "- name: Set mirror\n  block:\n    - name: First mirror url\n      ansible.builtin.replace:\n        path: /etc/apt/sources.list\n        regexp: http://deb.debian.org/\n        replace: https://mirrors.aliyun.com/\n    - name: Second mirror url\n      ansible.builtin.replace:\n        path: /etc/apt/sources.list\n        regexp: http://security.debian.org/\n        replace: https://mirrors.aliyun.com/\n",
     "zxc.20260220112432.1": "- name: Update apt\n  ansible.builtin.apt:\n    update_cache: true\n- name: Install apt packages\n  ansible.builtin.apt:\n    name: \"{{ item }}\"\n  loop:\n    @others",
     "zxc.20260220112706.1": "- git",
     "zxc.20260220112724.1": "- emacs\n- vim\n- hx",
@@ -1494,7 +1499,7 @@
       "_mod_time": 1770813702.075
     },
     "zxc.20260220112240.1": {
-      "_mod_time": 1771581863.986
+      "_mod_time": 1771582566.238
     },
     "zxc.20260220163617.2": {
       "_mod_time": 1771578548.094
