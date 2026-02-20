@@ -1142,6 +1142,10 @@
                 {
                   "gnx": "zxc.20260220182854.1",
                   "vh": "system"
+                },
+                {
+                  "gnx": "zxc.20260220184159.1",
+                  "vh": "encrypt"
                 }
               ]
             },
@@ -1486,6 +1490,7 @@
     "zxc.20260220134639.1": "- curl\n- wget",
     "zxc.20260220175034.1": "- fish",
     "zxc.20260220182854.1": "- xclip",
+    "zxc.20260220184159.1": "- gnupg",
     "zxc.20260220174627.1": "- name: Install xz-utils\n  ansible.builtin.apt:\n    name: xz-utils\n- name: Install chezmoi\n  ansible.builtin.apt:\n    deb: https://github.com/twpayne/chezmoi/releases/download/v2.69.4/chezmoi_2.69.4_linux_amd64.deb",
     "zxc.20260220163617.2": "---\n- name: Configure wsl arch\n  hosts: nuc-windows-wsl-arch\n  tasks:\n    @others",
     "zxc.20260220163617.3": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
@@ -1515,7 +1520,7 @@
       "_mod_time": 1770813702.075
     },
     "zxc.20260220112240.1": {
-      "_mod_time": 1771583338.965
+      "_mod_time": 1771584122.919
     },
     "zxc.20260220163617.2": {
       "_mod_time": 1771578548.094

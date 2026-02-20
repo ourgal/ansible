@@ -33,6 +33,7 @@
         - wget
         - fish
         - xclip
+        - gnupg
     - name: Install xz-utils
       ansible.builtin.apt:
         name: xz-utils
