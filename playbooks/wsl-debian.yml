@@ -33,6 +33,7 @@
         - wget
         - fish
         - xclip
+        - dos2unix
         - gnupg
         - scdaemon
         - pcscd
