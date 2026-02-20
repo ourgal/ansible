@@ -33,6 +33,7 @@
         - curl
         - wget
         - fish
+        - starship
         - xclip
         - dos2unix
         - bat
