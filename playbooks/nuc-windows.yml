@@ -449,9 +449,11 @@
         - shellcheck
         - shfmt
         - binutils
-    - name: Install nodejs via scoop
+    - name: Install nodejs and vscode
       community.windows.win_scoop:
-        name: nodejs-lts
+        name:
+          - nodejs-lts
+          - vscode
         state: present
         global: false
         no_cache: true
