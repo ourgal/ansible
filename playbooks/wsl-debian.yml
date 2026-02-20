@@ -1,17 +1,27 @@
 ---
-- name: Configure windows admin
+- name: Configure wsl debian
   hosts: nuc-windows-wsl-debian
-  become: true
   tasks:
     - name: Debug variables
       ansible.builtin.debug:
         var: ansible_facts
+    - name: Update apt
+      ansible.builtin.apt:
+        update_cache: true
     - name: Install apt packages
       ansible.builtin.apt:
         name: "{{ item }}"
-        update_cache: true
       loop:
         - git
         - emacs
+        - vim
+        - hx
         - curl
         - wget
+        - fish
+    - name: Install xz-utils
+      ansible.builtin.apt:
+        name: xz-utils
+    - name: Install chezmoi
+      ansible.builtin.apt:
+        deb: https://github.com/twpayne/chezmoi/releases/download/v2.69.4/chezmoi_2.69.4_linux_amd64.deb

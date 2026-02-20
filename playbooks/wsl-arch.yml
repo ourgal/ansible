@@ -1,0 +1,20 @@
+---
+- name: Configure wsl arch
+  hosts: nuc-windows-wsl-arch
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
+    - name: Update system
+      community.general.pacman:
+        update_cache: true
+        upgrade: true
+    - name: Install pacman packages
+      community.general.pacman:
+        name: "{{ item }}"
+      loop:
+        - git
+        - emacs
+        - curl
+        - wget
+        - chezmoi
