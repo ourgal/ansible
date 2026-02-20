@@ -25,6 +25,7 @@
         name: "{{ item }}"
       loop:
         - git
+        - lazygit
         - emacs
         - vim
         - hx
