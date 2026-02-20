@@ -1216,6 +1216,10 @@
               "vh": "facts"
             },
             {
+              "gnx": "zxc.20260221001307.1",
+              "vh": "pacman mirror"
+            },
+            {
               "gnx": "zxc.20260220163617.4",
               "vh": "pacman",
               "children": [
@@ -1234,6 +1238,66 @@
                 {
                   "gnx": "zxc.20260220170903.1",
                   "vh": "dotfiles"
+                },
+                {
+                  "gnx": "zxc.20260221001945.1",
+                  "vh": "video",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260221001945.2",
+                      "vh": "viewer"
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260221001936.1",
+                  "vh": "shell",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260221001936.2",
+                      "vh": "prompt"
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260221001925.1",
+                  "vh": "system",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260221001925.2",
+                      "vh": "fuzzy"
+                    },
+                    {
+                      "gnx": "zxc.20260221001925.3",
+                      "vh": "ls"
+                    },
+                    {
+                      "gnx": "zxc.20260221001925.4",
+                      "vh": "cd"
+                    },
+                    {
+                      "gnx": "zxc.20260221001925.5",
+                      "vh": "less"
+                    },
+                    {
+                      "gnx": "zxc.20260221001925.6",
+                      "vh": "top"
+                    },
+                    {
+                      "gnx": "zxc.20260221014622.1",
+                      "vh": "info"
+                    }
+                  ]
+                },
+                {
+                  "gnx": "zxc.20260221002017.1",
+                  "vh": "dev",
+                  "children": [
+                    {
+                      "gnx": "zxc.20260221002017.2",
+                      "vh": "nodejs"
+                    }
+                  ]
                 }
               ]
             }
@@ -1549,11 +1613,23 @@
     "zxc.20260220174627.1": "- name: Install xz-utils\n  ansible.builtin.apt:\n    name: xz-utils\n- name: Install chezmoi\n  ansible.builtin.apt:\n    deb: https://github.com/twpayne/chezmoi/releases/download/v2.69.4/chezmoi_2.69.4_linux_amd64.deb",
     "zxc.20260220163617.2": "---\n- name: Configure wsl arch\n  hosts: nuc-windows-wsl-arch\n  tasks:\n    @others",
     "zxc.20260220163617.3": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
+    "zxc.20260221001307.1": "- name: Set mirror\n  ansible.builtin.copy:\n    content: |\n      Server = https://mirror.nju.edu.cn/archlinux/$repo/os/$arch\n      Server = https://mirrors.cernet.edu.cn/archlinux/$repo/os/$arch\n    dest: /etc/pacman.d/mirrorlist\n    mode: \"0644\"",
     "zxc.20260220163617.4": "- name: Update system\n  community.general.pacman:\n    update_cache: true\n    upgrade: true\n- name: Install pacman packages\n  community.general.pacman:\n    name: \"{{ item }}\"\n  loop:\n    @others",
-    "zxc.20260220163617.5": "- git",
-    "zxc.20260220163617.6": "- emacs",
+    "zxc.20260220163617.5": "- git\n- lazygit",
+    "zxc.20260220163617.6": "- emacs\n- helix",
     "zxc.20260220163617.7": "- curl\n- wget",
     "zxc.20260220170903.1": "- chezmoi",
+    "zxc.20260221001945.2": "- pipewire\n- mpv",
+    "zxc.20260221001936.1": "- fish",
+    "zxc.20260221001936.2": "- starship",
+    "zxc.20260221001925.1": "- xclip\n- openssh\n- dos2unix\n- unzip",
+    "zxc.20260221001925.2": "- fzf",
+    "zxc.20260221001925.3": "- eza",
+    "zxc.20260221001925.4": "- zoxide",
+    "zxc.20260221001925.5": "- bat",
+    "zxc.20260221001925.6": "- btop",
+    "zxc.20260221014622.1": "- fastfetch",
+    "zxc.20260221002017.2": "- nodejs",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -1578,7 +1654,7 @@
       "_mod_time": 1771603526.717
     },
     "zxc.20260220163617.2": {
-      "_mod_time": 1771578548.094
+      "_mod_time": 1771609589.723
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959
