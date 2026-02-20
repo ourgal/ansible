@@ -34,6 +34,8 @@
         - fish
         - xclip
         - gnupg
+        - scdaemon
+        - pcscd
     - name: Install xz-utils
       ansible.builtin.apt:
         name: xz-utils
