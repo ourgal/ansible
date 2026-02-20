@@ -768,6 +768,10 @@
                               "vh": "launcher"
                             },
                             {
+                              "gnx": "zxc.20260220200724.1",
+                              "vh": "package manager"
+                            },
+                            {
                               "gnx": "zxc.20260125122946.1",
                               "vh": "dhcp"
                             },
@@ -1433,6 +1437,7 @@
     "zxc.20260125123009.1": "- flclash\n",
     "zxc.20260125123134.1": "- diskgenius\n- smartmontools\n- crystaldiskinfo\n- wiztree\n",
     "zxc.20260125123102.1": "- flow-launcher\n",
+    "zxc.20260220200724.1": "- unigetui",
     "zxc.20260125122946.1": "- dhcp-server\n",
     "zxc.20260125123027.1": "- hourglass\n",
     "zxc.20260125122959.1": "- copyq\n",
@@ -1532,7 +1537,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771575263.103
+      "_mod_time": 1771589252.606
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
