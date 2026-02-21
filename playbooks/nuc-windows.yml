@@ -404,6 +404,7 @@
         - gpg
         - openssl
         - gopass
+        - gopass-jsonapi
         - sops
         - dog
         - nali
