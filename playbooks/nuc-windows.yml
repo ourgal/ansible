@@ -90,7 +90,7 @@
             protocol: tcp
             state: absent
             enabled: true
-        - name: Deskflow firewall rule in
+        - name: Deskflow firewall rule tcp in
           community.windows.win_firewall_rule:
             name: Deskflow firewall rule tcp in
             localport: 24800-24801
@@ -100,11 +100,31 @@
             direction: in
             state: present
             enabled: true
-        - name: Deskflow firewall rule out
+        - name: Deskflow firewall rule udp in
           community.windows.win_firewall_rule:
             name: Deskflow firewall rule udp in
             localport: 24800-24801
             program: C:\Users\User\scoop\apps\deskflow\current\deskflow-core.exe
+            action: allow
+            protocol: udp
+            direction: in
+            state: present
+            enabled: true
+        - name: Aria2 firewall rule tcp in
+          community.windows.win_firewall_rule:
+            name: Deskflow firewall rule tcp in
+            localport: any
+            program: C:\Users\User\scoop\apps\aria2\current\aria2c.exe
+            action: allow
+            protocol: tcp
+            direction: in
+            state: present
+            enabled: true
+        - name: Aria2 firewall rule udp in
+          community.windows.win_firewall_rule:
+            name: Deskflow firewall rule udp in
+            localport: any
+            program: C:\Users\User\scoop\apps\aria2\current\aria2c.exe
             action: allow
             protocol: udp
             direction: in
