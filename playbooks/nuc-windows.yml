@@ -672,6 +672,7 @@
         - ansible
         - ansible-lint
         - grip
+        - names
     - name: Add cargo bin path to PATH
       tags: path
       ansible.windows.win_path:
