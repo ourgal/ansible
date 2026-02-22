@@ -170,6 +170,28 @@
             direction: in
             state: present
             enabled: true
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\alist\current
+          register: path
+        - name: Alist firewall rule
+          community.windows.win_firewall_rule:
+            name: alist.exe
+            program: "{{ path.stat.lnk_source }}\\alist.exe"
+            action: allow
+            protocol: tcp
+            direction: in
+            state: present
+            enabled: true
+        - name: Alist firewall rule
+          community.windows.win_firewall_rule:
+            name: alist.exe udp
+            program: "{{ path.stat.lnk_source }}\\alist.exe"
+            action: allow
+            protocol: udp
+            direction: in
+            state: present
+            enabled: true
     - name: Set user groups
       tags: user-admin
       ansible.windows.win_user:
