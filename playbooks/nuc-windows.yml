@@ -447,6 +447,7 @@
         - portal
         - rclone
         - syncthing
+        - alist
         # hash check filed
         # - ffsend
         - dos2unix

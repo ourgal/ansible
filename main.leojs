@@ -1462,7 +1462,7 @@
     "zxc.20260125120405.1": "- mcfly\n- atuin\n",
     "zxc.20260125120424.1": "- starship\n",
     "zxc.20260125025138.1": "- aichat\n",
-    "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n",
+    "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n- alist",
     "zxc.20260125121412.1": "# hash check filed\n# - ffsend\n",
     "zxc.20260125025233.1": "- dos2unix\n- goodbyedpi\n",
     "zxc.20260125120657.1": "- innounp\n- gzip\n",
@@ -1671,7 +1671,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771772684.56
+      "_mod_time": 1771772721.06
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
