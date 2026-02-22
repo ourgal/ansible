@@ -20,6 +20,7 @@
         - visualstudio2026-workload-vctools
         - weasel
         - calibre
+        - winfsp # rclone
     - name: Uninstall choco pacakges
       tags: choco-uninstall
       chocolatey.chocolatey.win_chocolatey:
