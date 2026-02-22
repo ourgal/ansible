@@ -72,59 +72,98 @@
     - name: Windows firewall rules
       tags: firewall
       block:
-        - name: Croc firewall rule in
+        - name: Facts
+          ansible.builtin.gather_facts:
+          when: ansible_facts.user_dir is not defined
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\croc\current
+          register: path
+        - name: Croc firewall rule
           community.windows.win_firewall_rule:
-            name: Croc firewall rule in
+            name: croc.exe
             localport: 9009-9013
+            program: "{{ path.stat.lnk_source }}\\croc.exe"
             action: allow
             direction: in
-            protocol: tcp
-            state: absent
+            protocol: tcp 
+            state: present
             enabled: true
-        - name: Croc firewall rule out
+        - name: Croc firewall rule
           community.windows.win_firewall_rule:
-            name: Croc firewall rule out
+            name: croc.exe udp
             localport: 9009-9013
+            program: "{{ path.stat.lnk_source }}\\croc.exe"
             action: allow
-            direction: out
-            protocol: tcp
-            state: absent
+            direction: in
+            protocol: udp 
+            state: present
             enabled: true
-        - name: Deskflow firewall rule tcp in
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\deskflow\current
+          register: path
+        - name: Deskflow firewall rule
           community.windows.win_firewall_rule:
-            name: Deskflow firewall rule tcp in
+            name: deskflow-core.exe
             localport: 24800-24801
-            program: C:\Users\User\scoop\apps\deskflow\current\deskflow-core.exe
+            program: "{{ path.stat.lnk_source }}\\deskflow-core.exe"
             action: allow
             protocol: tcp
             direction: in
             state: present
             enabled: true
-        - name: Deskflow firewall rule udp in
+        - name: Deskflow firewall rule
           community.windows.win_firewall_rule:
-            name: Deskflow firewall rule udp in
+            name: deskflow-core.exe udp
             localport: 24800-24801
-            program: C:\Users\User\scoop\apps\deskflow\current\deskflow-core.exe
+            program: "{{ path.stat.lnk_source }}\\deskflow-core.exe"
             action: allow
             protocol: udp
             direction: in
             state: present
             enabled: true
-        - name: Aria2 firewall rule tcp in
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\aria2\current
+          register: path
+        - name: Aria2 firewall rule
           community.windows.win_firewall_rule:
-            name: Deskflow firewall rule tcp in
+            name: aria2c.exe
             localport: any
-            program: C:\Users\User\scoop\apps\aria2\current\aria2c.exe
+            program: "{{ path.stat.lnk_source }}\\aria2c.exe"
             action: allow
             protocol: tcp
             direction: in
             state: present
             enabled: true
-        - name: Aria2 firewall rule udp in
+        - name: Aria2 firewall rule
           community.windows.win_firewall_rule:
-            name: Deskflow firewall rule udp in
+            name: aria2c.exe udp
             localport: any
-            program: C:\Users\User\scoop\apps\aria2\current\aria2c.exe
+            program: "{{ path.stat.lnk_source }}\\aria2c.exe"
+            action: allow
+            protocol: udp
+            direction: in
+            state: present
+            enabled: true
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\dufs\current
+          register: path
+        - name: Dufs firewall rule
+          community.windows.win_firewall_rule:
+            name: dufs.exe
+            program: "{{ path.stat.lnk_source }}\\dufs.exe"
+            action: allow
+            protocol: tcp
+            direction: in
+            state: present
+            enabled: true
+        - name: Dufs firewall rule
+          community.windows.win_firewall_rule:
+            name: dufs.exe udp
+            program: "{{ path.stat.lnk_source }}\\dufs.exe"
             action: allow
             protocol: udp
             direction: in

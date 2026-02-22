@@ -199,6 +199,10 @@
                   "vh": "firewall",
                   "children": [
                     {
+                      "gnx": "zxc.20260222200459.1",
+                      "vh": "check ansible_facts"
+                    },
+                    {
                       "gnx": "zxc.20260131000016.1",
                       "vh": "croc"
                     },
@@ -209,6 +213,10 @@
                     {
                       "gnx": "zxc.20260221163009.1",
                       "vh": "aria2"
+                    },
+                    {
+                      "gnx": "zxc.20260222123938.1",
+                      "vh": "dufs"
                     }
                   ]
                 },
@@ -1405,9 +1413,11 @@
     "zxc.20260126215348.1": "- name: Reboot if installing Linux Subsytem as feature requires it\n  tags: wsl\n  ansible.windows.win_reboot:\n  when: wsl_status.reboot_required or vmp_status.reboot_required\n",
     "zxc.20260128212532.1": "- name: Hide admin account\n  tags: hide-admin\n  ansible.windows.win_regedit:\n    path: HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\n    type: dword\n    name: Admin\n    data: 0\n",
     "zxc.20260131000001.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others\n",
-    "zxc.20260131000016.1": "- name: Croc firewall rule in\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule in\n    localport: 9009-9013\n    action: allow\n    direction: in\n    protocol: tcp\n    state: absent\n    enabled: true\n- name: Croc firewall rule out\n  community.windows.win_firewall_rule:\n    name: Croc firewall rule out\n    localport: 9009-9013\n    action: allow\n    direction: out\n    protocol: tcp\n    state: absent\n    enabled: true\n",
-    "zxc.20260214202807.1": "- name: Deskflow firewall rule tcp in\n  community.windows.win_firewall_rule:\n    name: Deskflow firewall rule tcp in\n    localport: 24800-24801\n    program: C:\\Users\\User\\scoop\\apps\\deskflow\\current\\deskflow-core.exe\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Deskflow firewall rule udp in\n  community.windows.win_firewall_rule:\n    name: Deskflow firewall rule udp in\n    localport: 24800-24801\n    program: C:\\Users\\User\\scoop\\apps\\deskflow\\current\\deskflow-core.exe\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true\n",
-    "zxc.20260221163009.1": "- name: Aria2 firewall rule tcp in\n  community.windows.win_firewall_rule:\n    name: Deskflow firewall rule tcp in\n    localport: any\n    program: C:\\Users\\User\\scoop\\apps\\aria2\\current\\aria2c.exe\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Aria2 firewall rule udp in\n  community.windows.win_firewall_rule:\n    name: Deskflow firewall rule udp in\n    localport: any\n    program: C:\\Users\\User\\scoop\\apps\\aria2\\current\\aria2c.exe\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true\n",
+    "zxc.20260222200459.1": "- name: Facts\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n",
+    "zxc.20260131000016.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\croc\\current\n  register: path\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: tcp \n    state: present\n    enabled: true\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe udp\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: udp \n    state: present\n    enabled: true",
+    "zxc.20260214202807.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\deskflow\\current\n  register: path\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe udp\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true",
+    "zxc.20260221163009.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\aria2\\current\n  register: path\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe udp\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true\n",
+    "zxc.20260222123938.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\dufs\\current\n  register: path\n- name: Dufs firewall rule\n  community.windows.win_firewall_rule:\n    name: dufs.exe\n    program: \"{{ path.stat.lnk_source }}\\\\dufs.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Dufs firewall rule\n  community.windows.win_firewall_rule:\n    name: dufs.exe udp\n    program: \"{{ path.stat.lnk_source }}\\\\dufs.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true",
     "zxc.20260213005645.1": "- name: Set user groups\n  tags: user-admin\n  ansible.windows.win_user:\n    name: User\n    state: present\n    groups:\n      - Users\n",
     "zxc.20260214221021.1": "- name: Start ssh-agent service\n  tags: ssh-agent\n  ansible.windows.win_service:\n    name: ssh-agent\n    state: stopped\n    start_mode: disabled\n",
     "zxc.20260215005207.1": "- name: Update openssh\n  tags: openssh\n  chocolatey.chocolatey.win_chocolatey:\n    name: openssh\n    state: latest\n    allow_prerelease: true\n    package_params: /SSHServerFeature\n",
@@ -1651,7 +1661,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771682666.508
+      "_mod_time": 1771763671.114
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
