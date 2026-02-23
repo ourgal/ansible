@@ -22,6 +22,7 @@
         - calibre
         - winfsp # rclone
         - steam
+        - epicgameslauncher
     - name: Uninstall choco pacakges
       tags: choco-uninstall
       chocolatey.chocolatey.win_chocolatey:
