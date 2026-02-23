@@ -1327,6 +1327,22 @@
       ]
     },
     {
+      "gnx": "zxc.20260223143307.1",
+      "vh": "termux",
+      "children": [
+        {
+          "gnx": "zxc.20260223143337.1",
+          "vh": "@clean playbooks/termux.yml",
+          "children": [
+            {
+              "gnx": "zxc.20260223143358.1",
+              "vh": "facts"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "gnx": "zxc.20260126204729.1",
       "vh": "ansible cfg",
       "children": [
@@ -1656,6 +1672,8 @@
     "zxc.20260221014622.1": "- fastfetch",
     "zxc.20260221014730.1": "- fastfetch",
     "zxc.20260221002017.2": "- nodejs",
+    "zxc.20260223143337.1": "---\n- name: Configure termux\n  hosts: note20\n  tasks:\n    @others",
+    "zxc.20260223143358.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126204754.1": "@others",
     "zxc.20260126221252.1": "[defaults]\n@others",
     "zxc.20260126221509.1": "gathering = smart",
@@ -1671,7 +1689,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1771816636.933
+      "_mod_time": 1771842647.726
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
@@ -1681,6 +1699,9 @@
     },
     "zxc.20260220163617.2": {
       "_mod_time": 1771609655.956
+    },
+    "zxc.20260223143337.1": {
+      "_mod_time": 1771828462.009
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1769530179.959

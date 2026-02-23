@@ -1,0 +1,7 @@
+---
+- name: Configure termux
+  hosts: note20
+  tasks:
+    - name: Debug variables
+      ansible.builtin.debug:
+        var: ansible_facts
