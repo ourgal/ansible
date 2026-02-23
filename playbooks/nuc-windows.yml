@@ -464,6 +464,7 @@
         - adb
         - scrcpy
         - cacert
+        - mailsend
         - scoop-search
         - hugo
         - gnuplot
