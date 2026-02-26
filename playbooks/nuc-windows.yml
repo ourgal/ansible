@@ -2,9 +2,6 @@
 - name: Configure windows admin
   hosts: nuc-windows-admin
   tags: admin
-  handlers:
-    - name: Reboot
-      ansible.windows.win_reboot:
   tasks:
     - name: Debug variables
       ansible.builtin.debug:
@@ -273,6 +270,9 @@
         groups:
           - Users
           - Administrators
+  handlers:
+    - name: Reboot
+      ansible.windows.win_reboot:
 - name: Configure windows user
   hosts: nuc-windows-user
   tags: user
