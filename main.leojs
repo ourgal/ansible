@@ -130,10 +130,6 @@
               "vh": "admin part",
               "children": [
                 {
-                  "gnx": "zxc.20260219201707.1",
-                  "vh": "<< reboot >>"
-                },
-                {
                   "gnx": "zxc.20260125024619.1",
                   "vh": "facts"
                 },
@@ -213,6 +209,10 @@
                 {
                   "gnx": "zxc.20260215140649.1",
                   "vh": "add game user"
+                },
+                {
+                  "gnx": "zxc.20260219201707.1",
+                  "vh": "<< reboot >>"
                 }
               ]
             },
@@ -239,6 +239,9 @@
                             {
                               "gnx": "zxc.20260201025855.1",
                               "vh": "<< config >>"
+                            },
+                            {
+                              "gnx": "zxc.20260201025855.1"
                             }
                           ]
                         },
@@ -1030,7 +1033,7 @@
                   "children": [
                     {
                       "gnx": "zxc.20260227205247.1",
-                      "vh": "pynvim"
+                      "vh": "vim-ghost"
                     }
                   ]
                 }
@@ -1115,6 +1118,10 @@
                     {
                       "gnx": "zxc.20260226193604.7",
                       "vh": "alist"
+                    },
+                    {
+                      "gnx": "zxc.20260227222048.1",
+                      "vh": "helix-ghost"
                     }
                   ]
                 }
@@ -1752,10 +1759,9 @@
     "zxc.20260212194835.2": "config:\n  cat_style: auto\n  show_manifest: true\n",
     "zxc.20260121205603.1": "---\n@others\n",
     "zxc.20260125024248.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n  handlers:\n    << reboot >>\n",
-    "zxc.20260219201707.1": "- name: Reboot\n  ansible.windows.win_reboot:\n",
     "zxc.20260125024619.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126223153.1": "- name: Install choco pacakges\n  tags: choco-install\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: latest\n  loop:\n    @others\n",
-    "zxc.20260126014227.1": "- firefox\n- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n- calibre\n- winfsp # rclone\n- steam\n- epicgameslauncher",
+    "zxc.20260126014227.1": "- firefox\n- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n- calibre\n- winfsp # rclone\n- steam\n- epicgameslauncher\n",
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  tags: choco-uninstall\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
     "zxc.20260126223217.2": "- gimp\n- gpg4win\n",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n",
@@ -1767,6 +1773,7 @@
     "zxc.20260215005207.1": "- name: Update openssh\n  tags: openssh\n  chocolatey.chocolatey.win_chocolatey:\n    name: openssh\n    state: latest\n    allow_prerelease: true\n    package_params: /SSHServerFeature\n",
     "zxc.20260215131131.1": "- name: Optimize powershell\n  tags: optimize-powershell\n  ansible.windows.win_shell: |\n    function Optimize-Assemblies {\n        param (\n            [string]$assemblyFilter = \"Microsoft.PowerShell.\",\n            [string]$activity = \"Native Image Installation\"\n        )\n\n        try {\n            # Get the path to the ngen executable dynamically\n            $ngenPath = [System.IO.Path]::Combine([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory(), \"ngen.exe\")\n\n            # Check if ngen.exe exists\n            if (-Not (Test-Path $ngenPath)) {\n                Write-Host \"Ngen.exe not found at $ngenPath. Make sure .NET Framework is installed.\"\n                return\n            }\n\n            # Get a list of loaded assemblies\n            $assemblies = [AppDomain]::CurrentDomain.GetAssemblies()\n\n            # Filter assemblies based on the provided filter\n            $filteredAssemblies = $assemblies | Where-Object { $_.FullName -ilike \"$assemblyFilter*\" }\n\n            if ($filteredAssemblies.Count -eq 0) {\n                Write-Host \"No matching assemblies found for optimization.\"\n                return\n            }\n\n            foreach ($assembly in $filteredAssemblies) {\n                # Get the name of the assembly\n                $name = [System.IO.Path]::GetFileName($assembly.Location)\n\n                # Display progress\n                Write-Progress -Activity $activity -Status \"Optimizing $name\"\n\n                # Use Ngen to install the assembly\n                Start-Process -FilePath $ngenPath -ArgumentList \"install `\"$($assembly.Location)`\"\" -Wait -WindowStyle Hidden\n            }\n\n            Write-Host \"Optimization complete.\"\n        } catch {\n            Write-Host \"An error occurred: $_\"\n        }\n    }\n\n    # Optimize PowerShell assemblies:\n    Optimize-Assemblies -assemblyFilter \"Microsoft.PowerShell.\"\n",
     "zxc.20260215140649.1": "- name: Add game user\n  tags: game-user\n  ansible.windows.win_user:\n    name: Game\n    password_expired: false\n    password_never_expires: true\n    state: present\n    groups:\n      - Users\n      - Administrators\n",
+    "zxc.20260219201707.1": "- name: Reboot\n  ansible.windows.win_reboot:\n",
     "zxc.20260125024238.1": "- name: Configure windows user\n  hosts: nuc-windows-user\n  tags: user\n  tasks:\n    @others\n",
     "zxc.20260125024918.1": "- name: Install aria2 and lessmsi via scoop\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - aria2\n    - lessmsi\n",
     "zxc.20260201002237.1": "- name: Update scoop config\n  tags: scoop-config\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Check scoop config file\n      ansible.windows.win_stat:\n        path: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_stat\n    - name: Get scoop config content\n      ansible.windows.slurp:\n        src: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n      register: scoop_config_content\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ scoop_config_content.content | b64decode | from_json | combine(config) | to_json }}\"\n      when: scoop_config_stat.stat.exists is true\n    - name: Set scoop config\n      vars:\n        << config >>\n      ansible.windows.win_copy:\n        dest: \"{{ ansible_facts.user_dir }}\\\\.config\\\\scoop\\\\config.json\"\n        content: \"{{ config | to_json }}\"\n      when: scoop_config_stat.stat.exists is false\n",
@@ -1797,7 +1804,7 @@
     "zxc.20260125120405.1": "- mcfly\n- atuin\n",
     "zxc.20260125120424.1": "- starship\n",
     "zxc.20260125025138.1": "- aichat\n",
-    "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n- alist",
+    "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n- alist\n",
     "zxc.20260125121412.1": "# hash check filed\n# - ffsend\n",
     "zxc.20260125025233.1": "- dos2unix\n- goodbyedpi\n",
     "zxc.20260125120657.1": "- innounp\n- gzip\n",
@@ -1807,7 +1814,7 @@
     "zxc.20260125025238.1": "- clipboard\n",
     "zxc.20260125025205.1": "- adb\n- scrcpy\n",
     "zxc.20260125025223.1": "- cacert\n",
-    "zxc.20260223183016.1": "- mailsend",
+    "zxc.20260223183016.1": "- mailsend\n",
     "zxc.20260125030627.1": "- scoop-search\n",
     "zxc.20260125025255.1": "- hugo\n",
     "zxc.20260125030319.1": "- gnuplot\n",
@@ -1920,7 +1927,7 @@
     "zxc.20260218022919.1": "- basedpyright\n",
     "zxc.20260218023019.1": "- ansible\n- ansible-lint\n",
     "zxc.20260218025808.1": "- grip\n",
-    "zxc.20260222203819.1": "- names",
+    "zxc.20260222203819.1": "- names\n",
     "zxc.20260214133505.1": "- name: Add cargo bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.cargo\\bin'\n",
     "zxc.20260214134044.1": "- name: Install cargo packages\n  tags: cargo-install\n  ansible.windows.win_shell: \"cargo install --locked --git {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260214134128.1": "- https://github.com/estin/simple-completion-language-server.git\n",
@@ -1935,18 +1942,18 @@
     "zxc.20260216162853.1": "- name: Add doom bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.emacs.d\\bin'\n",
     "zxc.20260216180449.1": "- name: Set rime as default input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 1\n    data: 00000804\n- name: Set en as second input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 2\n    data: 00000409\n",
     "zxc.20260217183336.1": "- name: Facts\n  tags: eget-install\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n- name: Check eget config file\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
-    "zxc.20260227203321.1": "- name: Set eget config file\n  tags: eget-install\n  ansible.windows.win_stat:\n    content: |\n      [global]\n      target = \"~/.local/bin\"\n      github_token = {{ gopass \"github/ourgal/token\" | quote }}\n    dest: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat.stat.exists is not true\n- name: Check eget config file again\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat",
+    "zxc.20260227203321.1": "- name: Set eget config file\n  tags: eget-install\n  ansible.windows.win_stat:\n    content: |\n      [global]\n      target = \"~/.local/bin\"\n      github_token = {{ gopass \"github/ourgal/token\" | quote }}\n    dest: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  when: eget_config_stat.stat.exists is not true\n- name: Check eget config file again\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
     "zxc.20260217183446.1": "- name: Install eget packages\n  tags: eget-install\n  ansible.windows.win_shell: \"eget {{ item }}\"\n  when: eget_config_stat.stat.exists is true\n  loop:\n    @others\n",
     "zxc.20260217183548.1": "- alajmo/mani\n",
     "zxc.20260218030313.1": "- jessfraz/dockfmt /a dockfmt-windows-amd64\n",
     "zxc.20260218031907.1": "- google/keep-sorted\n",
     "zxc.20260218191753.1": "- blahgeek/emacs-lsp-booster\n",
     "zxc.20260220012452.1": "- gopasspw/git-credential-gopass\n",
-    "zxc.20260227204153.1": "- rahji/helix-ghost",
+    "zxc.20260227204153.1": "- rahji/helix-ghost\n",
     "zxc.20260218030929.1": "- name: Rename binary\n  tags: eget-install\n  ansible.windows.win_copy:\n    src: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.old }}\"\n    dest: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.new }}\"\n    remote_src: true\n  loop:\n    - old: dockfmt\n      new: dockfmt.exe\n    - old: keep-sorted_windows.exe\n      new: keep-sorted.exe\n  when: eget_config_stat.stat.exists is true\n- name: Remove origin\n  tags: eget-install\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item }}\"\n    state: absent\n  when: eget_config_stat.stat.exists is true\n  loop:\n    - dockfmt\n    - keep-sorted_windows.exe\n",
     "zxc.20260217213824.1": "- name: Add msys bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\scoop\\apps\\msys2\\current\\mingw64\\bin'\n",
     "zxc.20260227205212.1": "- name: Install pip packages\n  tags: pip-install\n  ansible.windows.win_shell: \"pip install --user {{ item }}\"\n  loop:\n    @others\n\n",
-    "zxc.20260227205247.1": "- pynvim",
+    "zxc.20260227205247.1": "- pynvim\n- SimpleWebSocketServer\n- python-slugify\n- pywinauto\n",
     "zxc.20260215141824.1": "- name: Configure windows game user\n  hosts: nuc-windows-game\n  tags: game\n  tasks:\n    @others\n",
     "zxc.20260215142414.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260215142237.2": "- name: Add aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: present\n",
@@ -1954,14 +1961,15 @@
     "zxc.20260215142237.4": "- name: Remove aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: absent\n",
     "zxc.20260216001635.1": "- name: Install ldplayer\n  community.windows.win_scoop:\n    name: ldplayer\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n",
     "zxc.20260216004633.1": "- name: Install bluestacks\n  chocolatey.chocolatey.win_chocolatey:\n    name: bluestacks\n    state: latest\n",
-    "zxc.20260226193530.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others",
+    "zxc.20260226193530.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260226193604.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others\n",
     "zxc.20260226193604.2": "- name: Facts\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n",
-    "zxc.20260226193604.3": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\croc\\current\n  register: path\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: tcp\n    state: present\n    enabled: true\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe udp\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: udp\n    state: present\n    enabled: true",
-    "zxc.20260226193604.4": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\deskflow\\current\n  register: path\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe udp\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true",
-    "zxc.20260226193604.5": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\aria2\\current\n  register: path\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe udp\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true\n",
-    "zxc.20260226193604.6": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\dufs\\current\n  register: path\n- name: Dufs firewall rule\n  community.windows.win_firewall_rule:\n    name: dufs.exe\n    program: \"{{ path.stat.lnk_source }}\\\\dufs.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Dufs firewall rule\n  community.windows.win_firewall_rule:\n    name: dufs.exe udp\n    program: \"{{ path.stat.lnk_source }}\\\\dufs.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true",
-    "zxc.20260226193604.7": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\alist\\current\n  register: path\n- name: Alist firewall rule\n  community.windows.win_firewall_rule:\n    name: alist.exe\n    program: \"{{ path.stat.lnk_source }}\\\\alist.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: present\n    enabled: true\n- name: Alist firewall rule\n  community.windows.win_firewall_rule:\n    name: alist.exe udp\n    program: \"{{ path.stat.lnk_source }}\\\\alist.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: present\n    enabled: true",
+    "zxc.20260226193604.3": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\croc\\current\n  register: path\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: tcp\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe udp\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: udp\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260226193604.4": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\deskflow\\current\n  register: path\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe udp\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260226193604.5": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\aria2\\current\n  register: path\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe udp\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260226193604.6": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\dufs\\current\n  register: path\n- name: Dufs firewall rule\n  community.windows.win_firewall_rule:\n    name: dufs.exe\n    program: \"{{ path.stat.lnk_source }}\\\\dufs.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Dufs firewall rule\n  community.windows.win_firewall_rule:\n    name: dufs.exe udp\n    program: \"{{ path.stat.lnk_source }}\\\\dufs.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260226193604.7": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\alist\\current\n  register: path\n- name: Alist firewall rule\n  community.windows.win_firewall_rule:\n    name: alist.exe\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\alist.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Alist firewall rule\n  community.windows.win_firewall_rule:\n    name: alist.exe udp\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\alist.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260227222048.1": "- name: Check helix-ghost binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\helix-ghost.exe\n  register: path\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: helix-ghost.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: helix-ghost.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260211203811.1": "---\n@others\n",
     "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
     "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
@@ -2090,7 +2098,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772196772.062
+      "_mod_time": 1772203396.283
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

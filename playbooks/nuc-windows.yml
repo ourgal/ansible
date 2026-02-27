@@ -642,7 +642,7 @@
           target = "~/.local/bin"
           github_token = {{ gopass "github/ourgal/token" | quote }}
         dest: "{{ ansible_facts.user_dir }}\\.eget.toml"
-      register: eget_config_stat.stat.exists is not true
+      when: eget_config_stat.stat.exists is not true
     - name: Check eget config file again
       tags: eget-install
       ansible.windows.win_stat:
@@ -691,6 +691,9 @@
       ansible.windows.win_shell: "pip install --user {{ item }}"
       loop:
         - pynvim
+        - SimpleWebSocketServer
+        - python-slugify
+        - pywinauto
 
 - name: Configure windows game user
   hosts: nuc-windows-game
@@ -860,7 +863,7 @@
             action: allow
             direction: in
             protocol: tcp
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Croc firewall rule
           community.windows.win_firewall_rule:
@@ -870,7 +873,7 @@
             action: allow
             direction: in
             protocol: udp
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Check current source folder
           ansible.windows.win_stat:
@@ -884,7 +887,7 @@
             action: allow
             protocol: tcp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Deskflow firewall rule
           community.windows.win_firewall_rule:
@@ -894,7 +897,7 @@
             action: allow
             protocol: udp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Check current source folder
           ansible.windows.win_stat:
@@ -908,7 +911,7 @@
             action: allow
             protocol: tcp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Aria2 firewall rule
           community.windows.win_firewall_rule:
@@ -918,7 +921,7 @@
             action: allow
             protocol: udp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Check current source folder
           ansible.windows.win_stat:
@@ -931,7 +934,7 @@
             action: allow
             protocol: tcp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Dufs firewall rule
           community.windows.win_firewall_rule:
@@ -940,7 +943,7 @@
             action: allow
             protocol: udp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Check current source folder
           ansible.windows.win_stat:
@@ -949,18 +952,40 @@
         - name: Alist firewall rule
           community.windows.win_firewall_rule:
             name: alist.exe
-            program: "{{ path.stat.lnk_source }}\\alist.exe"
+            program: "{{ path.stat.lnk_source if path.stat.exists }}\\alist.exe"
             action: allow
             protocol: tcp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
         - name: Alist firewall rule
           community.windows.win_firewall_rule:
             name: alist.exe udp
-            program: "{{ path.stat.lnk_source }}\\alist.exe"
+            program: "{{ path.stat.lnk_source if path.stat.exists }}\\alist.exe"
             action: allow
             protocol: udp
             direction: in
-            state: present
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
+            enabled: true
+        - name: Check helix-ghost binary file
+          ansible.windows.win_stat:
+            path: C:\Users\User\.local\bin\helix-ghost.exe
+          register: path
+        - name: Helix-ghost firewall rule
+          community.windows.win_firewall_rule:
+            name: helix-ghost.exe
+            program: "{{ path.stat.path }}"
+            action: allow
+            protocol: tcp
+            direction: in
+            state: "{{ 'present' if path.stat.exists else 'absent' }}"
+            enabled: true
+        - name: Helix-ghost firewall rule
+          community.windows.win_firewall_rule:
+            name: helix-ghost.exe udp
+            program: "{{ path.stat.path }}"
+            action: allow
+            protocol: udp
+            direction: in
+            state: "{{ 'present' if path.stat.exists else 'absent' }}"
             enabled: true
