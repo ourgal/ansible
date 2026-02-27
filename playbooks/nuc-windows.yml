@@ -851,6 +851,13 @@
         - name: Facts
           ansible.builtin.gather_facts:
           when: ansible_facts.user_dir is not defined
+        - name: Enable firewall for Domain, Public and Private profiles
+          ansible.windows.win_firewall:
+            state: enabled
+            profiles:
+              - Domain
+              - Private
+              - Public
         - name: Check current source folder
           ansible.windows.win_stat:
             path: C:\Users\User\scoop\apps\croc\current

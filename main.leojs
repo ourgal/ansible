@@ -1100,6 +1100,10 @@
                       "vh": "check ansible_facts"
                     },
                     {
+                      "gnx": "zxc.20260227224730.1",
+                      "vh": "enable firewalls"
+                    },
+                    {
                       "gnx": "zxc.20260226193604.3",
                       "vh": "croc"
                     },
@@ -1968,6 +1972,7 @@
     "zxc.20260226193530.1": "- name: Configure windows admin\n  hosts: nuc-windows-admin\n  tags: admin\n  tasks:\n    @others\n",
     "zxc.20260226193604.1": "- name: Windows firewall rules\n  tags: firewall\n  block:\n    @others\n",
     "zxc.20260226193604.2": "- name: Facts\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n",
+    "zxc.20260227224730.1": "- name: Enable firewall for Domain, Public and Private profiles\n  ansible.windows.win_firewall:\n    state: enabled\n    profiles:\n      - Domain\n      - Private\n      - Public",
     "zxc.20260226193604.3": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\croc\\current\n  register: path\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: tcp\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Croc firewall rule\n  community.windows.win_firewall_rule:\n    name: croc.exe udp\n    localport: 9009-9013\n    program: \"{{ path.stat.lnk_source }}\\\\croc.exe\"\n    action: allow\n    direction: in\n    protocol: udp\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260226193604.4": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\deskflow\\current\n  register: path\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Deskflow firewall rule\n  community.windows.win_firewall_rule:\n    name: deskflow-core.exe udp\n    localport: 24800-24801\n    program: \"{{ path.stat.lnk_source }}\\\\deskflow-core.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260226193604.5": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\aria2\\current\n  register: path\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Aria2 firewall rule\n  community.windows.win_firewall_rule:\n    name: aria2c.exe udp\n    localport: any\n    program: \"{{ path.stat.lnk_source }}\\\\aria2c.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
@@ -2103,7 +2108,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772203565.593
+      "_mod_time": 1772203661.848
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
