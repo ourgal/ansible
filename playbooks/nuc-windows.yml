@@ -659,6 +659,7 @@
         - blahgeek/emacs-lsp-booster
         - gopasspw/git-credential-gopass
         - rahji/helix-ghost
+        - xxnuo/MTranServer /a amd64.exe
     - name: Rename binary
       tags: eget-install
       ansible.windows.win_copy:
@@ -670,6 +671,8 @@
           new: dockfmt.exe
         - old: keep-sorted_windows.exe
           new: keep-sorted.exe
+        - old: mtranserver-4.0.32-windows-amd64.exe
+          new: mtranserver.exe
       when: eget_config_stat.stat.exists is true
     - name: Remove origin
       tags: eget-install
@@ -680,6 +683,7 @@
       loop:
         - dockfmt
         - keep-sorted_windows.exe
+        - mtranserver-4.0.32-windows-amd64.exe
     - name: Add msys bin path to PATH
       tags: path
       ansible.windows.win_path:
@@ -1012,6 +1016,28 @@
         - name: Helix-ghost firewall rule
           community.windows.win_firewall_rule:
             name: python.exe udp
+            program: "{{ path.stat.path }}"
+            action: allow
+            protocol: udp
+            direction: in
+            state: "{{ 'present' if path.stat.exists else 'absent' }}"
+            enabled: true
+        - name: Check mtranserver binary file
+          ansible.windows.win_stat:
+            path: C:\Users\User\.local\bin\mtranserver.exe
+          register: path
+        - name: MTranServer firewall rule
+          community.windows.win_firewall_rule:
+            name: mtranserver.exe
+            program: "{{ path.stat.path }}"
+            action: allow
+            protocol: tcp
+            direction: in
+            state: "{{ 'present' if path.stat.exists else 'absent' }}"
+            enabled: true
+        - name: MTranServer firewall rule
+          community.windows.win_firewall_rule:
+            name: mtranserver.exe udp
             program: "{{ path.stat.path }}"
             action: allow
             protocol: udp

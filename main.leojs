@@ -1014,6 +1014,10 @@
                         {
                           "gnx": "zxc.20260227204153.1",
                           "vh": "helix"
+                        },
+                        {
+                          "gnx": "zxc.20260227233813.1",
+                          "vh": "mtranserver"
                         }
                       ]
                     },
@@ -1130,6 +1134,10 @@
                     {
                       "gnx": "zxc.20260227224509.1",
                       "vh": "python"
+                    },
+                    {
+                      "gnx": "zxc.20260227234406.1",
+                      "vh": "mtranserver"
                     }
                   ]
                 }
@@ -1958,7 +1966,8 @@
     "zxc.20260218191753.1": "- blahgeek/emacs-lsp-booster\n",
     "zxc.20260220012452.1": "- gopasspw/git-credential-gopass\n",
     "zxc.20260227204153.1": "- rahji/helix-ghost\n",
-    "zxc.20260218030929.1": "- name: Rename binary\n  tags: eget-install\n  ansible.windows.win_copy:\n    src: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.old }}\"\n    dest: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.new }}\"\n    remote_src: true\n  loop:\n    - old: dockfmt\n      new: dockfmt.exe\n    - old: keep-sorted_windows.exe\n      new: keep-sorted.exe\n  when: eget_config_stat.stat.exists is true\n- name: Remove origin\n  tags: eget-install\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item }}\"\n    state: absent\n  when: eget_config_stat.stat.exists is true\n  loop:\n    - dockfmt\n    - keep-sorted_windows.exe\n",
+    "zxc.20260227233813.1": "- xxnuo/MTranServer /a amd64.exe",
+    "zxc.20260218030929.1": "- name: Rename binary\n  tags: eget-install\n  ansible.windows.win_copy:\n    src: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.old }}\"\n    dest: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.new }}\"\n    remote_src: true\n  loop:\n    - old: dockfmt\n      new: dockfmt.exe\n    - old: keep-sorted_windows.exe\n      new: keep-sorted.exe\n    - old: mtranserver-4.0.32-windows-amd64.exe\n      new: mtranserver.exe\n  when: eget_config_stat.stat.exists is true\n- name: Remove origin\n  tags: eget-install\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item }}\"\n    state: absent\n  when: eget_config_stat.stat.exists is true\n  loop:\n    - dockfmt\n    - keep-sorted_windows.exe\n    - mtranserver-4.0.32-windows-amd64.exe\n",
     "zxc.20260217213824.1": "- name: Add msys bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\scoop\\apps\\msys2\\current\\mingw64\\bin'\n",
     "zxc.20260227205212.1": "- name: Install pip packages\n  tags: pip-install\n  ansible.windows.win_shell: \"pip install --user {{ item }}\"\n  loop:\n    @others\n\n",
     "zxc.20260227205247.1": "- pynvim\n- SimpleWebSocketServer\n- python-slugify\n- pywinauto\n",
@@ -1980,6 +1989,7 @@
     "zxc.20260226193604.7": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\alist\\current\n  register: path\n- name: Alist firewall rule\n  community.windows.win_firewall_rule:\n    name: alist.exe\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\alist.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Alist firewall rule\n  community.windows.win_firewall_rule:\n    name: alist.exe udp\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\alist.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260227222048.1": "- name: Check helix-ghost binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\helix-ghost.exe\n  register: path\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: helix-ghost.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: helix-ghost.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260227224509.1": "- name: Check python binary file\n  ansible.windows.win_stat:\n    path: C:\\Python314\\python.exe\n  register: path\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: python.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: python.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260227234406.1": "- name: Check mtranserver binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\mtranserver.exe\n  register: path\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260211203811.1": "---\n@others\n",
     "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
     "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
@@ -2108,7 +2118,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772203661.848
+      "_mod_time": 1772207179.8
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
