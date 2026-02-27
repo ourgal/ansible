@@ -981,6 +981,10 @@
                       "vh": "check eget config"
                     },
                     {
+                      "gnx": "zxc.20260227203321.1",
+                      "vh": "set eget config"
+                    },
+                    {
                       "gnx": "zxc.20260217183446.1",
                       "vh": "install",
                       "children": [
@@ -1917,6 +1921,7 @@
     "zxc.20260216162853.1": "- name: Add doom bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.emacs.d\\bin'\n",
     "zxc.20260216180449.1": "- name: Set rime as default input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 1\n    data: 00000804\n- name: Set en as second input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 2\n    data: 00000409\n",
     "zxc.20260217183336.1": "- name: Facts\n  tags: eget-install\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n- name: Check eget config file\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
+    "zxc.20260227203321.1": "- name: Set eget config file\n  tags: eget-install\n  ansible.windows.win_stat:\n    content: |\n      [global]\n      target = \"~/.local/bin\"\n      github_token = {{ gopass \"github/ourgal/token\" | quote }}\n    dest: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat.stat.exists is not true\n- name: Check eget config file again\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat",
     "zxc.20260217183446.1": "- name: Install eget packages\n  tags: eget-install\n  ansible.windows.win_shell: \"eget {{ item }}\"\n  when: eget_config_stat.stat.exists is true\n  loop:\n    @others\n",
     "zxc.20260217183548.1": "- alajmo/mani\n",
     "zxc.20260218030313.1": "- jessfraz/dockfmt /a dockfmt-windows-amd64\n",
@@ -2068,7 +2073,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772105774.654
+      "_mod_time": 1772195708.651
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075
