@@ -658,6 +658,7 @@
         - google/keep-sorted
         - blahgeek/emacs-lsp-booster
         - gopasspw/git-credential-gopass
+        - rahji/helix-ghost
     - name: Rename binary
       tags: eget-install
       ansible.windows.win_copy:
