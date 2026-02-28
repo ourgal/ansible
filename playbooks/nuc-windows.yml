@@ -1044,3 +1044,13 @@
             direction: in
             state: "{{ 'present' if path.stat.exists else 'absent' }}"
             enabled: true
+    - name: Set hostname
+      tags: hostname
+      block:
+        - name: Set hostname
+          ansible.windows.win_hostname:
+            name: "{{ my_hostname if my_hostname is defined else 'nuc' }}"
+          register: res
+        - name: Reboot
+          ansible.windows.win_reboot:
+          when: res.reboot_required
