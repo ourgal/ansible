@@ -612,6 +612,16 @@
                           "vh": "android"
                         },
                         {
+                          "gnx": "zxc.20260228235919.1",
+                          "vh": "audio",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260228235922.1",
+                              "vh": "mpd"
+                            }
+                          ]
+                        },
+                        {
                           "gnx": "zxc.20260125121651.1",
                           "vh": "automation"
                         },
@@ -1138,6 +1148,10 @@
                     {
                       "gnx": "zxc.20260227234406.1",
                       "vh": "mtranserver"
+                    },
+                    {
+                      "gnx": "zxc.20260301000713.1",
+                      "vh": "mpd"
                     }
                   ]
                 },
@@ -1882,6 +1896,7 @@
     "zxc.20260219200426.1": "- name: Install nodejs and vscode\n  community.windows.win_scoop:\n    name:\n      - nodejs-lts\n      - vscode\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  notify: Reboot\n",
     "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125121633.1": "- kdeconnect\n",
+    "zxc.20260228235922.1": "- mpd\n- mpc\n- ncmpc",
     "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
     "zxc.20260125121707.1": "# - calibre\n",
     "zxc.20260125121729.1": "# windows can't set default browser to this\n# - firefox\n- brave\n- qutebrowser\n- ungoogled-chromium\n",
@@ -1994,6 +2009,7 @@
     "zxc.20260227222048.1": "- name: Check helix-ghost binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\helix-ghost.exe\n  register: path\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: helix-ghost.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: helix-ghost.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260227224509.1": "- name: Check python binary file\n  ansible.windows.win_stat:\n    path: C:\\Python314\\python.exe\n  register: path\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: python.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: python.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260227234406.1": "- name: Check mtranserver binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\mtranserver.exe\n  register: path\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260301000713.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\mpd\\current\n  register: path\n- name: Mpd firewall rule\n  community.windows.win_firewall_rule:\n    name: mpd.exe\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\mpd.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Mpd firewall rule\n  community.windows.win_firewall_rule:\n    name: mpd.exe udp\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\mpd.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260228201243.1": "- name: Set hostname\n  tags: hostname\n  block:\n    - name: Set hostname\n      ansible.windows.win_hostname:\n        name: \"{{ my_hostname if my_hostname is defined else 'nuc' }}\"\n      register: res\n    - name: Reboot\n      ansible.windows.win_reboot:\n      when: res.reboot_required",
     "zxc.20260211203811.1": "---\n@others\n",
     "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
@@ -2123,7 +2139,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772280908.65
+      "_mod_time": 1772294908.578
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

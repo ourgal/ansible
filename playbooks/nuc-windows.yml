@@ -443,6 +443,9 @@
       until: result is not failed
       loop:
         - kdeconnect
+        - mpd
+        - mpc
+        - ncmpc
         - autohotkey
         - autoclicker
         # - calibre
@@ -1043,6 +1046,28 @@
             protocol: udp
             direction: in
             state: "{{ 'present' if path.stat.exists else 'absent' }}"
+            enabled: true
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\mpd\current
+          register: path
+        - name: Mpd firewall rule
+          community.windows.win_firewall_rule:
+            name: mpd.exe
+            program: "{{ path.stat.lnk_source if path.stat.exists }}\\mpd.exe"
+            action: allow
+            protocol: tcp
+            direction: in
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
+            enabled: true
+        - name: Mpd firewall rule
+          community.windows.win_firewall_rule:
+            name: mpd.exe udp
+            program: "{{ path.stat.lnk_source if path.stat.exists }}\\mpd.exe"
+            action: allow
+            protocol: udp
+            direction: in
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
     - name: Set hostname
       tags: hostname
