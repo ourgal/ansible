@@ -636,7 +636,7 @@
       register: eget_config_stat
     - name: Set eget config file
       tags: eget-install
-      ansible.windows.win_stat:
+      ansible.windows.win_copy:
         content: |
           [global]
           target = "~/.local/bin"
