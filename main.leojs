@@ -1162,6 +1162,10 @@
               ]
             }
           ]
+        },
+        {
+          "gnx": "zxc.20260301130922.1",
+          "vh": "@clean playbooks/templates/eget.toml.j2"
         }
       ]
     },
@@ -1976,8 +1980,9 @@
     "zxc.20260216155257.1": "- name: Set home environment variable\n  tags: user-env\n  ansible.windows.win_environment:\n    state: present\n    name: HOME\n    value: \"{{ ansible_facts.user_dir }}\"\n    level: user\n",
     "zxc.20260216162853.1": "- name: Add doom bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.emacs.d\\bin'\n",
     "zxc.20260216180449.1": "- name: Set rime as default input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 1\n    data: 00000804\n- name: Set en as second input method\n  ansible.windows.win_regedit:\n    path: HKCU:\\Keyboard Layout\\Preload\n    name: 2\n    data: 00000409\n",
-    "zxc.20260217183336.1": "- name: Facts\n  tags: eget-install\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n- name: Check eget config file\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
-    "zxc.20260227203321.1": "- name: Set eget config file\n  tags: eget-install\n  ansible.windows.win_copy:\n    content: |\n      [global]\n      target = \"~/.local/bin\"\n      github_token = {{ gopass \"github/ourgal/token\" | quote }}\n    dest: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  when: eget_config_stat.stat.exists is not true\n- name: Check eget config file again\n  tags: eget-install\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
+    "zxc.20260217183249.1": "- name: Eget\n  tags: eget-install\n  block:\n    @others",
+    "zxc.20260217183336.1": "- name: Facts\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n- name: Check eget config file\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
+    "zxc.20260227203321.1": "- name: Set eget config file\n  ansible.windows.win_template:\n    src: eget.toml.j2\n    dest: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  when: eget_config_stat.stat.exists is not true\n- name: Check eget config file again\n  ansible.windows.win_stat:\n    path: \"{{ ansible_facts.user_dir }}\\\\.eget.toml\"\n  register: eget_config_stat\n",
     "zxc.20260217183446.1": "- name: Install eget packages\n  tags: eget-install\n  ansible.windows.win_shell: \"eget {{ item }}\"\n  when: eget_config_stat.stat.exists is true\n  loop:\n    @others\n",
     "zxc.20260217183548.1": "- alajmo/mani\n",
     "zxc.20260218030313.1": "- jessfraz/dockfmt /a dockfmt-windows-amd64\n",
@@ -1986,10 +1991,10 @@
     "zxc.20260220012452.1": "- gopasspw/git-credential-gopass\n",
     "zxc.20260227204153.1": "- rahji/helix-ghost\n",
     "zxc.20260227233813.1": "- xxnuo/MTranServer /a amd64.exe",
-    "zxc.20260218030929.1": "- name: Rename binary\n  tags: eget-install\n  ansible.windows.win_copy:\n    src: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.old }}\"\n    dest: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.new }}\"\n    remote_src: true\n  loop:\n    - old: dockfmt\n      new: dockfmt.exe\n    - old: keep-sorted_windows.exe\n      new: keep-sorted.exe\n    - old: mtranserver-4.0.32-windows-amd64.exe\n      new: mtranserver.exe\n  when: eget_config_stat.stat.exists is true\n- name: Remove origin\n  tags: eget-install\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item }}\"\n    state: absent\n  when: eget_config_stat.stat.exists is true\n  loop:\n    - dockfmt\n    - keep-sorted_windows.exe\n    - mtranserver-4.0.32-windows-amd64.exe\n",
+    "zxc.20260218030929.1": "- name: Rename binary\n  ansible.windows.win_copy:\n    src: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.old }}\"\n    dest: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item.new }}\"\n    remote_src: true\n  loop:\n    - old: dockfmt\n      new: dockfmt.exe\n    - old: keep-sorted_windows.exe\n      new: keep-sorted.exe\n    - old: mtranserver-4.0.32-windows-amd64.exe\n      new: mtranserver.exe\n  when: eget_config_stat.stat.exists is true\n- name: Remove origin\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.local\\\\bin\\\\{{ item }}\"\n    state: absent\n  when: eget_config_stat.stat.exists is true\n  loop:\n    - dockfmt\n    - keep-sorted_windows.exe\n    - mtranserver-4.0.32-windows-amd64.exe\n",
     "zxc.20260217213824.1": "- name: Add msys bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\scoop\\apps\\msys2\\current\\mingw64\\bin'\n",
     "zxc.20260227205212.1": "- name: Install pip packages\n  tags: pip-install\n  ansible.windows.win_shell: \"pip install --user {{ item }}\"\n  loop:\n    @others\n\n",
-    "zxc.20260227205247.1": "- pynvim\n- SimpleWebSocketServer\n- python-slugify\n- pywinauto\n",
+    "zxc.20260227205247.1": "- pynvim\n- SimpleWebSocketServer\n- python-slugify\n- pywinauto",
     "zxc.20260215141824.1": "- name: Configure windows game user\n  hosts: nuc-windows-game\n  tags: game\n  tasks:\n    @others\n",
     "zxc.20260215142414.1": "- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260215142237.2": "- name: Add aki bucket\n  community.windows.win_scoop_bucket:\n    name: aki\n    repo: https://github.com/akirco/aki-apps\n    state: present\n",
@@ -2011,6 +2016,7 @@
     "zxc.20260227234406.1": "- name: Check mtranserver binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\mtranserver.exe\n  register: path\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260301000713.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\mpd\\current\n  register: path\n- name: Mpd firewall rule\n  community.windows.win_firewall_rule:\n    name: mpd.exe\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\mpd.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Mpd firewall rule\n  community.windows.win_firewall_rule:\n    name: mpd.exe udp\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\mpd.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260228201243.1": "- name: Set hostname\n  tags: hostname\n  block:\n    - name: Set hostname\n      ansible.windows.win_hostname:\n        name: \"{{ my_hostname if my_hostname is defined else 'nuc' }}\"\n      register: res\n    - name: Reboot\n      ansible.windows.win_reboot:\n      when: res.reboot_required",
+    "zxc.20260301130922.1": "[global]\ntarget = \"~/.local/bin\"\ngithub_token = {{ gopass \"github/ourgal/token\" | quote }}",
     "zxc.20260211203811.1": "---\n@others\n",
     "zxc.20260211203923.1": "- name: Install uos via nixos live cd\n  hosts: nixos-live\n  tasks:\n    @others\n",
     "zxc.20260211204116.1": "- name: Ansible facts\n  ansible.builtin.debug:\n    var: ansible_facts",
@@ -2139,7 +2145,10 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772294908.578
+      "_mod_time": 1772342075.825
+    },
+    "zxc.20260301130922.1": {
+      "_mod_time": 1772341927.149
     },
     "zxc.20260211203811.1": {
       "_mod_time": 1770813702.075

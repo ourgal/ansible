@@ -628,65 +628,59 @@
         path: HKCU:\Keyboard Layout\Preload
         name: 2
         data: 00000409
-    - name: Facts
+    - name: Eget
       tags: eget-install
-      ansible.builtin.gather_facts:
-      when: ansible_facts.user_dir is not defined
-    - name: Check eget config file
-      tags: eget-install
-      ansible.windows.win_stat:
-        path: "{{ ansible_facts.user_dir }}\\.eget.toml"
-      register: eget_config_stat
-    - name: Set eget config file
-      tags: eget-install
-      ansible.windows.win_copy:
-        content: |
-          [global]
-          target = "~/.local/bin"
-          github_token = {{ gopass "github/ourgal/token" | quote }}
-        dest: "{{ ansible_facts.user_dir }}\\.eget.toml"
-      when: eget_config_stat.stat.exists is not true
-    - name: Check eget config file again
-      tags: eget-install
-      ansible.windows.win_stat:
-        path: "{{ ansible_facts.user_dir }}\\.eget.toml"
-      register: eget_config_stat
-    - name: Install eget packages
-      tags: eget-install
-      ansible.windows.win_shell: "eget {{ item }}"
-      when: eget_config_stat.stat.exists is true
-      loop:
-        - alajmo/mani
-        - jessfraz/dockfmt /a dockfmt-windows-amd64
-        - google/keep-sorted
-        - blahgeek/emacs-lsp-booster
-        - gopasspw/git-credential-gopass
-        - rahji/helix-ghost
-        - xxnuo/MTranServer /a amd64.exe
-    - name: Rename binary
-      tags: eget-install
-      ansible.windows.win_copy:
-        src: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item.old }}"
-        dest: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item.new }}"
-        remote_src: true
-      loop:
-        - old: dockfmt
-          new: dockfmt.exe
-        - old: keep-sorted_windows.exe
-          new: keep-sorted.exe
-        - old: mtranserver-4.0.32-windows-amd64.exe
-          new: mtranserver.exe
-      when: eget_config_stat.stat.exists is true
-    - name: Remove origin
-      tags: eget-install
-      ansible.windows.win_file:
-        path: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item }}"
-        state: absent
-      when: eget_config_stat.stat.exists is true
-      loop:
-        - dockfmt
-        - keep-sorted_windows.exe
-        - mtranserver-4.0.32-windows-amd64.exe
+      block:
+        - name: Facts
+          ansible.builtin.gather_facts:
+          when: ansible_facts.user_dir is not defined
+        - name: Check eget config file
+          ansible.windows.win_stat:
+            path: "{{ ansible_facts.user_dir }}\\.eget.toml"
+          register: eget_config_stat
+        - name: Set eget config file
+          ansible.windows.win_template:
+            src: eget.toml.j2
+            dest: "{{ ansible_facts.user_dir }}\\.eget.toml"
+          when: eget_config_stat.stat.exists is not true
+        - name: Check eget config file again
+          ansible.windows.win_stat:
+            path: "{{ ansible_facts.user_dir }}\\.eget.toml"
+          register: eget_config_stat
+        - name: Install eget packages
+          tags: eget-install
+          ansible.windows.win_shell: "eget {{ item }}"
+          when: eget_config_stat.stat.exists is true
+          loop:
+            - alajmo/mani
+            - jessfraz/dockfmt /a dockfmt-windows-amd64
+            - google/keep-sorted
+            - blahgeek/emacs-lsp-booster
+            - gopasspw/git-credential-gopass
+            - rahji/helix-ghost
+            - xxnuo/MTranServer /a amd64.exe
+        - name: Rename binary
+          ansible.windows.win_copy:
+            src: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item.old }}"
+            dest: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item.new }}"
+            remote_src: true
+          loop:
+            - old: dockfmt
+              new: dockfmt.exe
+            - old: keep-sorted_windows.exe
+              new: keep-sorted.exe
+            - old: mtranserver-4.0.32-windows-amd64.exe
+              new: mtranserver.exe
+          when: eget_config_stat.stat.exists is true
+        - name: Remove origin
+          ansible.windows.win_file:
+            path: "{{ ansible_facts.user_dir }}\\.local\\bin\\{{ item }}"
+            state: absent
+          when: eget_config_stat.stat.exists is true
+          loop:
+            - dockfmt
+            - keep-sorted_windows.exe
+            - mtranserver-4.0.32-windows-amd64.exe
     - name: Add msys bin path to PATH
       tags: path
       ansible.windows.win_path:
