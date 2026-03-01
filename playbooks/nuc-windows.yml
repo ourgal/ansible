@@ -333,6 +333,7 @@
         # - ffsend
         - dos2unix
         - goodbyedpi
+        - file
         - innounp
         - gzip
         - gsudo
