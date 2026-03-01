@@ -1068,6 +1068,28 @@
             direction: in
             state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
             enabled: true
+        - name: Check current source folder
+          ansible.windows.win_stat:
+            path: C:\Users\User\scoop\apps\kdeconnect\current
+          register: path
+        - name: Kdeconnect firewall rule
+          community.windows.win_firewall_rule:
+            name: kdeconnectd.exe
+            program: "{{ path.stat.lnk_source if path.stat.exists }}\\bin\\kdeconnectd.exe"
+            action: allow
+            protocol: tcp
+            direction: in
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
+            enabled: true
+        - name: Kdeconnect firewall rule
+          community.windows.win_firewall_rule:
+            name: kdeconnectd.exe udp
+            program: "{{ path.stat.lnk_source if path.stat.exists }}\\bin\\kdeconnectd.exe"
+            action: allow
+            protocol: udp
+            direction: in
+            state: "{{ 'present' if path.stat.exists is true else 'absent' }}"
+            enabled: true
     - name: Set hostname
       tags: hostname
       block:

@@ -1156,6 +1156,10 @@
                     {
                       "gnx": "zxc.20260301000713.1",
                       "vh": "mpd"
+                    },
+                    {
+                      "gnx": "zxc.20260301183009.1",
+                      "vh": "kde connect"
                     }
                   ]
                 },
@@ -2020,6 +2024,7 @@
     "zxc.20260227224509.1": "- name: Check python binary file\n  ansible.windows.win_stat:\n    path: C:\\Python314\\python.exe\n  register: path\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: python.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: Helix-ghost firewall rule\n  community.windows.win_firewall_rule:\n    name: python.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260227234406.1": "- name: Check mtranserver binary file\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\.local\\bin\\mtranserver.exe\n  register: path\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n- name: MTranServer firewall rule\n  community.windows.win_firewall_rule:\n    name: mtranserver.exe udp\n    program: \"{{ path.stat.path }}\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260301000713.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\mpd\\current\n  register: path\n- name: Mpd firewall rule\n  community.windows.win_firewall_rule:\n    name: mpd.exe\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\mpd.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Mpd firewall rule\n  community.windows.win_firewall_rule:\n    name: mpd.exe udp\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\mpd.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
+    "zxc.20260301183009.1": "- name: Check current source folder\n  ansible.windows.win_stat:\n    path: C:\\Users\\User\\scoop\\apps\\kdeconnect\\current\n  register: path\n- name: Kdeconnect firewall rule\n  community.windows.win_firewall_rule:\n    name: kdeconnectd.exe\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\bin\\\\kdeconnectd.exe\"\n    action: allow\n    protocol: tcp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n- name: Kdeconnect firewall rule\n  community.windows.win_firewall_rule:\n    name: kdeconnectd.exe udp\n    program: \"{{ path.stat.lnk_source if path.stat.exists }}\\\\bin\\\\kdeconnectd.exe\"\n    action: allow\n    protocol: udp\n    direction: in\n    state: \"{{ 'present' if path.stat.exists is true else 'absent' }}\"\n    enabled: true\n",
     "zxc.20260228201243.1": "- name: Set hostname\n  tags: hostname\n  block:\n    - name: Set hostname\n      ansible.windows.win_hostname:\n        name: \"{{ my_hostname if my_hostname is defined else 'nuc' }}\"\n      register: res\n    - name: Reboot\n      ansible.windows.win_reboot:\n      when: res.reboot_required",
     "zxc.20260301130922.1": "[global]\ntarget = \"~/.local/bin\"\ngithub_token = {{ gopass \"github/ourgal/token\" | quote }}",
     "zxc.20260211203811.1": "---\n@others\n",
@@ -2150,7 +2155,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772342850.557
+      "_mod_time": 1772361187.422
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1772341927.149
