@@ -357,6 +357,7 @@
         - git-annex
         - everything-cli
         - jj
+        - gitomatic
         - git-bug
         - gh
         - git-lfs
