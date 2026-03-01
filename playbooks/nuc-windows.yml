@@ -368,6 +368,7 @@
         - lefthook
         - gallery-dl
         - yt-dlp
+        - pget
         - gpg
         - win-gpg-agent
         - openssl
