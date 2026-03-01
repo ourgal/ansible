@@ -449,6 +449,7 @@
       until: result is not failed
       loop:
         - kdeconnect
+        - filebot
         - mpd
         - mpc
         - ncmpc

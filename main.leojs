@@ -612,6 +612,10 @@
                           "vh": "android"
                         },
                         {
+                          "gnx": "zxc.20260301225753.1",
+                          "vh": "anime"
+                        },
+                        {
                           "gnx": "zxc.20260228235919.1",
                           "vh": "audio",
                           "children": [
@@ -1908,6 +1912,7 @@
     "zxc.20260219200426.1": "- name: Install nodejs and vscode\n  community.windows.win_scoop:\n    name:\n      - nodejs-lts\n      - vscode\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  notify: Reboot\n",
     "zxc.20260125121500.1": "- name: Install extras packages via scoop\n  tags: scoop-extras\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125121633.1": "- kdeconnect\n",
+    "zxc.20260301225753.1": "- filebot",
     "zxc.20260228235922.1": "- mpd\n- mpc\n- ncmpc",
     "zxc.20260125121651.1": "- autohotkey\n- autoclicker\n",
     "zxc.20260125121707.1": "# - calibre\n",
@@ -2155,7 +2160,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772376998.764
+      "_mod_time": 1772377077.983
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1772341927.149
