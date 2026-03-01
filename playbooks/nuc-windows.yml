@@ -295,6 +295,7 @@
         - fastfetch
         - ntop
         - btop
+        - bottom
         - which
         - ttyper
         - fd

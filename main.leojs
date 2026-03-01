@@ -1822,7 +1822,7 @@
     "zxc.20260126225858.1": "- name: Update scoop\n  tags: scoop-update\n  block:\n    - name: Facts\n      ansible.builtin.gather_facts:\n      when: ansible_facts is not defined\n    - name: Update scoop\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update\"\n    - name: Update scoop packages\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 update --all\"\n    - name: Remove scoop cache\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 cache remove *\"\n    - name: Clean up scoop packages\n      ansible.windows.win_shell: \"{{ ansible_facts.user_dir }}/scoop/apps/scoop/current/bin/scoop.ps1 cleanup --all\"\n",
     "zxc.20260125025055.1": "- name: Install main packages via scoop\n  tags: scoop-main\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    state: present\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    @others\n",
     "zxc.20260125120148.1": "- clink\n- clink-completions\n- cmder-full\n- pwsh\n- nu\n- yori\n",
-    "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n",
+    "zxc.20260125120941.1": "- fastfetch\n- ntop\n- btop\n- bottom",
     "zxc.20260125121058.1": "- which\n",
     "zxc.20260125121117.1": "- ttyper\n",
     "zxc.20260125120914.1": "- fd\n",
@@ -2145,7 +2145,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772342075.825
+      "_mod_time": 1772342453.893
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1772341927.149
