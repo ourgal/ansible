@@ -334,6 +334,7 @@
         - dos2unix
         - goodbyedpi
         - file
+        - zip
         - innounp
         - gzip
         - gsudo

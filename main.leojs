@@ -376,6 +376,10 @@
                           "vh": "system",
                           "children": [
                             {
+                              "gnx": "zxc.20260302221340.1",
+                              "vh": "archive"
+                            },
+                            {
                               "gnx": "zxc.20260125120657.1",
                               "vh": "unpack"
                             },
@@ -1861,6 +1865,7 @@
     "zxc.20260125030646.1": "- croc\n- cwrsync\n- dufs\n- miniserve\n- portal\n- rclone\n- syncthing\n- alist\n",
     "zxc.20260125121412.1": "# hash check filed\n# - ffsend\n",
     "zxc.20260125025233.1": "- dos2unix\n- goodbyedpi\n- file",
+    "zxc.20260302221340.1": "- zip",
     "zxc.20260125120657.1": "- innounp\n- gzip\n",
     "zxc.20260125120618.1": "- gsudo\n",
     "zxc.20260125120634.1": "- nssm\n",
@@ -2165,7 +2170,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772379246.234
+      "_mod_time": 1772460823.185
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1772341927.149
