@@ -406,6 +406,7 @@
         - tombi
         - ruff
         - ty
+        - uv
         - lua-language-server
         - stylua
         - sqlite
