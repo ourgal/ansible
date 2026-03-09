@@ -944,14 +944,20 @@
                     },
                     {
                       "gnx": "zxc.20260214134044.1",
-                      "vh": "install packages",
+                      "vh": "install packages locked git",
                       "children": [
                         {
                           "gnx": "zxc.20260214134128.1",
                           "vh": "simple-completion-language-server"
-                        },
+                        }
+                      ]
+                    },
+                    {
+                      "gnx": "zxc.20260309155645.1",
+                      "vh": "install packages ",
+                      "children": [
                         {
-                          "gnx": "zxc.20260220201200.1",
+                          "gnx": "zxc.20260309155645.3",
                           "vh": "unigetui"
                         }
                       ]
@@ -1995,7 +2001,8 @@
     "zxc.20260214133505.1": "- name: Add cargo bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.cargo\\bin'\n",
     "zxc.20260214134044.1": "- name: Install cargo packages\n  tags: cargo-install\n  ansible.windows.win_shell: \"cargo install --locked --git {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260214134128.1": "- https://github.com/estin/simple-completion-language-server.git\n",
-    "zxc.20260220201200.1": "- cargo-update\n",
+    "zxc.20260309155645.1": "- name: Install cargo packages\n  tags: cargo-install\n  ansible.windows.win_shell: \"cargo install {{ item }}\"\n  loop:\n    @others\n",
+    "zxc.20260309155645.3": "- cargo-update\n",
     "zxc.20260216182729.1": "- name: Install npm packages\n  tags: npm\n  ansible.windows.win_shell: npm install -g \"{{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260216191851.1": "- prettier\n",
     "zxc.20260216191908.1": "- vscode-langservers-extracted\n",
@@ -2172,22 +2179,22 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1772978110.211
+      "_mod_time": 1773043059.165
     },
     "zxc.20260301130922.1": {
-      "_mod_time": 1772341927.149
+      "_mod_time": 1773042928.727
     },
     "zxc.20260211203811.1": {
-      "_mod_time": 1770813702.075
+      "_mod_time": 1770963329.563
     },
     "zxc.20260220112240.1": {
-      "_mod_time": 1771603526.717
+      "_mod_time": 1772001583.862
     },
     "zxc.20260220163617.2": {
-      "_mod_time": 1771609655.956
+      "_mod_time": 1772001583.862
     },
     "zxc.20260223143337.1": {
-      "_mod_time": 1771859285.294
+      "_mod_time": 1772001583.862
     },
     "zxc.20260126204754.1": {
       "_mod_time": 1771850709.354

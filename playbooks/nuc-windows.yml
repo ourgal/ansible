@@ -608,6 +608,10 @@
       ansible.windows.win_shell: "cargo install --locked --git {{ item }}"
       loop:
         - https://github.com/estin/simple-completion-language-server.git
+    - name: Install cargo packages
+      tags: cargo-install
+      ansible.windows.win_shell: "cargo install {{ item }}"
+      loop:
         - cargo-update
     - name: Install npm packages
       tags: npm
