@@ -39,7 +39,6 @@
       delay: 5
       until: result is not failed
       loop:
-        - aria2
         - git
     - name: Add bucket
       tags: admin-scoop-buckets
@@ -168,7 +167,6 @@
       delay: 5
       until: result is not failed
       loop:
-        - aria2
         - lessmsi
     - name: Update scoop config
       tags: scoop-config
@@ -189,7 +187,7 @@
           vars:
             config:
               use_lessmsi: true
-              aria2-enabled: true
+              aria2-enabled: false
               aria2-warning-enabled: false
               use_sqlite_cache: true
               force_update: true
@@ -203,7 +201,7 @@
           vars:
             config:
               use_lessmsi: true
-              aria2-enabled: true
+              aria2-enabled: false
               aria2-warning-enabled: false
               use_sqlite_cache: true
               force_update: true
@@ -378,6 +376,7 @@
         - pget
         - wget2
         - wget
+        - aria2
         - gpg
         - win-gpg-agent
         - openssl
@@ -733,7 +732,6 @@
       delay: 5
       until: result is not failed
       loop:
-        - aria2
         - lessmsi
     - name: Update scoop config
       tags: scoop-config
@@ -754,7 +752,7 @@
           vars:
             config:
               use_lessmsi: true
-              aria2-enabled: true
+              aria2-enabled: false
               aria2-warning-enabled: false
               use_sqlite_cache: true
               force_update: true
@@ -768,7 +766,7 @@
           vars:
             config:
               use_lessmsi: true
-              aria2-enabled: true
+              aria2-enabled: false
               aria2-warning-enabled: false
               use_sqlite_cache: true
               force_update: true
