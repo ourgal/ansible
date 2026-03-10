@@ -54,6 +54,11 @@
         name: main-plus
         repo: https://github.com/Scoopforge/Main-Plus
         state: present
+    - name: Add extras-cn bucket
+      community.windows.win_scoop_bucket:
+        name: extras-cn
+        repo: https://github.com/Scoopforge/Extras-CN
+        state: present
     - name: Enable Virtual Machine Platform
       tags: wsl
       ansible.windows.win_optional_feature:
@@ -273,6 +278,11 @@
       community.windows.win_scoop_bucket:
         name: main-plus
         repo: https://github.com/Scoopforge/Main-Plus
+        state: present
+    - name: Add extras-cn bucket
+      community.windows.win_scoop_bucket:
+        name: extras-cn
+        repo: https://github.com/Scoopforge/Extras-CN
         state: present
     - name: Update scoop
       tags: scoop-update
@@ -840,6 +850,11 @@
       community.windows.win_scoop_bucket:
         name: main-plus
         repo: https://github.com/Scoopforge/Main-Plus
+        state: present
+    - name: Add extras-cn bucket
+      community.windows.win_scoop_bucket:
+        name: extras-cn
+        repo: https://github.com/Scoopforge/Extras-CN
         state: present
     - name: Add aki bucket
       community.windows.win_scoop_bucket:
