@@ -1812,6 +1812,10 @@
                 {
                   "gnx": "zxc.20260126205125.1",
                   "vh": "summary"
+                },
+                {
+                  "gnx": "zxc.20260312000806.1",
+                  "vh": "hide unreachable error"
                 }
               ]
             },
@@ -2208,6 +2212,7 @@
     "zxc.20260126204920.1": "nocows = True\n",
     "zxc.20260126204956.1": "callback_result_format = yaml\n",
     "zxc.20260126205125.1": "callbacks_enabled = profile_tasks\n",
+    "zxc.20260312000806.1": "bin_ansible_callbacks = True\nstdout_callback = community.general.diy\n[callback_diy]\nrunner_on_unreachable_msg=\"\"",
     "zxc.20260126221321.1": "[ssh_connection]\n@others\n",
     "zxc.20260126221212.1": "pipelining = True\n"
   },
@@ -2231,7 +2236,7 @@
       "_mod_time": 1773102893.662
     },
     "zxc.20260126204754.1": {
-      "_mod_time": 1773102893.657
+      "_mod_time": 1773245021.187
     }
   }
 }
