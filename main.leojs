@@ -900,6 +900,10 @@
                             {
                               "gnx": "zxc.20260311112217.1",
                               "vh": "extras-cn"
+                            },
+                            {
+                              "gnx": "zxc.20260311112826.1",
+                              "vh": "psmux"
                             }
                           ]
                         }
@@ -2016,6 +2020,7 @@
     "zxc.20260311112122.1": "- name: Add chawyehsu_dorado bucket\n  community.windows.win_scoop_bucket:\n    name: chawyehsu_dorado\n    repo: https://github.com/chawyehsu/dorado\n    state: present\n- name: Install other packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - runany",
     "zxc.20260311112155.1": "- name: Add extras-plus bucket\n  community.windows.win_scoop_bucket:\n    name: extras-plus\n    repo: https://github.com/Scoopforge/Extras-Plus\n    state: present",
     "zxc.20260311112217.1": "- name: Add extras-cn bucket\n  community.windows.win_scoop_bucket:\n    name: extras-cn\n    repo: https://github.com/Scoopforge/Extras-CN\n    state: present",
+    "zxc.20260311112826.1": "- name: Add psmux bucket\n  community.windows.win_scoop_bucket:\n    name: psmux\n    repo: https://github.com/marlocarlo/scoop-psmux\n    state: present\n- name: Install other packages via scoop\n  community.windows.win_scoop:\n    name: \"{{ item }}\"\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - psmux\n",
     "zxc.20260125125341.1": "- name: Add pipx bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.local\\bin'\n",
     "zxc.20260125132006.1": "- name: Install pipx packages\n  tags: pipx-install\n  ansible.windows.win_shell: \"pipx install {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260126223811.1": "- advance-touch\n",
@@ -2207,7 +2212,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1773199358.036
+      "_mod_time": 1773199763.326
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1773102893.662

@@ -621,6 +621,22 @@
         name: extras-cn
         repo: https://github.com/Scoopforge/Extras-CN
         state: present
+    - name: Add psmux bucket
+      community.windows.win_scoop_bucket:
+        name: psmux
+        repo: https://github.com/marlocarlo/scoop-psmux
+        state: present
+    - name: Install other packages via scoop
+      community.windows.win_scoop:
+        name: "{{ item }}"
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - psmux
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
