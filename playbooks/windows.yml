@@ -5,12 +5,8 @@
     - bed-windows-admin
     - work1-windows-admin
     - work2-windows-admin
+  ignore_unreachable: true
   tags: admin
-  pre_tasks:
-    - ansible.windows.win_ping:
-      ignore_errors: true
-    - ansible.builtin.ping:
-      ignore_errors: true
   tasks:
     - name: Debug variables
       ansible.builtin.debug:
@@ -167,12 +163,8 @@
     - bed-windows-user
     - work1-windows-user
     - work2-windows-user
+  ignore_unreachable: true
   tags: user
-  pre_tasks:
-    - ansible.windows.win_ping:
-      ignore_errors: true
-    - ansible.builtin.ping:
-      ignore_errors: true
   tasks:
     - name: Install aria2 and lessmsi via scoop
       community.windows.win_scoop:
@@ -791,12 +783,8 @@
     - bed-windows-game
     - work1-windows-game
     - work2-windows-game
+  ignore_unreachable: true
   tags: game
-  pre_tasks:
-    - ansible.windows.win_ping:
-      ignore_errors: true
-    - ansible.builtin.ping:
-      ignore_errors: true
   tasks:
     - name: Debug variables
       ansible.builtin.debug:
@@ -946,12 +934,8 @@
     - bed-windows-admin
     - work1-windows-admin
     - work2-windows-admin
+  ignore_unreachable: true
   tags: admin
-  pre_tasks:
-    - ansible.windows.win_ping:
-      ignore_errors: true
-    - ansible.builtin.ping:
-      ignore_errors: true
   tasks:
     - name: Windows firewall rules
       tags: firewall
