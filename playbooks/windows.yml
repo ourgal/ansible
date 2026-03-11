@@ -49,26 +49,6 @@
       loop:
         - extras
         - nerd-fonts
-    - name: Add main-plus bucket
-      community.windows.win_scoop_bucket:
-        name: main-plus
-        repo: https://github.com/Scoopforge/Main-Plus
-        state: present
-    - name: Add extras-cn bucket
-      community.windows.win_scoop_bucket:
-        name: extras-cn
-        repo: https://github.com/Scoopforge/Extras-CN
-        state: present
-    - name: Add extras-plus bucket
-      community.windows.win_scoop_bucket:
-        name: extras-plus
-        repo: https://github.com/Scoopforge/Extras-Plus
-        state: present
-    - name: Add chawyehsu_dorado bucket
-      community.windows.win_scoop_bucket:
-        name: chawyehsu_dorado
-        repo: https://github.com/chawyehsu/dorado
-        state: present
     - name: Enable Virtual Machine Platform
       tags: wsl
       ansible.windows.win_optional_feature:
@@ -285,26 +265,6 @@
       loop:
         - extras
         - nerd-fonts
-    - name: Add main-plus bucket
-      community.windows.win_scoop_bucket:
-        name: main-plus
-        repo: https://github.com/Scoopforge/Main-Plus
-        state: present
-    - name: Add extras-cn bucket
-      community.windows.win_scoop_bucket:
-        name: extras-cn
-        repo: https://github.com/Scoopforge/Extras-CN
-        state: present
-    - name: Add extras-plus bucket
-      community.windows.win_scoop_bucket:
-        name: extras-plus
-        repo: https://github.com/Scoopforge/Extras-Plus
-        state: present
-    - name: Add chawyehsu_dorado bucket
-      community.windows.win_scoop_bucket:
-        name: chawyehsu_dorado
-        repo: https://github.com/chawyehsu/dorado
-        state: present
     - name: Update scoop
       tags: scoop-update
       block:
@@ -463,7 +423,6 @@
         - stack
         - rust
         - cargo-binstall
-        - cargo-update
         - make
         - task
         - cmake
@@ -620,10 +579,30 @@
         - NerdFontsSymbolsOnly
         - FiraCode-NF-Mono
         - Noto-CJK-Mega-OTC
+    - name: Add main-plus bucket
+      community.windows.win_scoop_bucket:
+        name: main-plus
+        repo: https://github.com/Scoopforge/Main-Plus
+        state: present
     - name: Install other packages via scoop
-      tags: scoop-fonts
       community.windows.win_scoop:
-        name: '{{ item }}'
+        name: "{{ item }}"
+        global: false
+        no_cache: true
+      register: result
+      retries: 3
+      delay: 5
+      until: result is not failed
+      loop:
+        - cargo-update
+    - name: Add chawyehsu_dorado bucket
+      community.windows.win_scoop_bucket:
+        name: chawyehsu_dorado
+        repo: https://github.com/chawyehsu/dorado
+        state: present
+    - name: Install other packages via scoop
+      community.windows.win_scoop:
+        name: "{{ item }}"
         global: false
         no_cache: true
       register: result
@@ -632,6 +611,16 @@
       until: result is not failed
       loop:
         - runany
+    - name: Add extras-plus bucket
+      community.windows.win_scoop_bucket:
+        name: extras-plus
+        repo: https://github.com/Scoopforge/Extras-Plus
+        state: present
+    - name: Add extras-cn bucket
+      community.windows.win_scoop_bucket:
+        name: extras-cn
+        repo: https://github.com/Scoopforge/Extras-CN
+        state: present
     - name: Add pipx bin path to PATH
       tags: path
       ansible.windows.win_path:
@@ -880,26 +869,6 @@
       loop:
         - extras
         - nerd-fonts
-    - name: Add main-plus bucket
-      community.windows.win_scoop_bucket:
-        name: main-plus
-        repo: https://github.com/Scoopforge/Main-Plus
-        state: present
-    - name: Add extras-cn bucket
-      community.windows.win_scoop_bucket:
-        name: extras-cn
-        repo: https://github.com/Scoopforge/Extras-CN
-        state: present
-    - name: Add extras-plus bucket
-      community.windows.win_scoop_bucket:
-        name: extras-plus
-        repo: https://github.com/Scoopforge/Extras-Plus
-        state: present
-    - name: Add chawyehsu_dorado bucket
-      community.windows.win_scoop_bucket:
-        name: chawyehsu_dorado
-        repo: https://github.com/chawyehsu/dorado
-        state: present
     - name: Add aki bucket
       community.windows.win_scoop_bucket:
         name: aki
