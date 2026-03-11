@@ -42,15 +42,13 @@
       until: result is not failed
       loop:
         - git
-    - name: Remove bucket
+    - name: Add bucket
       community.windows.win_scoop_bucket:
-        name: main
-        state: absent
-    - name: Add scoop-cn bucket
-      community.windows.win_scoop_bucket:
-        name: main
-        repo: https://gh-proxy.com/https://github.com/duzyn/scoop-cn.git
+        name: "{{ item }}"
         state: present
+      loop:
+        - extras
+        - nerd-fonts
     - name: Add main-plus bucket
       community.windows.win_scoop_bucket:
         name: main-plus
@@ -280,15 +278,13 @@
             dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
             content: "{{ config | to_json }}"
           when: scoop_config_stat.stat.exists is false
-    - name: Remove bucket
+    - name: Add bucket
       community.windows.win_scoop_bucket:
-        name: main
-        state: absent
-    - name: Add scoop-cn bucket
-      community.windows.win_scoop_bucket:
-        name: main
-        repo: https://gh-proxy.com/https://github.com/duzyn/scoop-cn.git
+        name: "{{ item }}"
         state: present
+      loop:
+        - extras
+        - nerd-fonts
     - name: Add main-plus bucket
       community.windows.win_scoop_bucket:
         name: main-plus
@@ -877,15 +873,13 @@
             dest: "{{ ansible_facts.user_dir }}\\.config\\scoop\\config.json"
             content: "{{ config | to_json }}"
           when: scoop_config_stat.stat.exists is false
-    - name: Remove bucket
+    - name: Add bucket
       community.windows.win_scoop_bucket:
-        name: main
-        state: absent
-    - name: Add scoop-cn bucket
-      community.windows.win_scoop_bucket:
-        name: main
-        repo: https://gh-proxy.com/https://github.com/duzyn/scoop-cn.git
+        name: "{{ item }}"
         state: present
+      loop:
+        - extras
+        - nerd-fonts
     - name: Add main-plus bucket
       community.windows.win_scoop_bucket:
         name: main-plus
