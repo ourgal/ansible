@@ -1008,20 +1008,34 @@
                       "vh": "npm",
                       "children": [
                         {
-                          "gnx": "zxc.20260216191851.1",
-                          "vh": "prettier"
+                          "gnx": "zxc.20260312205756.1",
+                          "vh": "npm conf"
                         },
                         {
-                          "gnx": "zxc.20260216191908.1",
-                          "vh": "vscode-langservers-extracted"
+                          "gnx": "zxc.20260312205519.1",
+                          "vh": "packages",
+                          "children": [
+                            {
+                              "gnx": "zxc.20260216191851.1",
+                              "vh": "prettier"
+                            },
+                            {
+                              "gnx": "zxc.20260216191908.1",
+                              "vh": "vscode-langservers-extracted"
+                            },
+                            {
+                              "gnx": "zxc.20260216203621.1",
+                              "vh": "yaml-language-server"
+                            },
+                            {
+                              "gnx": "zxc.20260216203941.1",
+                              "vh": "ansible-language-server"
+                            }
+                          ]
                         },
                         {
-                          "gnx": "zxc.20260216203621.1",
-                          "vh": "yaml-language-server"
-                        },
-                        {
-                          "gnx": "zxc.20260216203941.1",
-                          "vh": "ansible-language-server"
+                          "gnx": "zxc.20260312205906.1",
+                          "vh": "remove npm conf"
                         }
                       ]
                     },
@@ -2075,11 +2089,14 @@
     "zxc.20260214134044.1": "- name: Install cargo packages\n  tags: cargo-install\n  ansible.windows.win_shell: \"cargo install --locked --git {{ item }}\"\n  loop:\n    @others\n",
     "zxc.20260214134128.1": "- https://github.com/estin/simple-completion-language-server.git\n",
     "zxc.20260312205334.1": "- name: Remove pip config\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.cargo\\\\config.toml\"\n    state: absent",
-    "zxc.20260216182729.1": "- name: Install npm packages\n  tags: npm\n  ansible.windows.win_shell: npm install -g \"{{ item }}\"\n  loop:\n    @others\n",
+    "zxc.20260216182729.1": "- name: Npm\n  tags: npm\n  block:\n    @others",
+    "zxc.20260312205756.1": "- name: Set npm config\n  ansible.windows.win_copy:\n    dest: \"{{ ansible_facts.user_dir }}\\\\.npmrc\"\n    content: |\n      registry = https://registry.npmmirror.com",
+    "zxc.20260312205519.1": "- name: Install npm packages\n  ansible.windows.win_shell: npm install -g \"{{ item }}\"\n  loop:\n    @others",
     "zxc.20260216191851.1": "- prettier\n",
     "zxc.20260216191908.1": "- vscode-langservers-extracted\n",
     "zxc.20260216203621.1": "- yaml-language-server\n",
     "zxc.20260216203941.1": "- \"@ansible/ansible-language-server\"\n",
+    "zxc.20260312205906.1": "- name: Remove npm config\n  ansible.windows.win_file:\n    path: \"{{ ansible_facts.user_dir }}\\\\.npmrc\"\n    state: absent",
     "zxc.20260216155251.1": "- name: Facts\n  tags: user-env\n  ansible.builtin.gather_facts:\n  when: ansible_facts.user_dir is not defined\n",
     "zxc.20260216155257.1": "- name: Set home environment variable\n  tags: user-env\n  ansible.windows.win_environment:\n    state: present\n    name: HOME\n    value: \"{{ ansible_facts.user_dir }}\"\n    level: user\n",
     "zxc.20260216162853.1": "- name: Add doom bin path to PATH\n  tags: path\n  ansible.windows.win_path:\n    state: present\n    scope: user\n    elements: '%userprofile%\\.emacs.d\\bin'\n",
@@ -2252,7 +2269,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1773320054.199
+      "_mod_time": 1773320369.87
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1773102893.662
