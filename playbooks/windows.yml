@@ -16,7 +16,6 @@
         name: "{{ item }}"
         state: latest
       loop:
-        - mpvio
         - visualstudio2026-workload-vctools
         - weasel
         - calibre
@@ -32,6 +31,7 @@
         - gimp
         - gpg4win
         - firefox
+        - mpvio
     - name: Install init packages via scoop
       tags: admin-scoop-init
       community.windows.win_scoop:
@@ -580,8 +580,7 @@
         - vlc
         # install failed
         # - miru
-        # installed via choco
-        # - mpv
+        - mpv
         - handbrake
         - openboard
         - archwsl

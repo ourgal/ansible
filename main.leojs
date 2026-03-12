@@ -1916,9 +1916,9 @@
     "zxc.20260219201707.1": "- name: Reboot\n  ansible.windows.win_reboot:\n",
     "zxc.20260125024619.1": "- name: Gather facts\n  ansible.builtin.gather_facts:\n- name: Debug variables\n  ansible.builtin.debug:\n    var: ansible_facts\n",
     "zxc.20260126223153.1": "- name: Install choco pacakges\n  tags: choco-install\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: latest\n  loop:\n    @others\n",
-    "zxc.20260126014227.1": "- mpvio\n- visualstudio2026-workload-vctools\n- weasel\n- calibre\n- winfsp # rclone\n- steam\n- epicgameslauncher\n",
+    "zxc.20260126014227.1": "- visualstudio2026-workload-vctools\n- weasel\n- calibre\n- winfsp # rclone\n- steam\n- epicgameslauncher\n",
     "zxc.20260126223217.1": "- name: Uninstall choco pacakges\n  tags: choco-uninstall\n  chocolatey.chocolatey.win_chocolatey:\n    name: \"{{ item }}\"\n    state: absent\n  loop:\n    @others\n",
-    "zxc.20260126223217.2": "- gimp\n- gpg4win\n- firefox",
+    "zxc.20260126223217.2": "- gimp\n- gpg4win\n- firefox\n- mpvio",
     "zxc.20260125024431.1": "- name: Install init packages via scoop\n  tags: admin-scoop-init\n  community.windows.win_scoop:\n    name: '{{ item }}'\n    global: false\n    no_cache: true\n  register: result\n  retries: 3\n  delay: 5\n  until: result is not failed\n  loop:\n    - git",
     "zxc.20260126215320.1": "- name: WSL\n  tags: wsl\n  block:\n    @others",
     "zxc.20260126215328.1": "- name: Enable Virtual Machine Platform\n  ansible.windows.win_optional_feature:\n    name: VirtualMachinePlatform\n    state: present\n  register: vmp_status\n- name: Enable hyper-v\n  ansible.windows.win_shell: bcdedit /set hypersivoralaunchtype auto\n  when: vmp_status is failed\n- name: Reboot for hyper-v\n  ansible.windows.win_reboot:\n  when: vmp_status is failed\n- name: Enable Virtual Machine Platform again\n  ansible.windows.win_optional_feature:\n    name: VirtualMachinePlatform\n    state: present\n  register: vmp_again_status\n  when: vmp_status is failed\n- name: Install Microsoft Subsystem for Linux\n  ansible.windows.win_optional_feature:\n    name: Microsoft-Windows-Subsystem-Linux\n    state: present\n  register: wsl_status\n",
@@ -2068,7 +2068,7 @@
     "zxc.20260125123255.1": "- copytranslator\n",
     "zxc.20260125123314.1": "- rufus\n- ventoy\n",
     "zxc.20260125123345.1": "- ani-cli\n",
-    "zxc.20260125123423.1": "- jellyfin-mpv-shim\n- vlc\n# install failed\n# - miru\n# installed via choco\n# - mpv\n",
+    "zxc.20260125123423.1": "- jellyfin-mpv-shim\n- vlc\n# install failed\n# - miru\n- mpv",
     "zxc.20260125123353.1": "- handbrake\n",
     "zxc.20260125123442.1": "- openboard\n",
     "zxc.20260220015943.1": "- archwsl\n- alpinewsl\n",
@@ -2282,7 +2282,7 @@
   },
   "uas": {
     "zxc.20260121205603.1": {
-      "_mod_time": 1773324435.921
+      "_mod_time": 1773324695.741
     },
     "zxc.20260301130922.1": {
       "_mod_time": 1773102893.662
