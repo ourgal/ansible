@@ -16,7 +16,6 @@
         name: "{{ item }}"
         state: latest
       loop:
-        - firefox
         - mpvio
         - visualstudio2026-workload-vctools
         - weasel
@@ -32,6 +31,7 @@
       loop:
         - gimp
         - gpg4win
+        - firefox
     - name: Install init packages via scoop
       tags: admin-scoop-init
       community.windows.win_scoop:
