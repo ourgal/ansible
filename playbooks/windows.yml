@@ -790,6 +790,9 @@
         - python-slugify
         - pywinauto
 
+  handlers:
+    - name: Reboot
+      ansible.windows.win_reboot:
 - name: Configure windows game user
   hosts: windows
   remote_user: game
@@ -940,6 +943,9 @@
       chocolatey.chocolatey.win_chocolatey:
         name: bluestacks
         state: latest
+  handlers:
+    - name: Reboot
+      ansible.windows.win_reboot:
 - name: Configure windows admin
   hosts: windows
   remote_user: admin
@@ -1218,3 +1224,6 @@
         name: Everything
         state: started
         path: C:\Users\User\scoop\apps\everything\current\everything.exe -svc
+  handlers:
+    - name: Reboot
+      ansible.windows.win_reboot:
